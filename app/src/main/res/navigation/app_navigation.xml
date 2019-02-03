@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/app_navigation"
+            app:startDestination="@id/poopListFragment">
+
+    <fragment android:id="@+id/calenderFragment"
+              android:name="inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderFragment"
+              android:label="fragment_calender" tools:layout="@layout/fragment_calender"/>
+    <fragment android:id="@+id/poopListFragment"
+              android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooplist.PoopListFragment"
+              android:label="PoopListFragment"/>
+</navigation>
