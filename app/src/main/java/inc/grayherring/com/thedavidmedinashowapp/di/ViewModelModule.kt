@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import inc.grayherring.com.thedavidmedinashowapp.ui.CalendarVM
+import inc.grayherring.com.thedavidmedinashowapp.ui.CalendarViewModel
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 
 @Suppress("unused")
@@ -13,8 +13,8 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 abstract class ViewModelModule {
     @Binds
     @IntoMap
-    @ViewModelKey(CalendarVM::class)
-    abstract fun bindUserViewModel(calendarVM: CalendarVM): ViewModel
+    @ViewModelKey(CalendarViewModel::class)
+    abstract fun bindUserViewModel(calendarViewModel: CalendarViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

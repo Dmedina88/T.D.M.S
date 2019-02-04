@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
@@ -17,9 +18,7 @@ class CalenderFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     lateinit var viewModel: CalendarViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

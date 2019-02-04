@@ -19,7 +19,6 @@ import inc.grayherring.com.thedavidmedinashowapp.TheDavidMedinaShowApp
 @Module
 class AppModule {
 
-
     @Provides
     @Singleton
     fun providesPoopLogDatabase(application: Application) =
