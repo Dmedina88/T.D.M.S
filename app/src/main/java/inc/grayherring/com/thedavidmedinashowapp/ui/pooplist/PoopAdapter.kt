@@ -8,13 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopLog
-import kotlinx.android.synthetic.main.poop_list_item.view.date
 
 class PoopAdapter() : RecyclerView.Adapter<PoopListVH>() {
 
-     private val data  = mutableListOf<PoopLog>()
+    private val data = mutableListOf<PoopLog>()
 
-    fun setData(newData : List<PoopLog>){
+    fun setData(newData: List<PoopLog>) {
         data.clear()
         data.addAll(newData)
         notifyDataSetChanged()
@@ -28,7 +27,7 @@ class PoopAdapter() : RecyclerView.Adapter<PoopListVH>() {
     override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: PoopListVH, position: Int) {
-       holder.bind(data[position])
+        holder.bind(data[position])
     }
 
 }
@@ -37,10 +36,10 @@ class PoopAdapter() : RecyclerView.Adapter<PoopListVH>() {
 sealed class PoopListVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     class Entry(itemView: View) : PoopListVH(itemView) {
-         val date: TextView = itemView.findViewById(R.id.date)
-         val type: ImageView = itemView.findViewById(R.id.poop_type)
+        val date: TextView = itemView.findViewById(R.id.date)
+        val type: ImageView = itemView.findViewById(R.id.poop_type)
 
-        override fun bind(poopLog: PoopLog){
+        override fun bind(poopLog: PoopLog) {
             date.text = poopLog.date.toString()
         }
 
