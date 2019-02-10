@@ -13,9 +13,6 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.MainActivity
 import dagger.android.ContributesAndroidInjector
 import inc.grayherring.com.thedavidmedinashowapp.TheDavidMedinaShowApp
 
-
-
-
 @Module
 class AppModule {
 

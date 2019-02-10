@@ -27,9 +27,7 @@ android {
 
 }
 
-androidExtensions {
-    experimental = true
-}
+
 
 
 dependencies {
@@ -47,6 +45,8 @@ dependencies {
     // optional - Test helpers for LiveData
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "androidx.room:room-runtime:$room_version"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     kapt "androidx.room:room-compiler:$room_version" // use kapt for Kotlin
     // optional - Coroutines support for Room
 

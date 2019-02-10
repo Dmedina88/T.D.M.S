@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.CalendarViewModel
@@ -17,8 +19,9 @@ class PoopListFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     private lateinit var viewModel: CalendarViewModel
+    private lateinit var poopListBindings : PoopListBindings
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,13 +31,22 @@ class PoopListFragment : BaseFragment() {
 
     }
 
-    override  fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        poopListBindings = PoopListBindings(view)
 
+        poopListBindings.floatingActionButton.setOnClickListener {
+            Toast.makeText(this.context,"hello",Toast.LENGTH_LONG).show()
+        }
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(CalendarViewModel::class.java)
-        viewModel.poopLogRepository.deleteAll()
+//        viewModel.poopLogRepository.deleteAll()
     }
 
 
+}
+
+class PoopListBindings(view: View) {
+    val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+    val floatingActionButton: FloatingActionButton = view.findViewById(R.id.add_fab)
 }
