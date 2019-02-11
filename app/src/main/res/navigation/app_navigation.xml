@@ -9,5 +9,11 @@
               android:label="fragment_calender" tools:layout="@layout/fragment_calender"/>
     <fragment android:id="@+id/poopListFragment"
               android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooplist.PoopListFragment"
-              android:label="PoopListFragment"/>
+              android:label="PoopListFragment">
+        <action android:id="@+id/action_poopListFragment_to_addEditLogFragment"
+                app:destination="@id/addEditLogFragment"/>
+    </fragment>
+    <fragment android:id="@+id/addEditLogFragment"
+              android:name="inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.AddEditLogFragment"
+              android:label="add_edit_log_fragment" tools:layout="@layout/add_edit_log_fragment"/>
 </navigation>

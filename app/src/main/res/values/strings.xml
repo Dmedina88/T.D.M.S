@@ -9,4 +9,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="add_poop_notes">Add poop notes?</string>
+
+    <string name="poop_type_1">Separate Hard Limps</string>
+    <string name="poop_type_2"> type 2</string>
+    <string name="poop_type_3"> type 3</string>
+    <string name="poop_type_4">type 4</string>
+    <string name="poop_type_5">type 5</string>
+    <string name="poop_type_6">type 6</string>
+    <string name="poop_type_7">type 7</string>
+
 </resources>
