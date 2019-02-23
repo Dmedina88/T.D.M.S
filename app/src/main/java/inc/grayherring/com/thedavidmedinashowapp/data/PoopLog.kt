@@ -6,8 +6,8 @@ import java.util.Calendar
 
 @Entity(tableName = "poop_log")
 data class PoopLog(
-    val date: Calendar,
-    val poopType: PoopType,
+  val date: Calendar,
+  val poopType: PoopType,
   val notes: String,
   @PrimaryKey(autoGenerate = true)
   val id: Int = 0

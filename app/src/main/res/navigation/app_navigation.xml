@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/app_navigation"
-            app:startDestination="@id/poopListFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/poopListFragment">
 
-    <fragment android:id="@+id/calenderFragment"
-              android:name="inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderFragment"
-              android:label="fragment_calender" tools:layout="@layout/fragment_calender"/>
-    <fragment android:id="@+id/poopListFragment"
-              android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooplist.PoopListFragment"
-              android:label="PoopListFragment">
+    <fragment
+        android:id="@+id/calenderFragment"
+        android:name="inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderFragment"
+        android:label="fragment_calender"
+        tools:layout="@layout/fragment_calender"/>
+    <fragment
+        android:id="@+id/poopListFragment"
+        android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooplist.PoopListFragment"
+        android:label="PoopListFragment">
         <action
             android:id="@+id/action_poopListFragment_to_addLogFragment"
             app:destination="@id/addLogFragment"/>
@@ -19,15 +23,15 @@
     </fragment>
     <fragment
         android:id="@+id/addLogFragment"
-        android:label="add_log_fragment"
-        android:name="inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.add.AddLogFragment"/>
+        android:name="inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.add.AddLogFragment"
+        android:label="add_log_fragment"/>
     <fragment
         android:id="@+id/editLogFragment"
         android:name="inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.edit.EditLogFragment"
         android:label="EditLogFragment">
         <argument
             android:name="poopId"
-            app:argType="integer"
-            android:defaultValue="0"/>
+            android:defaultValue="0"
+            app:argType="integer"/>
     </fragment>
 </navigation>

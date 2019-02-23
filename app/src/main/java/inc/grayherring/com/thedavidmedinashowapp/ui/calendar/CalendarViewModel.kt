@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui
+package inc.grayherring.com.thedavidmedinashowapp.ui.calendar
 
 import androidx.lifecycle.ViewModel
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopLogRepository

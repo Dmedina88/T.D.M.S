@@ -7,18 +7,17 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.edit.EditLogFragm
 import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooplist.PoopListFragment
 
-
 @Suppress("unused")
 @Module
 abstract class FragmentBuildersModule {
-    @ContributesAndroidInjector
-    abstract fun contributeCalenderFragment(): CalenderFragment
+  @ContributesAndroidInjector
+  abstract fun contributeCalenderFragment(): CalenderFragment
 
-    @ContributesAndroidInjector
-    abstract fun contributePoopListFragment(): PoopListFragment
+  @ContributesAndroidInjector
+  abstract fun contributePoopListFragment(): PoopListFragment
 
-    @ContributesAndroidInjector
-    abstract fun contributeAddLogFragment(): AddLogFragment
+  @ContributesAndroidInjector
+  abstract fun contributeAddLogFragment(): AddLogFragment
 
   @ContributesAndroidInjector
   abstract fun contributeEditLogFragment(): EditLogFragment

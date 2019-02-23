@@ -38,9 +38,9 @@ val PoopType.getIcon
   get() = when (this) {
     TYPE_1 -> R.drawable.ic_launcher_background
     TYPE_2 -> R.drawable.ic_launcher_foreground
-    TYPE_3 ->  R.drawable.ic_menu_gallery
-    TYPE_4 ->  R.drawable.ic_menu_send
-    TYPE_5 ->  R.drawable.ic_menu_slideshow
-    TYPE_6 ->  R.drawable.ic_menu_manage
-    TYPE_7 ->  R.drawable.ic_menu_camera
+    TYPE_3 -> R.drawable.ic_menu_gallery
+    TYPE_4 -> R.drawable.ic_menu_send
+    TYPE_5 -> R.drawable.ic_menu_slideshow
+    TYPE_6 -> R.drawable.ic_menu_manage
+    TYPE_7 -> R.drawable.ic_menu_camera
   }
