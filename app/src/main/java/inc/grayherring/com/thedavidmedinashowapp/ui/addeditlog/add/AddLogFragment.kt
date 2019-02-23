@@ -1,29 +1,27 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog
+package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.add
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.Spinner
-import android.widget.SpinnerAdapter
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
-import inc.grayherring.com.thedavidmedinashowapp.ui.CalendarViewModel
+import inc.grayherring.com.thedavidmedinashowapp.data.PoopLog
+import inc.grayherring.com.thedavidmedinashowapp.data.PoopType
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
+import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.AddEditBindings
+import inc.grayherring.com.thedavidmedinashowapp.util.ui.date
 import javax.inject.Inject
 
-class AddEditLogFragment : BaseFragment() {
+class AddLogFragment : BaseFragment() {
 
   @Inject
   lateinit var viewModelFactory: ViewModelFactory
   private lateinit var bindings: AddEditBindings
 
-  private lateinit var viewModel: AddEditLogViewModel
+  private lateinit var viewModel: AddLogViewModel
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -36,15 +34,25 @@ class AddEditLogFragment : BaseFragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory)
-        .get(AddEditLogViewModel::class.java)
+        .get(AddLogViewModel::class.java)
 
     bindings = AddEditBindings(view)
+
+
+    bindings.saveButton.setOnClickListener {
+
+      viewModel.save(
+          PoopLog(
+              bindings.datePicker.date,
+              bindings.poopTypeSpinner.selectedItem as PoopType,
+              bindings.notesEditText.text.toString()
+          )
+      )
+      findNavController().popBackStack()
+    }
   }
 
 }
 
-class AddEditBindings(view: View) {
-  val datePicker = view.findViewById<DatePicker>(R.id.date_picker)
-  val poopTypeSpinner = view.findViewById<Spinner>(R.id.poop_spinner)
-  val notesEditText = view.findViewById<EditText>(R.id.notes)
-}
+
+

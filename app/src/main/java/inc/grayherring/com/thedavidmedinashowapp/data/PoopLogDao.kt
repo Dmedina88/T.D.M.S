@@ -1,7 +1,11 @@
 package inc.grayherring.com.thedavidmedinashowapp.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
 @Dao
 interface PoopLogDao {
@@ -20,4 +24,7 @@ interface PoopLogDao {
 
     @Query("SELECT * FROM poop_log WHERE date BETWEEN :dayst AND :dayet")
     fun getFromTable(dayst: Long, dayet: Long): LiveData<List<PoopLog>>
+
+    @Query("SELECT * FROM poop_log WHERE id = :id LIMIT 1")
+    fun getPoop(id: Int): LiveData<PoopLog>
 }

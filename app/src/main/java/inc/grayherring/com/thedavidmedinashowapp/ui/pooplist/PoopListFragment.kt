@@ -4,18 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.CalendarViewModel
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
+import timber.log.Timber
 import javax.inject.Inject
-
 
 class PoopListFragment : BaseFragment() {
 
@@ -23,7 +25,6 @@ class PoopListFragment : BaseFragment() {
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: CalendarViewModel
     private lateinit var poopListBindings: PoopListBindings
-    private var adapter = PoopAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,26 +41,31 @@ class PoopListFragment : BaseFragment() {
             .get(CalendarViewModel::class.java)
 
         poopListBindings = PoopListBindings(view)
+      val adapter = PoopAdapter {
+        val action = PoopListFragmentDirections.actionPoopListFragmentToEditLogFragment(it.id)
+        findNavController().navigate(action)
 
-        poopListBindings.floatingActionButton.setOnClickListener {
-            Toast.makeText(this.context, "hello", Toast.LENGTH_LONG).show()
-        }
-
-        poopListBindings.recyclerView.adapter = adapter
-
-        viewModel.poopLogRepository.getAllPoops().observe(this, Observer {
-            adapter.setData(it)
+      }
+      poopListBindings.run {
+        viewModel.poopLogRepository.getAllPoops().observe(this@PoopListFragment, Observer {
+          Timber.i(it.toString())
+          adapter.setData(it)
         })
-
+        recyclerView.adapter = adapter
         poopListBindings.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_poopListFragment_to_addEditLogFragment)
+          findNavController().navigate(R.id.action_poopListFragment_to_addLogFragment)
         }
+      }
     }
-
 
 }
 
 class PoopListBindings(view: View) {
     val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
     val floatingActionButton: FloatingActionButton = view.findViewById(R.id.fab)
+
+  init {
+    recyclerView.layoutManager = LinearLayoutManager(view.context)
+    recyclerView.addItemDecoration(DividerItemDecoration(view.context, VERTICAL))
+  }
 }

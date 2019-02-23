@@ -2,7 +2,8 @@ package inc.grayherring.com.thedavidmedinashowapp.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.AddEditLogFragment
+import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.add.AddLogFragment
+import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.edit.EditLogFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooplist.PoopListFragment
 
@@ -17,6 +18,9 @@ abstract class FragmentBuildersModule {
     abstract fun contributePoopListFragment(): PoopListFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeAddEditLogFragment(): AddEditLogFragment
+    abstract fun contributeAddLogFragment(): AddLogFragment
+
+  @ContributesAndroidInjector
+  abstract fun contributeEditLogFragment(): EditLogFragment
 
 }

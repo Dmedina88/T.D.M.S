@@ -8,8 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopLog
+import inc.grayherring.com.thedavidmedinashowapp.data.getIcon
+import java.text.SimpleDateFormat
 
-class PoopAdapter() : RecyclerView.Adapter<PoopListVH>() {
+val format1 = SimpleDateFormat("yyyy-MM-dd")
+typealias PoopLogClicked = ((PoopLog) -> Unit)
+
+class PoopAdapter(val poopLogClicked: PoopLogClicked) : RecyclerView.Adapter<PoopListVH>() {
 
     private val data = mutableListOf<PoopLog>()
 
@@ -21,7 +26,7 @@ class PoopAdapter() : RecyclerView.Adapter<PoopListVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PoopListVH {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.poop_list_item, parent, false)
-        return PoopListVH.Entry(view)
+        return PoopListVH.Entry(view, poopLogClicked)
     }
 
     override fun getItemCount() = data.size
@@ -35,14 +40,17 @@ class PoopAdapter() : RecyclerView.Adapter<PoopListVH>() {
 
 sealed class PoopListVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    class Entry(itemView: View) : PoopListVH(itemView) {
+    class Entry(itemView: View, val onPoopLogClicked: PoopLogClicked) : PoopListVH(itemView) {
         val date: TextView = itemView.findViewById(R.id.date)
         val type: ImageView = itemView.findViewById(R.id.poop_type)
 
         override fun bind(poopLog: PoopLog) {
-            date.text = poopLog.date.toString()
+            date.text = "${format1.format(poopLog.date.time)} ${poopLog.notes} "
+            type.setImageResource(poopLog.poopType.getIcon)
+            itemView.setOnClickListener {
+                onPoopLogClicked(poopLog)
+            }
         }
-
     }
 
     abstract fun bind(poopLog: PoopLog)

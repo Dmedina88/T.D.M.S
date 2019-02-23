@@ -1,5 +1,6 @@
 package inc.grayherring.com.thedavidmedinashowapp.data
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopType.TYPE_1
@@ -33,7 +34,7 @@ val PoopType.stringRes
   }
 
 val PoopType.getIcon
-  @StringRes
+  @DrawableRes
   get() = when (this) {
     TYPE_1 -> R.drawable.ic_launcher_background
     TYPE_2 -> R.drawable.ic_launcher_foreground
