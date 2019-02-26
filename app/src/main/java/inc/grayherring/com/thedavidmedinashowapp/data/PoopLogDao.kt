@@ -1,11 +1,7 @@
 package inc.grayherring.com.thedavidmedinashowapp.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface PoopLogDao {
@@ -15,6 +11,9 @@ interface PoopLogDao {
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun insert(poopLog: PoopLog)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun update(poopLog: PoopLog)
 
   @Query("DELETE FROM poop_log")
   fun deleteAll()

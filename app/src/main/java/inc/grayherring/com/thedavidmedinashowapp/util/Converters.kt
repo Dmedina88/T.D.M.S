@@ -2,19 +2,21 @@ package inc.grayherring.com.thedavidmedinashowapp.util
 
 import androidx.room.TypeConverter
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopType
-import java.util.Calendar
+import org.threeten.bp.LocalDate
+
+
 
 class Converters {
   @TypeConverter
-  fun calendarToDatestamp(calendar: Calendar?): Long? = calendar?.timeInMillis
+  fun localDateToDatestamp(localDate: LocalDate?): Long? = localDate?.toEpochDay()
 
   @TypeConverter
-  fun datestampToCalendar(value: Long?): Calendar? =
-    value?.let { Calendar.getInstance().apply { timeInMillis = it } }
+  fun localDateToCalendar(value: Long?): LocalDate? =
+    value?.let { LocalDate.ofEpochDay(value) }
 
   @TypeConverter
-  fun calendarToDatestamp(poopType: PoopType?): String? = poopType?.name
+  fun localDateToDatestamp(poopType: PoopType?): String? = poopType?.name
 
   @TypeConverter
-  fun datestampToCalendar(poopType: String?): PoopType? = poopType?.let { PoopType.valueOf(it) }
+  fun localDateToCalendar(poopType: String?): PoopType? = poopType?.let { PoopType.valueOf(it) }
 }

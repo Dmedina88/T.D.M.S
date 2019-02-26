@@ -15,11 +15,11 @@
         android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooplist.PoopListFragment"
         android:label="PoopListFragment">
         <action
-            android:id="@+id/action_poopListFragment_to_addLogFragment"
-            app:destination="@id/addLogFragment"/>
+                android:id="@+id/list_to_addLogFragment"
+                app:destination="@id/addLogFragment"/>
         <action
-            android:id="@+id/action_poopListFragment_to_editLogFragment"
-            app:destination="@+id/editLogFragment"/>
+                android:id="@+id/list_to_editLogFragment"
+                app:destination="@+id/editLogFragment"/>
     </fragment>
     <fragment
         android:id="@+id/addLogFragment"

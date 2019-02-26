@@ -1,5 +1,6 @@
 package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.edit
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopLog
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopLogRepository
@@ -14,17 +15,17 @@ class EditPoopLogViewModel @Inject constructor(private val poopLogRepository: Po
 
   private val viewModelJob = Job()
   private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private var id: Int = 0
+    lateinit var oldPoopLog: LiveData<PoopLog>
 
-//    var _oldPoopLog: LiveData<PoopLog> = MutableLiveData<PoopLog>()
-//
-//    val oldPoopLog  : LiveData<PoopLog>  = _oldPoopLog
-
-  fun oldPoopLog(id: Int) =
-    poopLogRepository.getPoop(id)
+    fun init(id: Int) {
+        this.id = id
+        oldPoopLog = poopLogRepository.getPoop(id)
+    }
 
   fun save(poop: PoopLog) {
     uiScope.launch(Dispatchers.IO) {
-      poopLogRepository.insert(poop)
+        poopLogRepository.insert(poop.copy(id = id))
     }
   }
 

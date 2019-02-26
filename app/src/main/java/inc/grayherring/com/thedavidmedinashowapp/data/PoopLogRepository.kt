@@ -15,6 +15,7 @@ interface PoopLogRepository {
   fun deletePoopLog(poopLog: PoopLog)
   fun getPoops(dayst: Long, dayet: Long): LiveData<List<PoopLog>>
   fun getPoop(id: Int): LiveData<PoopLog>
+    fun update(poopLog: PoopLog)
 }
 
 @Singleton
@@ -25,6 +26,9 @@ class PoopLogRepositryImpl @Inject constructor(private val poopLogDao: PoopLogDa
 
   @WorkerThread
   override fun insert(poopLog: PoopLog) = poopLogDao.insert(poopLog)
+
+    @WorkerThread
+    override fun update(poopLog: PoopLog) = poopLogDao.update(poopLog)
 
   override fun deleteAll() = poopLogDao.deleteAll()
 

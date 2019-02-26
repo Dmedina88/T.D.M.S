@@ -38,15 +38,12 @@ class EditLogFragment : BaseFragment() {
         .get(EditPoopLogViewModel::class.java)
 
     bindings = AddEditBindings(view)
-    viewModel.oldPoopLog(EditLogFragmentArgs.fromBundle(arguments!!).poopId)
-        .observe(this, Observer {
-
+      viewModel.init(EditLogFragmentArgs.fromBundle(arguments!!).poopId)
+      viewModel.oldPoopLog.observe(this, Observer {
           bindings.notesEditText.setText(it.notes)
-
-        })
+      })
 
     bindings.saveButton.setOnClickListener {
-
       viewModel.save(
           PoopLog(
               bindings.datePicker.date,

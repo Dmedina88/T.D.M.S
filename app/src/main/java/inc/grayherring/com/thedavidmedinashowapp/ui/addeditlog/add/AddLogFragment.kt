@@ -38,9 +38,7 @@ class AddLogFragment : BaseFragment() {
 
     bindings = AddEditBindings(view)
 
-
     bindings.saveButton.setOnClickListener {
-
       viewModel.save(
           PoopLog(
               bindings.datePicker.date,
