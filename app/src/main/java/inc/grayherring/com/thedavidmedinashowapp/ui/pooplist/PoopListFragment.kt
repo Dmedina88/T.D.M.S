@@ -15,11 +15,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
+import javax.inject.Inject
 
 class PoopListFragment : BaseFragment() {
 
-  lateinit var viewModelFactory: ViewModelFactory
-  private lateinit var viewModel: PoopListVM
+  @Inject lateinit var viewModelFactory: ViewModelFactory
+  private  val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(PoopListVM::class.java) }
   private lateinit var poopListBindings: PoopListBindings
 
   override fun onCreateView(
@@ -32,8 +33,6 @@ class PoopListFragment : BaseFragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    viewModel = ViewModelProviders.of(this, viewModelFactory)
-      .get(PoopListVM::class.java)
 
     poopListBindings = PoopListBindings(view)
     val adapter = PoopAdapter {

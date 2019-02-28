@@ -16,7 +16,7 @@ class CalenderFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    lateinit var viewModel: CalendarViewModel
+    val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(CalendarViewModel::class.java) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,8 +29,7 @@ class CalenderFragment : BaseFragment() {
     override  fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory)
-            .get(CalendarViewModel::class.java)
+
         viewModel.poopLogRepository.deleteAll()
     }
 
