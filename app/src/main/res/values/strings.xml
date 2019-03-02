@@ -1,14 +1,14 @@
 <resources>
-  <string name="app_name">TheDavidMedinaShowApp</string>
+  <string name="app_name">The David Medina Show Mobile application</string>
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>
   <string name="nav_header_title">Android Studio</string>
   <string name="nav_header_subtitle">android.studio@android.com</string>
   <string name="nav_header_desc">Navigation header</string>
-  <string name="action_settings">Settings</string>
+  <string name="action_save">Save</string>
 
   <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="hello_blank_fragment">Hello Butt fragment</string>
   <string name="add_poop_notes">Add poop notes?</string>
 
   <string name="poop_type_1">Separate Hard Limps</string>
@@ -18,6 +18,5 @@
   <string name="poop_type_5">type 5</string>
   <string name="poop_type_6">type 6</string>
   <string name="poop_type_7">type 7</string>
-  <string name="save">save</string>
 
 </resources>

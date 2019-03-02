@@ -21,7 +21,9 @@ class AddLogFragment : BaseFragment() {
   lateinit var viewModelFactory: ViewModelFactory
   private lateinit var bindings: AddEditBindings
 
-  private lateinit var viewModel: AddLogViewModel
+  private val viewModel by lazy {
+    ViewModelProviders.of(this, viewModelFactory).get(AddLogViewModel::class.java)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -33,8 +35,6 @@ class AddLogFragment : BaseFragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    viewModel = ViewModelProviders.of(this, viewModelFactory)
-        .get(AddLogViewModel::class.java)
 
     bindings = AddEditBindings(view)
 

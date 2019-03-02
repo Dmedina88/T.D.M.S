@@ -39,10 +39,12 @@ class PoopListFragment : BaseFragment() {
       val action = PoopListFragmentDirections.listToEditLogFragment(it.id)
       findNavController().navigate(action)
     }
+
     poopListBindings.run {
       viewModel.poopListItems.observe(viewLifecycleOwner, Observer {
         adapter.setData(it)
       })
+
       recyclerView.adapter = adapter
       poopListBindings.floatingActionButton.setOnClickListener {
         findNavController().navigate(R.id.list_to_addLogFragment)
