@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopLog
 import inc.grayherring.com.thedavidmedinashowapp.data.getIcon
-import java.util.*
+import java.util.Calendar
 
 typealias PoopLogClicked = ((PoopLog) -> Unit)
 typealias DateItemClicked = ((Calendar) -> Unit)
@@ -67,7 +67,7 @@ sealed class PoopListVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView: View,
         private val poopLogClicked: PoopLogClicked
     ) : PoopListVH(itemView) {
-        val notes: TextView = itemView.findViewById(R.id.notes)
+      val notes: TextView = itemView.findViewById(R.id.notes_edit_text)
         val type: ImageView = itemView.findViewById(R.id.poop_type)
 
         fun bind(log: PoopListItem.Log) {

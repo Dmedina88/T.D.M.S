@@ -6,9 +6,12 @@ import org.threeten.bp.LocalDate
 
 @Entity(tableName = "poop_log")
 data class PoopLog(
-    val date: LocalDate,
-    val poopType: PoopType,
-    val notes: String,
-    @PrimaryKey(autoGenerate = true)
+  val date: LocalDate,
+//  val time: Time,
+  val poopType: PoopType,
+  val name: String,
+  val imagePath: String?,
+  val notes: String,
+  @PrimaryKey(autoGenerate = true)
   val id: Int = 0
 )
