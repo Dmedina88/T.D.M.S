@@ -42,6 +42,4 @@ abstract class FragmentBuildersModule {
   @ContributesAndroidInjector
   abstract fun contributePoopTypeFragment(): PoopTypeFragment
 
-
-
 }

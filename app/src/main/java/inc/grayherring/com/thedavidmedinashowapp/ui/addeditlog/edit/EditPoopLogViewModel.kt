@@ -11,21 +11,21 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class EditPoopLogViewModel @Inject constructor(private val poopLogRepository: PoopLogRepository) :
-    ViewModel() {
+  ViewModel() {
 
   private val viewModelJob = Job()
   private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private var id: Int = 0
-    lateinit var oldPoopLog: LiveData<PoopLog>
+  private var id: Int = 0
+  lateinit var oldPoopLog: LiveData<PoopLog>
 
-    fun init(id: Int) {
-        this.id = id
-        oldPoopLog = poopLogRepository.getPoop(id)
-    }
+  fun init(id: Int) {
+    this.id = id
+    oldPoopLog = poopLogRepository.getPoop(id)
+  }
 
   fun save(poop: PoopLog) {
     uiScope.launch(Dispatchers.IO) {
-        poopLogRepository.insert(poop.copy(id = id))
+      poopLogRepository.insert(poop.copy(id = id))
     }
   }
 

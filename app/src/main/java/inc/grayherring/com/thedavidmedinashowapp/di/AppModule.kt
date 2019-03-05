@@ -14,9 +14,9 @@ class AppModule {
   @Singleton
   fun providesPoopLogDatabase(application: Application) =
     Room.databaseBuilder(
-        application,
-        PoopLogDatabase::class.java,
-        "Poop_log_db"
+      application,
+      PoopLogDatabase::class.java,
+      "Poop_log_db"
     ).build()
 
   @Provides

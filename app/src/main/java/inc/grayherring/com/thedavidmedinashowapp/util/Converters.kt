@@ -4,18 +4,16 @@ import androidx.room.TypeConverter
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopType
 import org.threeten.bp.LocalDate
 
-
-
 class Converters {
   @TypeConverter
-  fun localDateToDatestamp(localDate: LocalDate?): Long? = localDate?.toEpochDay()
+  fun localDateToDateStamp(localDate: LocalDate?): Long? = localDate?.toEpochDay()
 
   @TypeConverter
   fun localDateToCalendar(value: Long?): LocalDate? =
     value?.let { LocalDate.ofEpochDay(value) }
 
   @TypeConverter
-  fun localDateToDatestamp(poopType: PoopType?): String? = poopType?.name
+  fun localDateToDateStamp(poopType: PoopType?): String? = poopType?.name
 
   @TypeConverter
   fun localDateToCalendar(poopType: String?): PoopType? = poopType?.let { PoopType.valueOf(it) }

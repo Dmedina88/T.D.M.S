@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AddLogViewModel @Inject constructor(private val poopLogRepository: PoopLogRepository) :
-    ViewModel() {
+  ViewModel() {
 
   private val viewModelJob = Job()
   private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)

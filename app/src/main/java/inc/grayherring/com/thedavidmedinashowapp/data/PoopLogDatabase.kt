@@ -20,9 +20,9 @@ abstract class PoopLogDatabase : RoomDatabase() {
       return INSTANCE ?: synchronized(this) {
         // Create database here
         val instance = Room.databaseBuilder(
-            context.applicationContext,
-            PoopLogDatabase::class.java,
-            "Poop_log_db"
+          context.applicationContext,
+          PoopLogDatabase::class.java,
+          "Poop_log_db"
         ).build()
         INSTANCE = instance
         instance
