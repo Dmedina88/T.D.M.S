@@ -10,56 +10,44 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
+import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentPoopListBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import javax.inject.Inject
 
 class PoopListFragment : BaseFragment() {
 
   @Inject lateinit var viewModelFactory: ViewModelFactory
-  private  val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(PoopListVM::class.java) }
-  private lateinit var poopListBindings: PoopListBindings
+  private val viewModel by lazy {
+    ViewModelProviders.of(this, viewModelFactory).get(PoopListVM::class.java)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_note_list, container, false)
-  }
+    val bindings = FragmentPoopListBinding.inflate(inflater, container, false)
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    poopListBindings = PoopListBindings(view)
     val adapter = PoopAdapter {
       val action = PoopListFragmentDirections.listToEditLogFragment(it.id)
       findNavController().navigate(action)
     }
 
-    poopListBindings.run {
-      viewModel.poopListItems.observe(viewLifecycleOwner, Observer {
-        adapter.setData(it)
-      })
+    viewModel.poopListItems.observe(viewLifecycleOwner, Observer {
+      adapter.setData(it)
+    })
 
+    bindings.run {
+      recyclerView.layoutManager = LinearLayoutManager(root.context)
+      recyclerView.addItemDecoration(DividerItemDecoration(root.context, VERTICAL))
       recyclerView.adapter = adapter
-      poopListBindings.floatingActionButton.setOnClickListener {
-        findNavController().navigate(R.id.list_to_addLogFragment)
+      fab.setOnClickListener {
+        findNavController().navigate(R.id.action_poopListFragment_to_poopFlowFragment)
       }
     }
+    return bindings.root
   }
 
-}
-
-class PoopListBindings(view: View) {
-  val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-  val floatingActionButton: FloatingActionButton = view.findViewById(R.id.fab)
-
-  init {
-    recyclerView.layoutManager = LinearLayoutManager(view.context)
-    recyclerView.addItemDecoration(DividerItemDecoration(view.context, VERTICAL))
-  }
 }
