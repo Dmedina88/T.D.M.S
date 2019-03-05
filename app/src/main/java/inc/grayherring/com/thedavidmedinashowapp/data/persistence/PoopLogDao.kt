@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.data
+package inc.grayherring.com.thedavidmedinashowapp.data.persistence
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -7,6 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
 
 @Dao
 interface PoopLogDao {

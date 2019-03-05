@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import inc.grayherring.com.thedavidmedinashowapp.R
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopLog
-import inc.grayherring.com.thedavidmedinashowapp.data.getIcon
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
+import inc.grayherring.com.thedavidmedinashowapp.data.models.icon
 import java.util.Calendar
 
 typealias PoopLogClicked = ((PoopLog) -> Unit)
@@ -18,6 +18,7 @@ class PoopAdapter(val poopLogClicked: PoopLogClicked) : RecyclerView.Adapter<Poo
 
   private val data = mutableListOf<PoopListItem>()
 
+  //todo : dif util
   fun setData(newData: List<PoopListItem>) {
     data.clear()
     data.addAll(newData)
@@ -72,7 +73,7 @@ sealed class PoopListVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(log: PoopListItem.Log) {
 
       notes.text = "${log.poopLog.notes} "
-      type.setImageResource(log.poopLog.poopType.getIcon)
+      type.setImageResource(log.poopLog.poopType.icon)
       itemView.setOnClickListener {
         poopLogClicked.invoke(log.poopLog)
       }

@@ -2,6 +2,8 @@ package inc.grayherring.com.thedavidmedinashowapp.data
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import inc.grayherring.com.thedavidmedinashowapp.data.persistence.PoopLogDao
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
 import javax.inject.Inject
 import javax.inject.Singleton
 

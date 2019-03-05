@@ -1,10 +1,11 @@
-package inc.grayherring.com.thedavidmedinashowapp.data
+package inc.grayherring.com.thedavidmedinashowapp.data.persistence
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
 import inc.grayherring.com.thedavidmedinashowapp.util.Converters
 
 @Database(entities = [PoopLog::class], version = 1, exportSchema = false)
@@ -17,7 +18,8 @@ abstract class PoopLogDatabase : RoomDatabase() {
     private var INSTANCE: PoopLogDatabase? = null
 
     fun getDatabase(context: Context): PoopLogDatabase {
-      return INSTANCE ?: synchronized(this) {
+      return INSTANCE
+        ?: synchronized(this) {
         // Create database here
         val instance = Room.databaseBuilder(
           context.applicationContext,

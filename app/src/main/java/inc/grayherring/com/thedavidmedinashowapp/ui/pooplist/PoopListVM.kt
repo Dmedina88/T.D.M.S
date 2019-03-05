@@ -2,7 +2,7 @@ package inc.grayherring.com.thedavidmedinashowapp.ui.pooplist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopLog
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopLogRepository
 import inc.grayherring.com.thedavidmedinashowapp.util.map
 import kotlinx.coroutines.CoroutineScope

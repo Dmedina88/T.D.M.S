@@ -1,7 +1,8 @@
-package inc.grayherring.com.thedavidmedinashowapp.data
+package inc.grayherring.com.thedavidmedinashowapp.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType
 import org.threeten.bp.LocalDate
 
 @Entity(tableName = "poop_log")

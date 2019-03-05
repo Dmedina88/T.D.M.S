@@ -1,15 +1,15 @@
-package inc.grayherring.com.thedavidmedinashowapp.data
+package inc.grayherring.com.thedavidmedinashowapp.data.models
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import inc.grayherring.com.thedavidmedinashowapp.R
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopType.TYPE_1
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopType.TYPE_2
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopType.TYPE_3
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopType.TYPE_4
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopType.TYPE_5
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopType.TYPE_6
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopType.TYPE_7
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType.TYPE_1
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType.TYPE_2
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType.TYPE_3
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType.TYPE_4
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType.TYPE_5
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType.TYPE_6
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType.TYPE_7
 
 enum class PoopType {
   TYPE_1,
@@ -33,7 +33,7 @@ val PoopType.stringRes
     TYPE_7 -> R.string.poop_type_7
   }
 
-val PoopType.getIcon
+val PoopType.icon
   @DrawableRes
   get() = when (this) {
     TYPE_1 -> R.drawable.ic_launcher_background

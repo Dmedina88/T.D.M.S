@@ -8,7 +8,7 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.NotesFr
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.PhotoFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.PoopTypeFragment
 
-class SavePoopPagerAdapater(fragmentManager: FragmentManager) :
+class SavePoopPager(fragmentManager: FragmentManager) :
   FragmentPagerAdapter(fragmentManager) {
   override fun getItem(position: Int): Fragment = when (position) {
     0 -> DatePickerFragment()
@@ -21,4 +21,12 @@ class SavePoopPagerAdapater(fragmentManager: FragmentManager) :
 
   override fun getCount() = 4
 
+  override fun getPageTitle(position: Int): CharSequence? =
+    when (position) {
+      0 -> "Date"
+      1 -> "Note"
+      2 -> "Type"
+      3 -> "Photo"
+      else -> super.getPageTitle(position)
+    }
 }

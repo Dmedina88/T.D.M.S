@@ -1,7 +1,7 @@
 package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.add
 
 import androidx.lifecycle.ViewModel
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopLog
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopLogRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

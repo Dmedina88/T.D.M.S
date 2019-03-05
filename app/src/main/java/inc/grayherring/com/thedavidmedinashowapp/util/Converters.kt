@@ -1,7 +1,7 @@
 package inc.grayherring.com.thedavidmedinashowapp.util
 
 import androidx.room.TypeConverter
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopType
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType
 import org.threeten.bp.LocalDate
 
 class Converters {

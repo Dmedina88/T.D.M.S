@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopType
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType
 import inc.grayherring.com.thedavidmedinashowapp.databinding.AddEditLogFragmentBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import javax.inject.Inject

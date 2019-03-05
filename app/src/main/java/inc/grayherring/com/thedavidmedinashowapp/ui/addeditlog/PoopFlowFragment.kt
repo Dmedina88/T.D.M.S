@@ -30,7 +30,7 @@ class PoopFlowFragment : BaseFragment() {
     bindings = FragmentPoopFlowBinding.inflate(inflater, container, false)
     viewModel.init(null)
 
-    bindings.viewPager.adapter = SavePoopPagerAdapater(requireFragmentManager())
+    bindings.viewPager.adapter = SavePoopPager(requireFragmentManager())
 
 
 
