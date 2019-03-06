@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
 import javax.inject.Inject
 
@@ -36,21 +37,26 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
     _poopTypeList.value = PoopType.values().map { PoopTypeItem(it,false) }
   }
 
-  //take off main thread and clean up
+  //todo: test?
   fun selectPoopType(selectedPoopType: PoopType) {
     if (this.selectedPoopType == selectedPoopType) {
       return
-    } else {
-      this.selectedPoopType = selectedPoopType
-      _poopTypeList.value = _poopTypeList.value?.map {
-        if (it.poopType == selectedPoopType) {
-          it.copy(selected = true)
-        } else {
-          it.copy(selected = false)
+    }
+    this.selectedPoopType = selectedPoopType
+
+    uiScope.launch {
+      _poopTypeList.value = withContext(Dispatchers.IO) {
+        _poopTypeList.value?.map {
+          if (it.poopType == selectedPoopType) {
+            it.copy(selected = true)
+          } else {
+            it.copy(selected = false)
+          }
         }
       }
     }
   }
+
 
   fun init(id: Int?) {
     this.id = id ?: 0

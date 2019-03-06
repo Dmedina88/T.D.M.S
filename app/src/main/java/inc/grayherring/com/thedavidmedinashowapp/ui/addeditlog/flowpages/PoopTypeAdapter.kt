@@ -25,22 +25,22 @@ class PoopTypeAdapter(private val typeClicked: TypeClicked) : RecyclerView.Adapt
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PoopTypeVH =
-    PoopTypeVH(PoopTypeItemBinding.inflate(LayoutInflater.from(parent.context)),typeClicked)
+    PoopTypeVH(PoopTypeItemBinding.inflate(LayoutInflater.from(parent.context)), typeClicked)
 
   override fun getItemCount() = data.size
 
   override fun onBindViewHolder(holder: PoopTypeVH, position: Int) {
-   holder.bind(data[position])
+    holder.bind(data[position])
   }
 
 }
 
-
-class PoopTypeVH(binding: PoopTypeItemBinding,val typeClicked: TypeClicked) : DataBindingViewHolder<PoopTypeItemBinding, PoopTypeItem>(binding) {
+class PoopTypeVH(binding: PoopTypeItemBinding, val typeClicked: TypeClicked) :
+  DataBindingViewHolder<PoopTypeItemBinding, PoopTypeItem>(binding) {
   override fun bind(item: PoopTypeItem) {
     binding.icon.setImageResource(item.poopType.icon)
-    binding.detail.text= binding.root.context.getText(item.poopType.stringRes)
-    binding.root.setBackgroundColor(if (item.selected) binding.root.colorPrimary else binding.root.colorWhite )
+    binding.detail.text = binding.root.context.getText(item.poopType.stringRes)
+    binding.root.setBackgroundColor(if (item.selected) binding.root.colorPrimary else binding.root.colorWhite)
     binding.root.setOnClickListener {
       typeClicked(item.poopType)
     }

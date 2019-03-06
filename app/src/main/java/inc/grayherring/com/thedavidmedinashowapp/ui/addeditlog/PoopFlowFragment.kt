@@ -29,11 +29,10 @@ class PoopFlowFragment : BaseFragment() {
 
     bindings = FragmentPoopFlowBinding.inflate(inflater, container, false)
     viewModel.init(null)
-
     bindings.viewPager.adapter = SavePoopPager(requireFragmentManager())
-
-
-
+    bindings.viewPager.currentItem = 2
+    //sort of want to do this with data binding if i can
+    bindings.tabLayout.setupWithViewPager(bindings.viewPager)
     return bindings.root
   }
 

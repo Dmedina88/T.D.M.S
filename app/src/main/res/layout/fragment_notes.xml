@@ -14,11 +14,13 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:orientation="vertical"
+      android:padding="16dp"
       tools:context=".ui.addeditlog.flowpages.DatePickerFragment"
       >
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:hint="@string/optional_name_hint"
         >
 
@@ -34,15 +36,17 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        android:gravity="start"
         android:hint="@string/optional_notes"
         >
 
       <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/notes_edit_text"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="start"
           android:text="@={vm.notes}"
-
           />
 
 

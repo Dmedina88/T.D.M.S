@@ -21,5 +21,6 @@
   <string name="optional_name_hint">Optional Name</string>
   <string name="optional_notes">Optional Notes</string>
   <string name="take_photo_optional">Take Photo(Optional)</string>
+  <string name="choose_photo">Choose Photo</string>
 
 </resources>
