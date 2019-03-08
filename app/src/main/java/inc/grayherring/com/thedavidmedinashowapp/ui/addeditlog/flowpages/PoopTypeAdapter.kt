@@ -11,6 +11,7 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.PoopTypeItem
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.DataBindingViewHolder
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.colorPrimary
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.colorWhite
+import inc.grayherring.com.thedavidmedinashowapp.util.ui.setRippleBackgroundColor
 
 typealias TypeClicked = ((PoopType) -> Unit)
 
@@ -40,7 +41,11 @@ class PoopTypeVH(binding: PoopTypeItemBinding, val typeClicked: TypeClicked) :
   override fun bind(item: PoopTypeItem) {
     binding.icon.setImageResource(item.poopType.icon)
     binding.detail.text = binding.root.context.getText(item.poopType.stringRes)
-    binding.root.setBackgroundColor(if (item.selected) binding.root.colorPrimary else binding.root.colorWhite)
+    if (item.selected) {
+      binding.root.setRippleBackgroundColor(binding.root.colorPrimary, binding.root.colorWhite)
+    } else {
+      binding.root.setRippleBackgroundColor(binding.root.colorWhite, binding.root.colorPrimary)
+    }
     binding.root.setOnClickListener {
       typeClicked(item.poopType)
     }

@@ -18,7 +18,7 @@ class NotesFragment : BaseFragment() {
   lateinit var bindings: FragmentNotesBinding
 
   private val viewModel by lazy {
-    ViewModelProviders.of(this, viewModelFactory)
+    ViewModelProviders.of(this.requireActivity(), viewModelFactory)
       .get(PoopFlowViewModel::class.java)
   }
 

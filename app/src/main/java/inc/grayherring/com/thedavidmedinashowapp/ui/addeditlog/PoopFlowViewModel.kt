@@ -2,39 +2,42 @@ package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import inc.grayherring.com.thedavidmedinashowapp.arch.ViewModelCoroutine
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopLogRepository
 import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
 import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType
-import kotlinx.coroutines.CoroutineScope
+import inc.grayherring.com.thedavidmedinashowapp.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
 import javax.inject.Inject
 
-//move to won package if there are more flow spasific models
 data class PoopTypeItem(val poopType: PoopType, val selected: Boolean)
 
+sealed class PoopFlowError {
+  object MissingPoopType : PoopFlowError()
+}
+
 class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopLogRepository) :
-  ViewModel() {
+  ViewModelCoroutine() {
 
-  //view data
-  val date = MutableLiveData<LocalDate>()
-  val name = MutableLiveData<String>()
-  val notes = MutableLiveData<String>()
-  val imagePath = MutableLiveData<String>()
-  val poopTypeList: LiveData<List<PoopTypeItem>> get() = _poopTypeList
   private val _poopTypeList = MutableLiveData<List<PoopTypeItem>>()
-
-  private val viewModelJob = Job()
-  private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-  private var id: Int = 0
+  private val _errors = SingleLiveEvent<PoopFlowError>()
+  private val _finish = SingleLiveEvent<Boolean>()
   private var selectedPoopType: PoopType? = null
+  private var id: Int = 0
+
+  val date = MutableLiveData<LocalDate>().apply { value = LocalDate.now() }
+  val name = MutableLiveData<String>().apply { value = "" }
+  val notes = MutableLiveData<String>().apply { value = "" }
+  val imagePath = MutableLiveData<String>().apply { value = "" }
+  val poopTypeList: LiveData<List<PoopTypeItem>> get() = _poopTypeList
+  val errors: LiveData<PoopFlowError> get() = _errors
+  val finish: LiveData<Boolean> get() = _finish
 
   init {
-    _poopTypeList.value = PoopType.values().map { PoopTypeItem(it,false) }
+    _poopTypeList.value = PoopType.values().map { PoopTypeItem(it, false) }
   }
 
   //todo: test?
@@ -44,7 +47,7 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
     }
     this.selectedPoopType = selectedPoopType
 
-    uiScope.launch {
+    viewModeScope.launch {
       _poopTypeList.value = withContext(Dispatchers.IO) {
         _poopTypeList.value?.map {
           if (it.poopType == selectedPoopType) {
@@ -57,22 +60,34 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
     }
   }
 
-
   fun init(id: Int?) {
     this.id = id ?: 0
-    date.value = LocalDate.now()
-
   }
 
-  fun save(poop: PoopLog) {
-    uiScope.launch(Dispatchers.IO) {
-      poopLogRepository.insert(poop.copy(id = id))
+  fun save() {
+    viewModeScope.launch {
+      //todo selectedPoopType error
+      val selectedDate = date.value ?: LocalDate.now()
+      val selectedName = name.value ?: ""
+      val selectedNotes = notes.value ?: ""
+      val selectedPath = imagePath.value ?: ""
+      val type = selectedPoopType
+
+      if (type == null) {
+        _errors.value = PoopFlowError.MissingPoopType
+        return@launch
+      }
+
+      _finish.value = withContext(Dispatchers.IO) {
+        poopLogRepository.insert(
+          PoopLog(selectedDate, type, selectedName, selectedPath, selectedNotes, id)
+        )
+        true
+      }
+
     }
+
   }
 
-  override fun onCleared() {
-    super.onCleared()
-    viewModelJob.cancel()
-  }
 }
 

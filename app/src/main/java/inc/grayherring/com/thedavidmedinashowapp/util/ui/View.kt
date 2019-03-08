@@ -1,44 +1,68 @@
 package inc.grayherring.com.thedavidmedinashowapp.util.ui
 
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.LayerDrawable
-import android.graphics.drawable.ShapeDrawable
+import android.content.res.ColorStateList
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.RippleDrawable
 import android.view.View
-import androidx.annotation.ColorInt
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import inc.grayherring.com.thedavidmedinashowapp.R
+import com.google.android.material.snackbar.Snackbar
 
-val View.colorPrimary get() = ContextCompat.getColor(this.context, R.color.colorPrimary)
-val View.colorWhite get() = ContextCompat.getColor(this.context, R.color.white)
+val View.colorPrimary
+  get() = ContextCompat.getColor(
+    this.context,
+    inc.grayherring.com.thedavidmedinashowapp.R.color.colorPrimary
+  )
+val View.colorWhite
+  get() = ContextCompat.getColor(
+    this.context,
+    inc.grayherring.com.thedavidmedinashowapp.R.color.white
+  )
 
-private fun View.rippleDrawable(@ColorInt color: Int? = null, borderless: Boolean = false): Drawable {
-  val res =
-    if (borderless) R.attr.selectableItemBackgroundBorderless else R.attr.selectableItemBackground
-  val attrs = intArrayOf(res)
-  val typedArray = context.obtainStyledAttributes(attrs)
-  val selectableBackground = typedArray.getDrawable(0)
-  typedArray.recycle()
-  return if (color == null) {
-    selectableBackground
-  } else {
-    val solidBackground = ShapeDrawable()
-    solidBackground.paint.color = color
-    LayerDrawable(arrayOf(solidBackground, selectableBackground))
-  }
+//fun getBackgroundDrawable(pressedColor: Int, backgroundDrawable: Drawable): RippleDrawable {
+//  return RippleDrawable(getPressedState(pressedColor), backgroundDrawable, null)
+//}
+//
+//fun getPressedState(pressedColor: Int): ColorStateList {
+//  return ColorStateList(arrayOf(intArrayOf()), intArrayOf(pressedColor))
+//}
+
+fun getPressedColorRippleDrawable(normalColor: Int, pressedColor: Int): RippleDrawable {
+  return RippleDrawable(
+    getPressedColorSelector(normalColor, pressedColor),
+    getColorDrawableFromColor(normalColor),
+    null
+  )
 }
 
-fun View.setRippleBackground(@ColorInt color: Int? = null, borderless: Boolean = false) {
-  background = rippleDrawable(color, borderless)
+fun getPressedColorSelector(normalColor: Int, pressedColor: Int): ColorStateList {
+  return ColorStateList(
+    arrayOf(
+      intArrayOf(android.R.attr.state_pressed),
+      intArrayOf(android.R.attr.state_focused),
+      intArrayOf(android.R.attr.state_activated),
+      intArrayOf()
+    ),
+    intArrayOf(pressedColor, pressedColor, pressedColor, normalColor)
+  )
 }
 
-fun View.setRippleForeground(@ColorInt color: Int? = null, borderless: Boolean = false) {
-  foreground = rippleDrawable(color, borderless)
+fun getColorDrawableFromColor(color: Int): ColorDrawable {
+  return ColorDrawable(color)
 }
 
-fun View.addRippleBackgroundLayer() {
-  val attrs = intArrayOf(R.attr.selectableItemBackground)
-  val typedArray = context.obtainStyledAttributes(attrs)
-  val selectableBackground = typedArray.getDrawable(0)
-  typedArray.recycle()
-  this.background = LayerDrawable(arrayOf(background, selectableBackground))
+fun View.setRippleBackgroundColor(normalColor: Int, pressedColor: Int = this.colorWhite) {
+  this.background = getPressedColorRippleDrawable(normalColor, pressedColor)
+}
+
+fun View.snackbar(text: CharSequence, duration: Int = Snackbar.LENGTH_SHORT): Snackbar {
+  val snack = Snackbar.make(this, text, duration)
+  snack.show()
+  return snack
+}
+
+fun View.snackbar(@StringRes text: Int, duration: Int = Snackbar.LENGTH_SHORT): Snackbar {
+  val snack = Snackbar.make(this, text, duration)
+  snack.show()
+  return snack
 }

@@ -21,7 +21,7 @@ class PoopTypeFragment : BaseFragment() {
   lateinit var bindings: FragmentPoopTypePickerBinding
 
   private val viewModel by lazy {
-    ViewModelProviders.of(this, viewModelFactory)
+    ViewModelProviders.of(this.requireActivity(), viewModelFactory)
       .get(PoopFlowViewModel::class.java)
   }
 
@@ -30,17 +30,16 @@ class PoopTypeFragment : BaseFragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-
     val adapter = PoopTypeAdapter(viewModel::selectPoopType)
+
     bindings = FragmentPoopTypePickerBinding.inflate(inflater, container, false)
     bindings.poopTypeList.adapter = adapter
-    bindings.poopTypeList.layoutManager = GridLayoutManager(requireContext(),2)
+    bindings.poopTypeList.layoutManager = GridLayoutManager(requireContext(), 2)
     bindings.poopTypeList.addItemDecoration(GridSpacingItemDecoration(2, 18, true))
 
     viewModel.poopTypeList.observe(viewLifecycleOwner, Observer {
       adapter.setData(it)
     })
-
 
     return bindings.root
   }

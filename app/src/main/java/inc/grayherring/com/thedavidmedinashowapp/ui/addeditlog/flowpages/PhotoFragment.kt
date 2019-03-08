@@ -2,18 +2,26 @@ package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import inc.grayherring.com.thedavidmedinashowapp.BuildConfig
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentTakePhotoBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.PoopFlowViewModel
+import inc.grayherring.com.thedavidmedinashowapp.util.loadImageFromPath
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.format.DateTimeFormatter
+import timber.log.Timber
+import java.io.File
+import java.io.IOException
 import javax.inject.Inject
 
 class PhotoFragment : BaseFragment() {
@@ -22,10 +30,12 @@ class PhotoFragment : BaseFragment() {
   lateinit var viewModelFactory: ViewModelFactory
   lateinit var bindings: FragmentTakePhotoBinding
 
-  val REQUEST_IMAGE_CAPTURE = 1
+  private val REQUEST_CAPTURE_IMAGE = 100
+
+  var pendingImagePath = ""
 
   private val viewModel by lazy {
-    ViewModelProviders.of(this, viewModelFactory)
+    ViewModelProviders.of(this.requireActivity(), viewModelFactory)
       .get(PoopFlowViewModel::class.java)
   }
 
@@ -38,31 +48,66 @@ class PhotoFragment : BaseFragment() {
     bindings = FragmentTakePhotoBinding.inflate(inflater, container, false)
 
     bindings.takePhotoBtn.setOnClickListener {
-      dispatchTakePictureIntent()
+      openCamera()
     }
     viewModel.imagePath.observe(viewLifecycleOwner, Observer {
-      if (it.isNullOrBlank()) {
-
-      } else {
-
+      if (!it.isNullOrBlank()) {
+        bindings.poopImage.loadImageFromPath(it)
       }
     })
 
     return bindings.root
   }
 
-  private fun dispatchTakePictureIntent() {
+  private fun openCamera() {
     Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+      // Ensure that there's a camera activity to handle the intent
       takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
-        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        // Create the File where the photo should go
+        val photoFile: File? = try {
+          createImageFile()
+
+        } catch (ex: IOException) {
+          // Error occurred while creating the File
+          null
+        }
+
+        // Continue only if the File was successfully created
+        photoFile?.also {
+          val fileUri = FileProvider.getUriForFile(
+            this.requireContext(),
+            "${BuildConfig.APPLICATION_ID}.provider",
+            it
+          )
+          pendingImagePath = it.absolutePath
+          Timber.d(pendingImagePath)
+          takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
+          startActivityForResult(takePictureIntent, REQUEST_CAPTURE_IMAGE)
+        }
       }
     }
   }
 
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-      val imageBitmap = data?.extras?.get("data") as Bitmap
-      bindings.poopImage.setImageBitmap(imageBitmap)
+  //move some place
+  @Throws(IOException::class)
+  private fun createImageFile(): File {
+    val timeStamp = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+    val imageFileName = "IMG_" + timeStamp + "_"
+    val storageDir = this.requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+    return File.createTempFile(
+      imageFileName,
+      ".jpg",
+      storageDir
+    )
+  }
+
+  override fun onActivityResult(
+    requestCode: Int, resultCode: Int, data: Intent?
+  ) {
+    if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode == RESULT_OK) {
+      viewModel.imagePath.value = pendingImagePath
     }
   }
 }
+
+

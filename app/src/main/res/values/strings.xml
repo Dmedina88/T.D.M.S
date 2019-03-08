@@ -22,5 +22,11 @@
   <string name="optional_notes">Optional Notes</string>
   <string name="take_photo_optional">Take Photo(Optional)</string>
   <string name="choose_photo">Choose Photo</string>
+  <string name="poop_image">poop image</string>
+  <string name="date_title">Date</string>
+  <string name="note_title">Note</string>
+  <string name="type_title">Type</string>
+  <string name="photo_title">Photo</string>
+  <string name="mandatory_poop_type">Poop Type is Mandatory</string>
 
 </resources>
