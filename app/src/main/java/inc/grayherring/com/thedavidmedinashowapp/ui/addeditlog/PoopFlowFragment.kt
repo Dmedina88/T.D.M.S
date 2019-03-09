@@ -27,7 +27,7 @@ class PoopFlowFragment : BaseFragment() {
   private val viewModel by lazy {
     Timber.d("PoopFlowFragment lazy")
 
-    ViewModelProviders.of(this.requireActivity(), viewModelFactory)
+    ViewModelProviders.of(this, viewModelFactory)
       .get(PoopFlowViewModel::class.java)
   }
 

@@ -35,7 +35,7 @@ class PhotoFragment : BaseFragment() {
   var pendingImagePath = ""
 
   private val viewModel by lazy {
-    ViewModelProviders.of(this.requireActivity(), viewModelFactory)
+    ViewModelProviders.of(this.requireParentFragment(), viewModelFactory)
       .get(PoopFlowViewModel::class.java)
   }
 

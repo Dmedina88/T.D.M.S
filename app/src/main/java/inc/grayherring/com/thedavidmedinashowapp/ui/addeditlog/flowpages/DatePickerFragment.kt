@@ -21,7 +21,7 @@ class DatePickerFragment : BaseFragment() {
   lateinit var bindings: FragmentDatePickerBinding
 
   private val viewModel by lazy {
-    ViewModelProviders.of(this.requireActivity(), viewModelFactory)
+    ViewModelProviders.of(this.requireParentFragment(), viewModelFactory)
       .get(PoopFlowViewModel::class.java)
   }
 
@@ -36,7 +36,7 @@ class DatePickerFragment : BaseFragment() {
     //todo: 2 way binding myself out of this
     viewModel.date.observe(viewLifecycleOwner, Observer {
       bindings.datePicker.init(
-        it.year, it.monthValue -1, it.dayOfMonth
+        it.year, it.monthValue, it.dayOfMonth
       ) { _, year, month, dayOfMonth ->
         val localDate = LocalDate.of(year, month, dayOfMonth)
         if (it != localDate)
@@ -48,4 +48,7 @@ class DatePickerFragment : BaseFragment() {
     return bindings.root
   }
 
+  fun onDateChange(year: Int, month: Int, dayOfMonth: Int) {
+
+  }
 }
