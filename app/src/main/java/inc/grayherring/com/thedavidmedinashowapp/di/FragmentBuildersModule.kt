@@ -3,8 +3,6 @@ package inc.grayherring.com.thedavidmedinashowapp.di
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.PoopFlowFragment
-import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.add.AddLogFragment
-import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.edit.EditLogFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.DatePickerFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.NotesFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.PhotoFragment
@@ -20,12 +18,6 @@ abstract class FragmentBuildersModule {
 
   @ContributesAndroidInjector
   abstract fun contributePoopListFragment(): PoopListFragment
-
-  @ContributesAndroidInjector
-  abstract fun contributeAddLogFragment(): AddLogFragment
-
-  @ContributesAndroidInjector
-  abstract fun contributeEditLogFragment(): EditLogFragment
 
   @ContributesAndroidInjector
   abstract fun contributeDatePickerFragment(): DatePickerFragment

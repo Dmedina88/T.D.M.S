@@ -33,7 +33,6 @@ class DatePickerFragment : BaseFragment() {
 
     bindings = FragmentDatePickerBinding.inflate(inflater, container, false)
 
-    //todo: 2 way binding myself out of this
     viewModel.date.observe(viewLifecycleOwner, Observer {
       bindings.datePicker.init(
         it.year, it.monthValue, it.dayOfMonth
@@ -42,13 +41,9 @@ class DatePickerFragment : BaseFragment() {
         if (it != localDate)
           viewModel.date.value = LocalDate.of(year, month, dayOfMonth)
       }
-      bindings.datePicker.localDate = it
     })
 
     return bindings.root
   }
 
-  fun onDateChange(year: Int, month: Int, dayOfMonth: Int) {
-
-  }
 }

@@ -31,7 +31,7 @@ class PoopListFragment : BaseFragment() {
     val bindings = FragmentPoopListBinding.inflate(inflater, container, false)
 
     val adapter = PoopAdapter {
-      val action = PoopListFragmentDirections.listToEditLogFragment(it.id)
+      val action = PoopListFragmentDirections.actionListToFlow(it.id)
       findNavController().navigate(action)
     }
 
@@ -44,7 +44,8 @@ class PoopListFragment : BaseFragment() {
       recyclerView.addItemDecoration(DividerItemDecoration(root.context, VERTICAL))
       recyclerView.adapter = adapter
       fab.setOnClickListener {
-        findNavController().navigate(R.id.action_poopListFragment_to_poopFlowFragment)
+
+        findNavController().navigate(R.id.action_list_to_flow)
       }
     }
     return bindings.root

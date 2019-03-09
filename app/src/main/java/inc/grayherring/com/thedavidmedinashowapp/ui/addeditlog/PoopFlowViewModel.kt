@@ -1,5 +1,6 @@
 package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import inc.grayherring.com.thedavidmedinashowapp.arch.ViewModelCoroutine
@@ -58,15 +59,32 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
     }
   }
 
-  fun init(id: Int?) {
+  fun init(id: Int) {
     Timber.d("init")
-    this.id = id ?: 0
-    date.value = LocalDate.now()
-    name.value = ""
-    notes.value = ""
-    imagePath.value = ""
-    selectedPoopType = null
-    _poopTypeList.value = PoopType.values().map { PoopTypeItem(it, false) }
+    if (id > 0){
+     viewModeScope.launch {
+      val log = withContext(Dispatchers.IO){
+         poopLogRepository.getPoop(id)
+       }
+
+       this@PoopFlowViewModel.id = log.id
+       date.value = log.date
+       name.value = log.name
+       notes.value = log.notes
+       imagePath.value = log.imagePath
+       selectedPoopType = log.poopType
+       _poopTypeList.value = PoopType.values().map { PoopTypeItem(it, it == log.poopType) }
+     }
+    } else{
+      this.id = 0
+      date.value = LocalDate.now()
+      name.value = ""
+      notes.value = ""
+      imagePath.value = ""
+      selectedPoopType = null
+      _poopTypeList.value = PoopType.values().map { PoopTypeItem(it, false) }
+    }
+
   }
 
   fun save() {

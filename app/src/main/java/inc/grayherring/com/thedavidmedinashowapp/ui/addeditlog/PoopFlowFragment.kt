@@ -37,7 +37,7 @@ class PoopFlowFragment : BaseFragment() {
     savedInstanceState: Bundle?
   ): View? {
     bindings = FragmentPoopFlowBinding.inflate(inflater, container, false)
-    viewModel.init(null)
+    viewModel.init(PoopFlowFragmentArgs.fromBundle(arguments!!).id)
     val adapter = SavePoopPager(childFragmentManager, requireContext())
     bindings.viewPager.adapter = adapter
     //sort of want to do this with data binding if i can

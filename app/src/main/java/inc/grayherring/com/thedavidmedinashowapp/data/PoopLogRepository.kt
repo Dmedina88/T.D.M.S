@@ -12,17 +12,19 @@ interface PoopLogRepository {
 
   @WorkerThread
   fun insert(poopLog: PoopLog)
-
+  @WorkerThread
+  fun getPoop(id: Int): PoopLog
   fun deleteAll()
   fun deletePoopLog(poopLog: PoopLog)
   fun getPoops(dayst: Long, dayet: Long): LiveData<List<PoopLog>>
-  fun getPoop(id: Int): LiveData<PoopLog>
+  fun getPoopLiveData(id: Int): LiveData<PoopLog>
   fun update(poopLog: PoopLog)
 }
 
 @Singleton
 class PoopLogRepositryImpl @Inject constructor(private val poopLogDao: PoopLogDao) :
   PoopLogRepository {
+  override fun getPoopLiveData(id: Int) =poopLogDao.getPoopLiveData(id)
 
   override fun getAllPoops(): LiveData<List<PoopLog>> = poopLogDao.getAllPoops()
 
@@ -39,6 +41,6 @@ class PoopLogRepositryImpl @Inject constructor(private val poopLogDao: PoopLogDa
   override fun getPoops(dayst: Long, dayet: Long): LiveData<List<PoopLog>> =
     poopLogDao.getFromTable(dayst, dayet)
 
-  override fun getPoop(id: Int): LiveData<PoopLog> = poopLogDao.getPoop(id)
+  override fun getPoop(id: Int):PoopLog = poopLogDao.getPoop(id)
 
 }
