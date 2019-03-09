@@ -12,6 +12,7 @@ import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentPoopTypePic
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.PoopFlowViewModel
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.GridSpacingItemDecoration
+import timber.log.Timber
 import javax.inject.Inject
 
 class PoopTypeFragment : BaseFragment() {
@@ -21,6 +22,7 @@ class PoopTypeFragment : BaseFragment() {
   lateinit var bindings: FragmentPoopTypePickerBinding
 
   private val viewModel by lazy {
+    Timber.d("PoopTypeFragment lazy")
     ViewModelProviders.of(this.requireActivity(), viewModelFactory)
       .get(PoopFlowViewModel::class.java)
   }
@@ -38,6 +40,7 @@ class PoopTypeFragment : BaseFragment() {
     bindings.poopTypeList.addItemDecoration(GridSpacingItemDecoration(2, 18, true))
 
     viewModel.poopTypeList.observe(viewLifecycleOwner, Observer {
+      Timber.i(it.toString())
       adapter.setData(it)
     })
 

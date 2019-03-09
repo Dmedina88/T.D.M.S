@@ -15,6 +15,7 @@ import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentPoopFlowBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.snackbar
+import timber.log.Timber
 import javax.inject.Inject
 
 class PoopFlowFragment : BaseFragment() {
@@ -24,6 +25,8 @@ class PoopFlowFragment : BaseFragment() {
   lateinit var bindings: FragmentPoopFlowBinding
 
   private val viewModel by lazy {
+    Timber.d("PoopFlowFragment lazy")
+
     ViewModelProviders.of(this.requireActivity(), viewModelFactory)
       .get(PoopFlowViewModel::class.java)
   }
@@ -35,7 +38,7 @@ class PoopFlowFragment : BaseFragment() {
   ): View? {
     bindings = FragmentPoopFlowBinding.inflate(inflater, container, false)
     viewModel.init(null)
-    val adapter = SavePoopPager(requireFragmentManager(), requireContext())
+    val adapter = SavePoopPager(childFragmentManager, requireContext())
     bindings.viewPager.adapter = adapter
     //sort of want to do this with data binding if i can
     bindings.tabLayout.setupWithViewPager(bindings.viewPager)

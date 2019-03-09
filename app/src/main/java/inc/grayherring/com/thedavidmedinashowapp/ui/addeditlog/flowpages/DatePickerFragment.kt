@@ -1,6 +1,5 @@
 package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,7 +34,7 @@ class DatePickerFragment : BaseFragment() {
     bindings = FragmentDatePickerBinding.inflate(inflater, container, false)
 
     //todo: 2 way binding myself out of this
-    viewModel.date.observe(this, Observer {
+    viewModel.date.observe(viewLifecycleOwner, Observer {
       bindings.datePicker.init(
         it.year, it.monthValue -1, it.dayOfMonth
       ) { _, year, month, dayOfMonth ->
@@ -49,7 +48,4 @@ class DatePickerFragment : BaseFragment() {
     return bindings.root
   }
 
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-  }
 }

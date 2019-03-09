@@ -2,19 +2,13 @@ package inc.grayherring.com.thedavidmedinashowapp.ui.pooplist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
 import inc.grayherring.com.thedavidmedinashowapp.data.PoopLogRepository
+import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
 import inc.grayherring.com.thedavidmedinashowapp.util.map
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 
 class PoopListVM @Inject constructor(val poopLogRepository: PoopLogRepository) : ViewModel() {
-
-  private val viewModelJob = Job()
-  private val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
   val poopListItems: LiveData<List<PoopListItem>> =
     poopLogRepository.getAllPoops().map(::addDateItem)
@@ -35,8 +29,4 @@ class PoopListVM @Inject constructor(val poopLogRepository: PoopLogRepository) :
     return results
   }
 
-  override fun onCleared() {
-    super.onCleared()
-    viewModelJob.cancel()
-  }
 }

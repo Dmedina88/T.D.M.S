@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
+import timber.log.Timber
 import javax.inject.Inject
 
 data class PoopTypeItem(val poopType: PoopType, val selected: Boolean)
@@ -28,17 +29,14 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
   private var selectedPoopType: PoopType? = null
   private var id: Int = 0
 
-  val date = MutableLiveData<LocalDate>().apply { value = LocalDate.now() }
-  val name = MutableLiveData<String>().apply { value = "" }
-  val notes = MutableLiveData<String>().apply { value = "" }
-  val imagePath = MutableLiveData<String>().apply { value = "" }
+  val date = MutableLiveData<LocalDate>()
+  val name = MutableLiveData<String>()
+  val notes = MutableLiveData<String>()
+  val imagePath = MutableLiveData<String>()
   val poopTypeList: LiveData<List<PoopTypeItem>> get() = _poopTypeList
   val errors: LiveData<PoopFlowError> get() = _errors
   val finish: LiveData<Boolean> get() = _finish
 
-  init {
-    _poopTypeList.value = PoopType.values().map { PoopTypeItem(it, false) }
-  }
 
   //todo: test?
   fun selectPoopType(selectedPoopType: PoopType) {
@@ -61,7 +59,14 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
   }
 
   fun init(id: Int?) {
+    Timber.d("init")
     this.id = id ?: 0
+    date.value = LocalDate.now()
+    name.value = ""
+    notes.value = ""
+    imagePath.value = ""
+    selectedPoopType = null
+    _poopTypeList.value = PoopType.values().map { PoopTypeItem(it, false) }
   }
 
   fun save() {
@@ -84,7 +89,6 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
         )
         true
       }
-
     }
 
   }

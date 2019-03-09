@@ -31,7 +31,7 @@ class NotesFragment : BaseFragment() {
     bindings = FragmentNotesBinding.inflate(inflater, container, false)
 
     bindings.vm = viewModel
-    bindings.lifecycleOwner = this
+    bindings.lifecycleOwner = viewLifecycleOwner
 
     return bindings.root
   }
