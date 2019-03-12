@@ -1,6 +1,5 @@
 package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import inc.grayherring.com.thedavidmedinashowapp.arch.ViewModelCoroutine
@@ -24,6 +23,8 @@ sealed class PoopFlowError {
 class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopLogRepository) :
   ViewModelCoroutine() {
 
+  //MaybeD0: considering movingall this to a state class and usinging map on LiveData to get the data from it
+  //id lose 2 way data binding but do i even want it  :shrug:
   private val _poopTypeList = MutableLiveData<List<PoopTypeItem>>()
   private val _errors = SingleLiveEvent<PoopFlowError>()
   private val _finish = SingleLiveEvent<Boolean>()
@@ -37,7 +38,6 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
   val poopTypeList: LiveData<List<PoopTypeItem>> get() = _poopTypeList
   val errors: LiveData<PoopFlowError> get() = _errors
   val finish: LiveData<Boolean> get() = _finish
-
 
   //todo: test?
   fun selectPoopType(selectedPoopType: PoopType) {
@@ -61,35 +61,41 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
 
   fun init(id: Int) {
     Timber.d("init")
-    if (id > 0){
-     viewModeScope.launch {
-      val log = withContext(Dispatchers.IO){
-         poopLogRepository.getPoop(id)
-       }
-
-       this@PoopFlowViewModel.id = log.id
-       date.value = log.date
-       name.value = log.name
-       notes.value = log.notes
-       imagePath.value = log.imagePath
-       selectedPoopType = log.poopType
-       _poopTypeList.value = PoopType.values().map { PoopTypeItem(it, it == log.poopType) }
-     }
-    } else{
-      this.id = 0
-      date.value = LocalDate.now()
-      name.value = ""
-      notes.value = ""
-      imagePath.value = ""
-      selectedPoopType = null
-      _poopTypeList.value = PoopType.values().map { PoopTypeItem(it, false) }
+    if (id > 0) {
+      viewModeScope.launch {
+        val log = withContext(Dispatchers.IO) {
+          poopLogRepository.getPoop(id)
+        }
+        setData(log)
+      }
+    } else {
+      reset()
     }
 
   }
 
+  private fun setData(log: PoopLog) {
+    this@PoopFlowViewModel.id = log.id
+    date.value = log.date
+    name.value = log.name
+    notes.value = log.notes
+    imagePath.value = log.imagePath
+    selectedPoopType = log.poopType
+    _poopTypeList.value = PoopType.values().map { PoopTypeItem(it, it == log.poopType) }
+  }
+
+  private fun reset() {
+    this.id = 0
+    date.value = LocalDate.now()
+    name.value = ""
+    notes.value = ""
+    imagePath.value = ""
+    selectedPoopType = null
+    _poopTypeList.value = PoopType.values().map { PoopTypeItem(it, false) }
+  }
+
   fun save() {
     viewModeScope.launch {
-      //todo selectedPoopType error
       val selectedDate = date.value ?: LocalDate.now()
       val selectedName = name.value ?: ""
       val selectedNotes = notes.value ?: ""
