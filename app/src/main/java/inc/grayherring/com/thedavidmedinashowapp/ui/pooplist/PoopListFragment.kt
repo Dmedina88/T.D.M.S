@@ -31,7 +31,7 @@ class PoopListFragment : BaseFragment() {
     val bindings = FragmentPoopListBinding.inflate(inflater, container, false)
 
     val adapter = PoopAdapter {
-      val action = PoopListFragmentDirections.actionListToFlow(it.id)
+      val action = PoopListFragmentDirections.actionPoopListFragmentToLogDetailFragment(it.id)
       findNavController().navigate(action)
     }
 

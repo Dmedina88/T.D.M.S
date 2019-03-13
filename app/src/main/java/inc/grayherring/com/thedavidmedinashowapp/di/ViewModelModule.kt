@@ -8,6 +8,7 @@ import dagger.multibindings.IntoMap
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.PoopFlowViewModel
 import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalendarViewModel
+import inc.grayherring.com.thedavidmedinashowapp.ui.detail.LogDetailViewModel
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooplist.PoopListVM
 
 @Suppress("unused")
@@ -27,6 +28,11 @@ abstract class ViewModelModule {
   @IntoMap
   @ViewModelKey(PoopFlowViewModel::class)
   abstract fun bindPoopFlowViewModel(poopFlowViewModel: PoopFlowViewModel): ViewModel
+
+  @Binds
+  @IntoMap
+  @ViewModelKey(LogDetailViewModel::class)
+  abstract fun bindLogDetailViewModel(logDetailViewModel: LogDetailViewModel): ViewModel
 
   @Binds
   abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

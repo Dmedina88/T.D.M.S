@@ -28,5 +28,7 @@
   <string name="type_title">Type</string>
   <string name="photo_title">Photo</string>
   <string name="mandatory_poop_type">Poop Type is Mandatory</string>
+  <string name="edit">Edit</string>
+  <string name="delete">Delete</string>
 
 </resources>

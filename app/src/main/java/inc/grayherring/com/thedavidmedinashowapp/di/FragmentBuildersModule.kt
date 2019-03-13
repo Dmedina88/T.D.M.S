@@ -8,6 +8,7 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.NotesFr
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.PhotoFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.PoopTypeFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderFragment
+import inc.grayherring.com.thedavidmedinashowapp.ui.detail.LogDetailFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooplist.PoopListFragment
 
 @Suppress("unused")
@@ -33,5 +34,10 @@ abstract class FragmentBuildersModule {
 
   @ContributesAndroidInjector
   abstract fun contributePoopTypeFragment(): PoopTypeFragment
+
+
+  @ContributesAndroidInjector
+  abstract fun contributeLogDetailFragment(): LogDetailFragment
+
 
 }

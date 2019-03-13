@@ -23,6 +23,6 @@ var View.visible
 fun ImageView.loadImageFromPath(path: String) {
   Glide.with(this.context)
     .load(path)
-    .fitCenter()
+    .centerCrop()
     .into(this)
 }
