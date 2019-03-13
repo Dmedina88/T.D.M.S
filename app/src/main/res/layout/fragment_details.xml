@@ -18,9 +18,6 @@
           android:id="@+id/log_image"
           android:layout_width="0dp"
           android:layout_height="0dp"
-          android:layout_marginEnd="8dp"
-          android:layout_marginStart="8dp"
-          android:layout_marginTop="8dp"
           app:layout_constraintDimensionRatio="1:1"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="0.0"
@@ -42,16 +39,16 @@
           />
       <TextView
           android:id="@+id/name"
-          android:layout_width="0dp"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="8dp"
           android:layout_marginEnd="8dp"
-          android:layout_marginStart="8dp"
-          android:layout_marginTop="8dp"
-          app:layout_constraintBottom_toTopOf="@+id/notes"
+          app:layout_constrainedWidth="true"
           app:layout_constraintEnd_toStartOf="@+id/date"
+          app:layout_constraintHorizontal_bias="0.0"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/log_type_icon"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:text="This is a title"
+          style="@style/heading_text_view"
           />
       <TextView
           android:id="@+id/notes"
@@ -59,22 +56,21 @@
           android:layout_height="wrap_content"
           android:layout_marginEnd="8dp"
           android:layout_marginStart="8dp"
+          android:layout_marginTop="8dp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="1.0"
           app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/log_type_icon"
+          tools:text="BODY TEST"
           />
       <TextView
           android:id="@+id/date"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginEnd="8dp"
-          android:layout_marginStart="8dp"
           android:textAlignment="viewEnd"
-          app:layout_constraintBottom_toBottomOf="@+id/name"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toEndOf="@+id/name"
-          app:layout_constraintTop_toTopOf="@+id/name"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:text="this is a date"
+          style="@style/heading_text_view"
           />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </ScrollView>

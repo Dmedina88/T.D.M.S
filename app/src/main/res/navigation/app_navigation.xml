@@ -8,7 +8,7 @@
   <fragment
         android:id="@+id/poopListFragment"
         android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooplist.PoopListFragment"
-        android:label="PoopListFragment">
+        android:label="Home">
       <action
           android:id="@+id/action_list_to_flow"
           app:destination="@id/poopFlowFragment"
@@ -23,7 +23,7 @@
   <fragment
       android:id="@+id/poopFlowFragment"
       android:name="inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.PoopFlowFragment"
-      android:label="PoopFlowFragment">
+      android:label="Log Flow">
     <argument
         android:name="id"
         app:argType="integer"
@@ -32,7 +32,7 @@
   <fragment
       android:id="@+id/logDetailFragment"
       android:name="inc.grayherring.com.thedavidmedinashowapp.ui.detail.LogDetailFragment"
-      android:label="LogDetailFragment">
+      android:label="Detail">
     <action
         android:id="@+id/action_logDetailFragment_to_poopFlowFragment"
         app:destination="@id/poopFlowFragment"/>
