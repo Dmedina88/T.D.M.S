@@ -22,7 +22,7 @@ interface PoopLogRepository {
 }
 
 @Singleton
-class PoopLogRepositryImpl @Inject constructor(private val poopLogDao: PoopLogDao) :
+class PoopLogRepositoryImpl @Inject constructor(private val poopLogDao: PoopLogDao) :
   PoopLogRepository {
   override fun getPoopLiveData(id: Int) =poopLogDao.getPoopLiveData(id)
 
