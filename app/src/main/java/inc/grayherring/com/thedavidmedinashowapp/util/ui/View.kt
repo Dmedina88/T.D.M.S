@@ -19,13 +19,6 @@ val View.colorWhite
     inc.grayherring.com.thedavidmedinashowapp.R.color.white
   )
 
-//fun getBackgroundDrawable(pressedColor: Int, backgroundDrawable: Drawable): RippleDrawable {
-//  return RippleDrawable(getPressedState(pressedColor), backgroundDrawable, null)
-//}
-//
-//fun getPressedState(pressedColor: Int): ColorStateList {
-//  return ColorStateList(arrayOf(intArrayOf()), intArrayOf(pressedColor))
-//}
 
 fun getPressedColorRippleDrawable(normalColor: Int, pressedColor: Int): RippleDrawable {
   return RippleDrawable(

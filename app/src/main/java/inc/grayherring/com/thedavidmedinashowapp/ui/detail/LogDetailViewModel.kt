@@ -18,16 +18,10 @@ import javax.inject.Inject
 class LogDetailViewModel @Inject constructor(private val poopLogRepository: PoopLogRepository) :
   ViewModelCoroutine() {
 
+
   private val _logDetailState = MutableLiveData<LogDetailState>()
   val logDetailState get() = _logDetailState
-
-  private lateinit var _logLiveData: LiveData<PoopLog>
-  val logLiveData get() = _logLiveData
-  private val _showImageLiveData = MutableLiveData<Boolean>().apply { value = false }
-  val showImageLiveData get() = _showImageLiveData
-
   fun init(id: Int) {
-    _logLiveData = poopLogRepository.getPoopLiveData(id)
     viewModeScope.launch {
       _logDetailState.value = withContext(Dispatchers.IO) {
         val log = poopLogRepository.getPoop(id)
