@@ -1,5 +1,6 @@
 package inc.grayherring.com.thedavidmedinashowapp.ui.detail
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -8,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnticipateOvershootInterpolator
-import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.Observer
@@ -18,8 +18,10 @@ import androidx.transition.ChangeBounds
 import androidx.transition.Transition
 import androidx.transition.TransitionListenerAdapter
 import androidx.transition.TransitionManager
+import com.afollestad.materialdialogs.MaterialDialog
 import com.bumptech.glide.Glide
 import inc.grayherring.com.thedavidmedinashowapp.R
+import inc.grayherring.com.thedavidmedinashowapp.R.string
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.data.models.icon
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentDetailsBinding
@@ -43,10 +45,22 @@ class LogDetailFragment : BaseFragment() {
       .get(LogDetailViewModel::class.java)
   }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
     bindings = FragmentDetailsBinding.inflate(inflater, container, false)
     viewModel.init(LogDetailFragmentArgs.fromBundle(arguments!!).id)
     setHasOptionsMenu(true)
+    bind()
+    return bindings.root
+  }
+
+  fun bind() {
+    viewModel.deletedLiveData.observe(viewLifecycleOwner, Observer {
+      findNavController().popBackStack()
+    })
     bindings.run {
       viewModel.logDetailState.observe(viewLifecycleOwner, Observer {
         it?.let { state ->
@@ -84,8 +98,6 @@ class LogDetailFragment : BaseFragment() {
       logImage.setOnClickListener {
         viewModel.toggleImage()
       }
-
-      return bindings.root
     }
   }
 
@@ -100,18 +112,17 @@ class LogDetailFragment : BaseFragment() {
   }
 
   private fun FragmentDetailsBinding.loadDetailImage(state: LogDetailState) {
-    if (!state.log.imagePath.isNullOrBlank()){
+    if (!state.log.imagePath.isNullOrBlank()) {
       Glide.with(logImage.context)
         .load(state.log.imagePath)
         .error(state.log.poopType.icon)
         .centerCrop()
         .into(logImage)
-    }else{
+    } else {
       logImage.setImageResource(state.log.poopType.icon)
     }
 
   }
-
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     inflater.inflate(R.menu.detail, menu)
@@ -125,10 +136,20 @@ class LogDetailFragment : BaseFragment() {
         findNavController().navigate(action)
       }
       if (item.itemId == R.id.action_delete) {
-        //todo dialog
+        showDeleteDialog()
       }
     })
     return super.onOptionsItemSelected(item)
+  }
+
+  private fun showDeleteDialog() {
+    //todo restore log easter agg and achevment. call it the Flush
+    MaterialDialog(this.requireContext())
+      .title(string.delete)
+      .message(string.delete_message)
+      .positiveButton { viewModel.delete() }
+      .negativeButton { it.dismiss() }
+      .show()
   }
 
   private fun transitionView(@LayoutRes constraintLayout: Int, onTransitionEnd: () -> Unit) {

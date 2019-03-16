@@ -60,7 +60,6 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
   }
 
   fun init(id: Int) {
-    Timber.d("init")
     if (id > 0) {
       viewModeScope.launch {
         val log = withContext(Dispatchers.IO) {

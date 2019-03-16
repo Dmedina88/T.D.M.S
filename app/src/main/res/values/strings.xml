@@ -30,5 +30,6 @@
   <string name="mandatory_poop_type">Poop Type is Mandatory</string>
   <string name="edit">Edit</string>
   <string name="delete">Delete</string>
+  <string name="delete_message">Are you sure you want to Delete Log? This action can not be undone.</string>
 
 </resources>
