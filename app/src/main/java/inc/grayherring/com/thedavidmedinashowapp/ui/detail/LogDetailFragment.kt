@@ -84,11 +84,8 @@ class LogDetailFragment : BaseFragment() {
             }
           }
 
-          Glide.with(logTypeIcon.context)
-            .load(state.log.poopType.icon)
-            .circleCrop()
-            .centerInside()
-            .into(logTypeIcon)
+          logTypeIcon.setImageResource(state.log.poopType.icon)
+
           name.textOrGone(state.log.name)
           notes.textOrGone(state.log.notes)
           date.textOrGone(state.log.date.format(DateTimeFormatter.ISO_DATE))
