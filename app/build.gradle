@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
 android {
   compileSdkVersion 28
@@ -67,6 +68,9 @@ dependencies {
   kapt "androidx.room:room-compiler:$room_version"
   kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
+  //play-services
+  implementation 'com.google.android.gms:play-services-oss-licenses:16.0.2'
+
 
   //DI
   implementation 'com.google.dagger:dagger-android:2.20'
@@ -81,7 +85,6 @@ dependencies {
   //sanity
   implementation 'com.jakewharton.threetenabp:threetenabp:1.1.2'
   implementation 'com.jakewharton.timber:timber:4.7.1'
-
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'androidx.arch.core:core-testing:2.0.0'

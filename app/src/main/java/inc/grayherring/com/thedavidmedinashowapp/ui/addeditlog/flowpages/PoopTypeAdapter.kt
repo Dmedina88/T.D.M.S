@@ -8,7 +8,6 @@ import inc.grayherring.com.thedavidmedinashowapp.data.models.icon
 import inc.grayherring.com.thedavidmedinashowapp.data.models.stringRes
 import inc.grayherring.com.thedavidmedinashowapp.databinding.PoopTypeItemBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.PoopTypeItem
-import inc.grayherring.com.thedavidmedinashowapp.util.ui.DataBindingViewHolder
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.colorPrimary
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.colorWhite
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.setRippleBackgroundColor
@@ -23,10 +22,11 @@ class PoopTypeAdapter(private val typeClicked: TypeClicked) : RecyclerView.Adapt
     data.clear()
     data.addAll(newData)
     notifyDataSetChanged()
+
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PoopTypeVH =
-    PoopTypeVH(PoopTypeItemBinding.inflate(LayoutInflater.from(parent.context)), typeClicked)
+  PoopTypeVH(PoopTypeItemBinding.inflate(LayoutInflater.from(parent.context),parent,false), typeClicked)
 
   override fun getItemCount() = data.size
 
@@ -36,9 +36,8 @@ class PoopTypeAdapter(private val typeClicked: TypeClicked) : RecyclerView.Adapt
 
 }
 
-class PoopTypeVH(binding: PoopTypeItemBinding, val typeClicked: TypeClicked) :
-  DataBindingViewHolder<PoopTypeItemBinding, PoopTypeItem>(binding) {
-  override fun bind(item: PoopTypeItem) {
+class PoopTypeVH(val binding: PoopTypeItemBinding, val typeClicked: TypeClicked) : RecyclerView.ViewHolder(binding.root) {
+   fun bind(item: PoopTypeItem) {
     binding.icon.setImageResource(item.poopType.icon)
     binding.detail.text = binding.root.context.getText(item.poopType.stringRes)
     if (item.selected) {

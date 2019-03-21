@@ -1,32 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root"
-    android:layout_width="match_parent"
-    android:layout_height="64dp"
-    android:background="?attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true"
+    xmlns:tools="http://schemas.android.com/tools"
     >
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="64dp"
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:focusable="true"
+      >
 
-  <ImageView
-      android:id="@+id/poop_type"
-      android:layout_width="32dp"
-      android:layout_height="32dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="16dp"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      />
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <TextView
+        android:id="@+id/info1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="name or type"
+        />
+    <TextView
+        android:id="@+id/info2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="@+id/info1"
+        app:layout_constraintLeft_toLeftOf="@id/info1"
+        app:layout_constraintRight_toLeftOf="@id/info1"
+        app:layout_constraintStart_toStartOf="@id/info1"
+        app:layout_constraintTop_toBottomOf="@id/info1"
+        tools:text="info or detals"
+        />
 
-  <TextView
-      android:id="@+id/notes_edit_text"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      app:layout_constraintStart_toEndOf="@id/poop_type"
-      app:layout_constraintTop_toTopOf="@id/poop_type"
-      />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

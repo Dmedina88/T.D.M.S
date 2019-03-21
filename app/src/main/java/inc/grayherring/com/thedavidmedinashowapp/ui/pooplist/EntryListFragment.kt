@@ -30,10 +30,10 @@ class PoopListFragment : BaseFragment() {
     // Inflate the layout for this fragment
     val bindings = FragmentPoopListBinding.inflate(inflater, container, false)
 
-    val adapter = PoopAdapter {
+    val adapter = PoopAdapter({
       val action = PoopListFragmentDirections.actionPoopListFragmentToLogDetailFragment(it.id)
       findNavController().navigate(action)
-    }
+    }, {})
 
     viewModel.poopListItems.observe(viewLifecycleOwner, Observer {
       adapter.setData(it)
