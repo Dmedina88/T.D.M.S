@@ -17,22 +17,22 @@ interface EntryDao {
   fun getAllEntries(): LiveData<List<Entry>>
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(entry: Entry)
+  suspend fun insert(entry: Entry)
 
   @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update(entry: Entry)
+  suspend fun update(entry: Entry)
 
   @Query("DELETE FROM poop_log")
-   fun deleteAll()
+  suspend fun deleteAll()
 
   @Delete
-   fun deleteEntryLog(entry: Entry)
+  suspend fun deleteEntryLog(entry: Entry)
 
   @Query("SELECT * FROM poop_log WHERE date BETWEEN :dayst AND :dayet")
   fun getFromTable(dayst: Long, dayet: Long): LiveData<List<Entry>>
 
   @Query(GET_POOP_QUERY)
-  fun getEntry(id: Int): Entry
+  suspend fun getEntry(id: Int): Entry
 
   @Query(GET_POOP_QUERY)
   fun getEntryLiveData(id: Int): LiveData<Entry>

@@ -8,9 +8,7 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.FULL_D
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.IMAGE_FULLSCREEN
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.NONE
 import inc.grayherring.com.thedavidmedinashowapp.util.SingleLiveEvent
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 data class LogDetailState(val entry: Entry, val animationState: AnimationState)
@@ -32,10 +30,8 @@ class LogDetailViewModel @Inject constructor(private val entryRepository: EntryR
 
   fun init(id: Int) {
     viewModeScope.launch {
-      _logDetailState.value = withContext(Dispatchers.IO) {
-        val log = entryRepository.getEntry(id)
-        LogDetailState(log, NONE)
-      }
+      val log = entryRepository.getEntry(id)
+      _logDetailState.value = LogDetailState(log, NONE)
     }
   }
 
@@ -50,13 +46,12 @@ class LogDetailViewModel @Inject constructor(private val entryRepository: EntryR
 
   fun delete() {
     viewModeScope.launch {
-      deletedLiveData.value = withContext(Dispatchers.IO) {
-        _logDetailState.value?.let {
-          entryRepository.deleteEntry(it.entry)
-          true
-        }
+      _logDetailState.value?.let {
+        entryRepository.deleteEntry(it.entry)
+        deletedLiveData.value = true
       }
     }
   }
+
 }
 

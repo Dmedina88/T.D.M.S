@@ -11,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
-import timber.log.Timber
 import javax.inject.Inject
 
 data class EntryTypeItem(val poopType: EntryType, val selected: Boolean)
@@ -62,7 +61,6 @@ class EntryFlowViewModel @Inject constructor(private val entryRepository: EntryR
   fun init(id: Int) {
     if (id > 0) {
       viewModeScope.launch {
-
         setData(entryRepository.getEntry(id))
       }
     } else {
@@ -104,15 +102,21 @@ class EntryFlowViewModel @Inject constructor(private val entryRepository: EntryR
         return@launch
       }
 
-      _finish.value = withContext(Dispatchers.IO) {
-        entryRepository.insert(
-          Entry(selectedDate, type, selectedName, selectedPath, selectedNotes, id)
+      entryRepository.insert(
+        Entry(
+          selectedDate,
+          type,
+          selectedName,
+          selectedPath,
+          selectedNotes,
+          id
         )
-        true
-      }
+      )
+      _finish.value = true
     }
-
   }
 
 }
+
+
 

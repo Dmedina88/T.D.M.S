@@ -27,9 +27,4 @@ class CalenderFragment : BaseFragment() {
 
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    viewModel.entryRepository.deleteAll()
-  }
-
 }
