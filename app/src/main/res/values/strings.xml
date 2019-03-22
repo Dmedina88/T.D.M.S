@@ -12,12 +12,21 @@
   <string name="add_poop_notes">Add poop notes?</string>
 
   <string name="poop_type_1">Separate Hard Limps</string>
-  <string name="poop_type_2">type 2</string>
-  <string name="poop_type_3">type 3</string>
-  <string name="poop_type_4">type 4</string>
-  <string name="poop_type_5">type 5</string>
-  <string name="poop_type_6">type 6</string>
-  <string name="poop_type_7">type 7</string>
+  <string name="poop_type_2">Sausage shaped but lumpy</string>
+  <string name="poop_type_3">Sausage shaped with crack in surface</string>
+  <string name="poop_type_4">Sausage shaped but lumpy</string>
+  <string name="poop_type_5">Soft Blobs with clear edges</string>
+  <string name="poop_type_6">Fluffy/Mushy ith ragged edges</string>
+  <string name="poop_type_7">Watery No sold Peaces</string>
+
+  <string name="poop_type_1_name">Type 1</string>
+  <string name="poop_type_2_name">Type 2</string>
+  <string name="poop_type_3_name">Type 3</string>
+  <string name="poop_type_4_name">Type 4</string>
+  <string name="poop_type_5_name">Type 5</string>
+  <string name="poop_type_6_name">Type 6</string>
+  <string name="poop_type_7_name">Type 7</string>
+
   <string name="optional_name_hint">Optional Name</string>
   <string name="optional_notes">Optional Notes</string>
   <string name="take_photo_optional">Take Photo(Optional)</string>

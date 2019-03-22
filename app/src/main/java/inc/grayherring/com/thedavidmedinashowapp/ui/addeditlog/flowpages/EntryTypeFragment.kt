@@ -8,23 +8,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
-import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentPoopTypePickerBinding
+import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryTypePickerBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
-import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.PoopFlowViewModel
+import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.GridSpacingItemDecoration
 import timber.log.Timber
 import javax.inject.Inject
 
-class PoopTypeFragment : BaseFragment() {
+class EntryTypeFragment : BaseFragment() {
 
   @Inject
   lateinit var viewModelFactory: ViewModelFactory
-  lateinit var bindings: FragmentPoopTypePickerBinding
+  lateinit var bindings: FragmentEntryTypePickerBinding
 
   private val viewModel by lazy {
-    Timber.d("PoopTypeFragment lazy")
+    Timber.d("EntryTypeFragment lazy")
     ViewModelProviders.of(this.requireParentFragment(), viewModelFactory)
-      .get(PoopFlowViewModel::class.java)
+      .get(EntryFlowViewModel::class.java)
   }
 
   override fun onCreateView(
@@ -32,9 +32,9 @@ class PoopTypeFragment : BaseFragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    val adapter = PoopTypeAdapter(viewModel::selectPoopType)
+    val adapter = EntryTypeAdapter(viewModel::selectEntryType)
 
-    bindings = FragmentPoopTypePickerBinding.inflate(inflater, container, false)
+    bindings = FragmentEntryTypePickerBinding.inflate(inflater, container, false)
     bindings.poopTypeList.adapter = adapter
     bindings.poopTypeList.layoutManager = GridLayoutManager(requireContext(), 2)
     bindings.poopTypeList.addItemDecoration(GridSpacingItemDecoration(2, 18, true))

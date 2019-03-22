@@ -24,8 +24,7 @@ object AppInjector {
   fun init(app: TheDavidMedinaShowApp) {
     DaggerAppComponent.builder().application(app)
       .build().inject(app)
-    app
-      .registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
+    app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
         override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
           handleActivity(activity)
         }

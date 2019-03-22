@@ -1,7 +1,7 @@
 package inc.grayherring.com.thedavidmedinashowapp.util
 
 import androidx.room.TypeConverter
-import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType
+import inc.grayherring.com.thedavidmedinashowapp.data.models.EntryType
 import org.threeten.bp.LocalDate
 
 class Converters {
@@ -13,8 +13,8 @@ class Converters {
     value?.let { LocalDate.ofEpochDay(value) }
 
   @TypeConverter
-  fun localDateToDateStamp(poopType: PoopType?): String? = poopType?.name
+  fun localDateToDateStamp(poopType: EntryType?): String? = poopType?.name
 
   @TypeConverter
-  fun localDateToCalendar(poopType: String?): PoopType? = poopType?.let { PoopType.valueOf(it) }
+  fun localDateToCalendar(poopType: String?): EntryType? = poopType?.let { EntryType.valueOf(it) }
 }

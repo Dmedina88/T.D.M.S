@@ -6,7 +6,7 @@
 
     <variable
         name="vm"
-        type="inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.PoopFlowViewModel"
+        type="inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel"
         />
 
   </data>

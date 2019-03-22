@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import inc.grayherring.com.thedavidmedinashowapp.data.persistence.PoopLogDatabase
+import inc.grayherring.com.thedavidmedinashowapp.data.persistence.EntryDatabase
 import javax.inject.Singleton
 
 @Module
@@ -12,16 +12,17 @@ class AppModule {
 
   @Provides
   @Singleton
-  fun providesPoopLogDatabase(application: Application) =
+  fun providesEntryLogDatabase(application: Application) =
     Room.databaseBuilder(
       application,
-      PoopLogDatabase::class.java,
-      "Poop_log_db"
+      EntryDatabase::class.java,
+      "log_db"
     ).build()
 
   @Provides
   @Singleton
-  fun providesPoopDoa(database: PoopLogDatabase) =
-    database.poopDao()
+  fun providesEntryDoa(database: EntryDatabase) =
+    database.entryDao()
+
 
 }

@@ -15,7 +15,7 @@ import inc.grayherring.com.thedavidmedinashowapp.BuildConfig
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentTakePhotoBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
-import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.PoopFlowViewModel
+import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
 import inc.grayherring.com.thedavidmedinashowapp.util.loadImageFromPath
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
@@ -36,7 +36,7 @@ class PhotoFragment : BaseFragment() {
 
   private val viewModel by lazy {
     ViewModelProviders.of(this.requireParentFragment(), viewModelFactory)
-      .get(PoopFlowViewModel::class.java)
+      .get(EntryFlowViewModel::class.java)
   }
 
   override fun onCreateView(

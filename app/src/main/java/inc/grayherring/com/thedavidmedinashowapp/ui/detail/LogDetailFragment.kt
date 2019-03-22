@@ -1,6 +1,5 @@
 package inc.grayherring.com.thedavidmedinashowapp.ui.detail
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -84,11 +83,11 @@ class LogDetailFragment : BaseFragment() {
             }
           }
 
-          logTypeIcon.setImageResource(state.log.poopType.icon)
+          logTypeIcon.setImageResource(state.entry.poopType.icon)
 
-          name.textOrGone(state.log.name)
-          notes.textOrGone(state.log.notes)
-          date.textOrGone(state.log.date.format(DateTimeFormatter.ISO_DATE))
+          name.textOrGone(state.entry.name)
+          notes.textOrGone(state.entry.notes)
+          date.textOrGone(state.entry.date.format(DateTimeFormatter.ISO_DATE))
         }
       })
 
@@ -99,24 +98,24 @@ class LogDetailFragment : BaseFragment() {
   }
 
   private fun FragmentDetailsBinding.loadFullScreenImage(state: LogDetailState) {
-    if (!state.log.imagePath.isNullOrBlank()) {
+    if (!state.entry.imagePath.isNullOrBlank()) {
       Glide.with(logImage.context)
-        .load(state.log.imagePath)
-        .error(state.log.poopType.icon)
+        .load(state.entry.imagePath)
+        .error(state.entry.poopType.icon)
         .fitCenter()
         .into(logImage)
     }
   }
 
   private fun FragmentDetailsBinding.loadDetailImage(state: LogDetailState) {
-    if (!state.log.imagePath.isNullOrBlank()) {
+    if (!state.entry.imagePath.isNullOrBlank()) {
       Glide.with(logImage.context)
-        .load(state.log.imagePath)
-        .error(state.log.poopType.icon)
+        .load(state.entry.imagePath)
+        .error(state.entry.poopType.icon)
         .centerCrop()
         .into(logImage)
     } else {
-      logImage.setImageResource(state.log.poopType.icon)
+      logImage.setImageResource(state.entry.poopType.icon)
     }
 
   }
@@ -127,7 +126,7 @@ class LogDetailFragment : BaseFragment() {
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    viewModel.logDetailState.map { it.log.id }.observe(viewLifecycleOwner, Observer {
+    viewModel.logDetailState.map { it.entry.id }.observe(viewLifecycleOwner, Observer {
       if (item.itemId == R.id.action_edit) {
         val action = LogDetailFragmentDirections.actionLogDetailFragmentToPoopFlowFragment(it)
         findNavController().navigate(action)
@@ -140,7 +139,7 @@ class LogDetailFragment : BaseFragment() {
   }
 
   private fun showDeleteDialog() {
-    //todo restore log easter agg and achevment. call it the Flush
+    //todo restore entry easter agg and achevment. call it the Flush
     MaterialDialog(this.requireContext())
       .title(string.delete)
       .message(string.delete_message)

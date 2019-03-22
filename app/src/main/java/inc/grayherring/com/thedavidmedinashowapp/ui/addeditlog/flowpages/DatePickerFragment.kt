@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentDatePickerBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
-import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.PoopFlowViewModel
+import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.localDate
 import org.threeten.bp.LocalDate
 import javax.inject.Inject
@@ -22,7 +22,7 @@ class DatePickerFragment : BaseFragment() {
 
   private val viewModel by lazy {
     ViewModelProviders.of(this.requireParentFragment(), viewModelFactory)
-      .get(PoopFlowViewModel::class.java)
+      .get(EntryFlowViewModel::class.java)
   }
 
   override fun onCreateView(

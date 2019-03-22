@@ -5,26 +5,26 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
+import inc.grayherring.com.thedavidmedinashowapp.data.models.Entry
 import inc.grayherring.com.thedavidmedinashowapp.util.Converters
 
-@Database(entities = [PoopLog::class], version = 1, exportSchema = false)
+@Database(entities = [Entry::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
-abstract class PoopLogDatabase : RoomDatabase() {
-  abstract fun poopDao(): PoopLogDao
+abstract class EntryDatabase : RoomDatabase() {
+  abstract fun entryDao(): EntryDao
 
   companion object {
     @Volatile
-    private var INSTANCE: PoopLogDatabase? = null
+    private var INSTANCE: EntryDatabase? = null
 
-    fun getDatabase(context: Context): PoopLogDatabase {
+    fun getDatabase(context: Context): EntryDatabase {
       return INSTANCE
         ?: synchronized(this) {
         // Create database here
         val instance = Room.databaseBuilder(
           context.applicationContext,
-          PoopLogDatabase::class.java,
-          "Poop_log_db"
+          EntryDatabase::class.java,
+          "Entry_log_db"
         ).build()
         INSTANCE = instance
         instance

@@ -9,15 +9,15 @@ import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.DatePickerFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.NotesFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.PhotoFragment
-import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.PoopTypeFragment
+import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages.EntryTypeFragment
 import timber.log.Timber
 
 data class FlowItems(val fragment: Fragment, @StringRes val title: Int)
-class SavePoopPager(fragmentManager: FragmentManager, val context: Context) :
+class SaveEntryPager(fragmentManager: FragmentManager, val context: Context) :
   FragmentPagerAdapter(fragmentManager) {
 
   val data = mutableListOf(
-    FlowItems(PoopTypeFragment().also { Timber.i("come one") }, R.string.type_title),
+    FlowItems(EntryTypeFragment().also { Timber.i("come one") }, R.string.type_title),
     FlowItems(DatePickerFragment(), R.string.date_title),
     FlowItems(NotesFragment(), R.string.note_title),
     FlowItems(PhotoFragment(), R.string.photo_title)

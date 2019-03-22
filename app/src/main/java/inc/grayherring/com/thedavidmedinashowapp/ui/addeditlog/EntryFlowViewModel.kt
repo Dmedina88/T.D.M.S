@@ -3,9 +3,9 @@ package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import inc.grayherring.com.thedavidmedinashowapp.arch.ViewModelCoroutine
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopLogRepository
-import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
-import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopType
+import inc.grayherring.com.thedavidmedinashowapp.data.EntryRepository
+import inc.grayherring.com.thedavidmedinashowapp.data.models.Entry
+import inc.grayherring.com.thedavidmedinashowapp.data.models.EntryType
 import inc.grayherring.com.thedavidmedinashowapp.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,42 +14,42 @@ import org.threeten.bp.LocalDate
 import timber.log.Timber
 import javax.inject.Inject
 
-data class PoopTypeItem(val poopType: PoopType, val selected: Boolean)
+data class EntryTypeItem(val poopType: EntryType, val selected: Boolean)
 
-sealed class PoopFlowError {
-  object MissingPoopType : PoopFlowError()
+sealed class EntryFlowError {
+  object MissingEntryType : EntryFlowError()
 }
 
-class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopLogRepository) :
+class EntryFlowViewModel @Inject constructor(private val entryRepository: EntryRepository) :
   ViewModelCoroutine() {
 
   //MaybeD0: considering movingall this to a state class and usinging map on LiveData to get the data from it
   //id lose 2 way data binding but do i even want it  :shrug:
-  private val _poopTypeList = MutableLiveData<List<PoopTypeItem>>()
-  private val _errors = SingleLiveEvent<PoopFlowError>()
+  private val _poopTypeList = MutableLiveData<List<EntryTypeItem>>()
+  private val _errors = SingleLiveEvent<EntryFlowError>()
   private val _finish = SingleLiveEvent<Boolean>()
-  private var selectedPoopType: PoopType? = null
+  private var selectedEntryType: EntryType? = null
   private var id: Int = 0
 
   val date = MutableLiveData<LocalDate>()
   val name = MutableLiveData<String>()
   val notes = MutableLiveData<String>()
   val imagePath = MutableLiveData<String>()
-  val poopTypeList: LiveData<List<PoopTypeItem>> get() = _poopTypeList
-  val errors: LiveData<PoopFlowError> get() = _errors
+  val poopTypeList: LiveData<List<EntryTypeItem>> get() = _poopTypeList
+  val errors: LiveData<EntryFlowError> get() = _errors
   val finish: LiveData<Boolean> get() = _finish
 
   //todo: test?
-  fun selectPoopType(selectedPoopType: PoopType) {
-    if (this.selectedPoopType == selectedPoopType) {
+  fun selectEntryType(selectedEntryType: EntryType) {
+    if (this.selectedEntryType == selectedEntryType) {
       return
     }
-    this.selectedPoopType = selectedPoopType
+    this.selectedEntryType = selectedEntryType
 
     viewModeScope.launch {
       _poopTypeList.value = withContext(Dispatchers.IO) {
         _poopTypeList.value?.map {
-          if (it.poopType == selectedPoopType) {
+          if (it.poopType == selectedEntryType) {
             it.copy(selected = true)
           } else {
             it.copy(selected = false)
@@ -62,10 +62,8 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
   fun init(id: Int) {
     if (id > 0) {
       viewModeScope.launch {
-        val log = withContext(Dispatchers.IO) {
-          poopLogRepository.getPoop(id)
-        }
-        setData(log)
+
+        setData(entryRepository.getEntry(id))
       }
     } else {
       reset()
@@ -73,14 +71,14 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
 
   }
 
-  private fun setData(log: PoopLog) {
-    this@PoopFlowViewModel.id = log.id
-    date.value = log.date
-    name.value = log.name
-    notes.value = log.notes
-    imagePath.value = log.imagePath
-    selectedPoopType = log.poopType
-    _poopTypeList.value = PoopType.values().map { PoopTypeItem(it, it == log.poopType) }
+  private fun setData(entry: Entry) {
+    this@EntryFlowViewModel.id = entry.id
+    date.value = entry.date
+    name.value = entry.name
+    notes.value = entry.notes
+    imagePath.value = entry.imagePath
+    selectedEntryType = entry.poopType
+    _poopTypeList.value = EntryType.values().map { EntryTypeItem(it, it == entry.poopType) }
   }
 
   private fun reset() {
@@ -89,8 +87,8 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
     name.value = ""
     notes.value = ""
     imagePath.value = ""
-    selectedPoopType = null
-    _poopTypeList.value = PoopType.values().map { PoopTypeItem(it, false) }
+    selectedEntryType = null
+    _poopTypeList.value = EntryType.values().map { EntryTypeItem(it, false) }
   }
 
   fun save() {
@@ -99,16 +97,16 @@ class PoopFlowViewModel @Inject constructor(private val poopLogRepository: PoopL
       val selectedName = name.value ?: ""
       val selectedNotes = notes.value ?: ""
       val selectedPath = imagePath.value ?: ""
-      val type = selectedPoopType
+      val type = selectedEntryType
 
       if (type == null) {
-        _errors.value = PoopFlowError.MissingPoopType
+        _errors.value = EntryFlowError.MissingEntryType
         return@launch
       }
 
       _finish.value = withContext(Dispatchers.IO) {
-        poopLogRepository.insert(
-          PoopLog(selectedDate, type, selectedName, selectedPath, selectedNotes, id)
+        entryRepository.insert(
+          Entry(selectedDate, type, selectedName, selectedPath, selectedNotes, id)
         )
         true
       }

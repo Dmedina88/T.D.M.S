@@ -12,23 +12,23 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
-import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentPoopFlowBinding
+import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryFlowBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.snackbar
 import timber.log.Timber
 import javax.inject.Inject
 
-class PoopFlowFragment : BaseFragment() {
+class EntryFlowFragment : BaseFragment() {
 
   @Inject
   lateinit var viewModelFactory: ViewModelFactory
-  lateinit var bindings: FragmentPoopFlowBinding
+  lateinit var bindings: FragmentEntryFlowBinding
 
   private val viewModel by lazy {
-    Timber.d("PoopFlowFragment lazy")
+    Timber.d("EntryFlowFragment lazy")
 
     ViewModelProviders.of(this, viewModelFactory)
-      .get(PoopFlowViewModel::class.java)
+      .get(EntryFlowViewModel::class.java)
   }
 
   override fun onCreateView(
@@ -36,9 +36,9 @@ class PoopFlowFragment : BaseFragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    bindings = FragmentPoopFlowBinding.inflate(inflater, container, false)
-    viewModel.init(PoopFlowFragmentArgs.fromBundle(arguments!!).id)
-    val adapter = SavePoopPager(childFragmentManager, requireContext())
+    bindings = FragmentEntryFlowBinding.inflate(inflater, container, false)
+    viewModel.init(EntryFlowFragmentArgs.fromBundle(arguments!!).id)
+    val adapter = SaveEntryPager(childFragmentManager, requireContext())
     bindings.viewPager.adapter = adapter
     //sort of want to do this with data binding if i can
     bindings.tabLayout.setupWithViewPager(bindings.viewPager)

@@ -2,8 +2,8 @@ package inc.grayherring.com.thedavidmedinashowapp.ui.detail
 
 import androidx.lifecycle.MutableLiveData
 import inc.grayherring.com.thedavidmedinashowapp.arch.ViewModelCoroutine
-import inc.grayherring.com.thedavidmedinashowapp.data.PoopLogRepository
-import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
+import inc.grayherring.com.thedavidmedinashowapp.data.EntryRepository
+import inc.grayherring.com.thedavidmedinashowapp.data.models.Entry
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.FULL_DETAIL
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.IMAGE_FULLSCREEN
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.NONE
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-data class LogDetailState(val log: PoopLog, val animationState: AnimationState)
+data class LogDetailState(val entry: Entry, val animationState: AnimationState)
 
 enum class AnimationState {
   NONE,
@@ -21,7 +21,7 @@ enum class AnimationState {
   FULL_DETAIL
 }
 
-class LogDetailViewModel @Inject constructor(private val poopLogRepository: PoopLogRepository) :
+class LogDetailViewModel @Inject constructor(private val entryRepository: EntryRepository) :
   ViewModelCoroutine() {
 
   private val _deletedLiveData = SingleLiveEvent<Boolean>()
@@ -33,7 +33,7 @@ class LogDetailViewModel @Inject constructor(private val poopLogRepository: Poop
   fun init(id: Int) {
     viewModeScope.launch {
       _logDetailState.value = withContext(Dispatchers.IO) {
-        val log = poopLogRepository.getPoop(id)
+        val log = entryRepository.getEntry(id)
         LogDetailState(log, NONE)
       }
     }
@@ -52,7 +52,7 @@ class LogDetailViewModel @Inject constructor(private val poopLogRepository: Poop
     viewModeScope.launch {
       deletedLiveData.value = withContext(Dispatchers.IO) {
         _logDetailState.value?.let {
-          poopLogRepository.deletePoopLog(it.log)
+          entryRepository.deleteEntry(it.entry)
           true
         }
       }

@@ -7,33 +7,33 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import inc.grayherring.com.thedavidmedinashowapp.data.models.PoopLog
+import inc.grayherring.com.thedavidmedinashowapp.data.models.Entry
 
 private const val GET_POOP_QUERY = "SELECT * FROM poop_log WHERE id = :id LIMIT 1"
 
 @Dao
-interface PoopLogDao {
+interface EntryDao {
   @Query("SELECT * from poop_log ORDER BY date")
-  fun getAllPoops(): LiveData<List<PoopLog>>
+  fun getAllEntries(): LiveData<List<Entry>>
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(poopLog: PoopLog)
+    fun insert(entry: Entry)
 
   @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update(poopLog: PoopLog)
+    fun update(entry: Entry)
 
   @Query("DELETE FROM poop_log")
    fun deleteAll()
 
   @Delete
-   fun deletePoopLog(poopLog: PoopLog)
+   fun deleteEntryLog(entry: Entry)
 
   @Query("SELECT * FROM poop_log WHERE date BETWEEN :dayst AND :dayet")
-  fun getFromTable(dayst: Long, dayet: Long): LiveData<List<PoopLog>>
+  fun getFromTable(dayst: Long, dayet: Long): LiveData<List<Entry>>
 
   @Query(GET_POOP_QUERY)
-  fun getPoop(id: Int): PoopLog
+  fun getEntry(id: Int): Entry
 
   @Query(GET_POOP_QUERY)
-  fun getPoopLiveData(id: Int): LiveData<PoopLog>
+  fun getEntryLiveData(id: Int): LiveData<Entry>
 }

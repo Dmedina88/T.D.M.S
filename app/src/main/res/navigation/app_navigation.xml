@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/poopListFragment">
+    app:startDestination="@id/entryListFragment">
 
   <fragment
-        android:id="@+id/poopListFragment"
-        android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooplist.PoopListFragment"
-        android:label="Home">
-      <action
-          android:id="@+id/action_list_to_flow"
-          app:destination="@id/poopFlowFragment"
-          app:enterAnim="@anim/slide_in_right"
-          app:exitAnim="@anim/slide_out_left"
-          app:popEnterAnim="@anim/slide_in_right"
-          app:popExitAnim="@anim/slide_out_left" />
-      <action
-          android:id="@+id/action_poopListFragment_to_logDetailFragment"
-          app:destination="@id/logDetailFragment"/>
-    </fragment>
+      android:id="@+id/entryListFragment"
+      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.entrylist.EntryListFragment"
+      android:label="Home">
+    <action
+        android:id="@+id/action_list_to_flow"
+        app:destination="@id/poopFlowFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"/>
+    <action
+        android:id="@+id/action_poopListFragment_to_logDetailFragment"
+        app:destination="@id/logDetailFragment"/>
+  </fragment>
   <fragment
       android:id="@+id/poopFlowFragment"
-      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.PoopFlowFragment"
+      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowFragment"
       android:label="Log Flow">
     <argument
         android:name="id"
-        app:argType="integer"
-        android:defaultValue="-1"/>
+        android:defaultValue="-1"
+        app:argType="integer"/>
   </fragment>
   <fragment
       android:id="@+id/logDetailFragment"
@@ -38,7 +37,7 @@
         app:destination="@id/poopFlowFragment"/>
     <argument
         android:name="id"
-        app:argType="integer"
-        android:defaultValue="-1"/>
+        android:defaultValue="-1"
+        app:argType="integer"/>
   </fragment>
 </navigation>

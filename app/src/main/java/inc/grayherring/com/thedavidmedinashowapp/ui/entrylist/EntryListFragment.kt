@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.pooplist
+package inc.grayherring.com.thedavidmedinashowapp.ui.entrylist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
-import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentPoopListBinding
+import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryListBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import javax.inject.Inject
 
-class PoopListFragment : BaseFragment() {
+class EntryListFragment : BaseFragment() {
 
   @Inject lateinit var viewModelFactory: ViewModelFactory
   private val viewModel by lazy {
-    ViewModelProviders.of(this, viewModelFactory).get(PoopListVM::class.java)
+    ViewModelProviders.of(this, viewModelFactory).get(EntryListVM::class.java)
   }
 
   override fun onCreateView(
@@ -28,10 +28,10 @@ class PoopListFragment : BaseFragment() {
     savedInstanceState: Bundle?
   ): View? {
     // Inflate the layout for this fragment
-    val bindings = FragmentPoopListBinding.inflate(inflater, container, false)
+    val bindings = FragmentEntryListBinding.inflate(inflater, container, false)
 
-    val adapter = PoopAdapter({
-      val action = PoopListFragmentDirections.actionPoopListFragmentToLogDetailFragment(it.id)
+    val adapter = EntryAdapter({
+      val action = EntryListFragmentDirections.actionPoopListFragmentToLogDetailFragment(it.id)
       findNavController().navigate(action)
     }, {})
 
@@ -44,7 +44,6 @@ class PoopListFragment : BaseFragment() {
       recyclerView.addItemDecoration(DividerItemDecoration(root.context, VERTICAL))
       recyclerView.adapter = adapter
       fab.setOnClickListener {
-
         findNavController().navigate(R.id.action_list_to_flow)
       }
     }
