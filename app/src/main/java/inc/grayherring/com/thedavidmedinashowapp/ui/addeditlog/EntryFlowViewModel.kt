@@ -2,10 +2,11 @@ package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import inc.grayherring.com.thedavidmedinashowapp.arch.ViewModelCoroutine
-import inc.grayherring.com.thedavidmedinashowapp.data.EntryRepository
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import inc.grayherring.com.thedavidmedinashowapp.data.models.Entry
 import inc.grayherring.com.thedavidmedinashowapp.data.models.EntryType
+import inc.grayherring.com.thedavidmedinashowapp.data.repo.EntryRepository
 import inc.grayherring.com.thedavidmedinashowapp.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,7 +21,7 @@ sealed class EntryFlowError {
 }
 
 class EntryFlowViewModel @Inject constructor(private val entryRepository: EntryRepository) :
-  ViewModelCoroutine() {
+  ViewModel() {
 
   //MaybeD0: considering movingall this to a state class and usinging map on LiveData to get the data from it
   //id lose 2 way data binding but do i even want it  :shrug:
@@ -45,7 +46,7 @@ class EntryFlowViewModel @Inject constructor(private val entryRepository: EntryR
     }
     this.selectedEntryType = selectedEntryType
 
-    viewModeScope.launch {
+    viewModelScope.launch {
       _poopTypeList.value = withContext(Dispatchers.IO) {
         _poopTypeList.value?.map {
           if (it.poopType == selectedEntryType) {
@@ -60,7 +61,7 @@ class EntryFlowViewModel @Inject constructor(private val entryRepository: EntryR
 
   fun init(id: Int) {
     if (id > 0) {
-      viewModeScope.launch {
+      viewModelScope.launch {
         setData(entryRepository.getEntry(id))
       }
     } else {
@@ -90,7 +91,7 @@ class EntryFlowViewModel @Inject constructor(private val entryRepository: EntryR
   }
 
   fun save() {
-    viewModeScope.launch {
+    viewModelScope.launch {
       val selectedDate = date.value ?: LocalDate.now()
       val selectedName = name.value ?: ""
       val selectedNotes = notes.value ?: ""

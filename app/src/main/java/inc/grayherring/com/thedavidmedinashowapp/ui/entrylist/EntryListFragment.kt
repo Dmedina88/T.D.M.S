@@ -33,9 +33,9 @@ class EntryListFragment : BaseFragment() {
     val adapter = EntryAdapter({
       val action = EntryListFragmentDirections.actionPoopListFragmentToLogDetailFragment(it.id)
       findNavController().navigate(action)
-    }, {})
+    }, { viewModel.dateClicked(it) })
 
-    viewModel.poopListItems.observe(viewLifecycleOwner, Observer {
+    viewModel.entryItems.observe(viewLifecycleOwner, Observer {
       adapter.setData(it)
     })
 
@@ -47,7 +47,8 @@ class EntryListFragment : BaseFragment() {
         findNavController().navigate(R.id.action_list_to_flow)
       }
     }
-    return bindings.root
-  }
 
+    return bindings.root
+
+  }
 }

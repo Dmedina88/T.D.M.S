@@ -12,7 +12,7 @@ import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseActivity
-import inc.grayherring.com.thedavidmedinashowapp.data.EntryRepository
+import inc.grayherring.com.thedavidmedinashowapp.data.repo.EntryRepository
 import inc.grayherring.com.thedavidmedinashowapp.databinding.ActivityMainBinding
 import javax.inject.Inject
 
@@ -51,6 +51,5 @@ class MainActivity : BaseActivity(), OnNavigationItemSelectedListener {
 
     return true
   }
-
 
 }

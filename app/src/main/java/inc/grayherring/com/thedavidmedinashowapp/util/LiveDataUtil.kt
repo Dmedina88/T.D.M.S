@@ -2,13 +2,11 @@ package inc.grayherring.com.thedavidmedinashowapp.util
 
 import androidx.annotation.MainThread
 import androidx.annotation.Nullable
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
-import androidx.databinding.adapters.NumberPickerBindingAdapter.setValue
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.Transformations
 import java.util.concurrent.atomic.AtomicBoolean
 
 fun <X, Y> LiveData<X>.map(mapper: (X) -> Y) = Transformations.map(this, mapper)

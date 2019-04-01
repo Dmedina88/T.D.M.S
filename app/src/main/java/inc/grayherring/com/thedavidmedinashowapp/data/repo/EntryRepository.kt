@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.data
+package inc.grayherring.com.thedavidmedinashowapp.data.repo
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData

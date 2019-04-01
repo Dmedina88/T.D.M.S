@@ -12,7 +12,7 @@ import inc.grayherring.com.thedavidmedinashowapp.databinding.DateItemBinding
 import inc.grayherring.com.thedavidmedinashowapp.databinding.EntryListItemBinding
 
 typealias EntryLogClicked = ((Entry) -> Unit)
-typealias DateItemClicked = ((Int) -> Unit)
+typealias DateItemClicked = ((String) -> Unit)
 
 class EntryAdapter(
   private val poopLogClicked: EntryLogClicked,
@@ -104,7 +104,7 @@ sealed class EntryListVH<Binding : ViewDataBinding>(protected val bindings: Bind
     fun bind(item: EntryListItem.Date) {
       bindings.date.text = item.date
       bindings.realRoot.setOnClickListener {
-        dateItemClicked.invoke(this.layoutPosition)
+        dateItemClicked(item.date)
       }
     }
   }
