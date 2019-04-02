@@ -35,9 +35,7 @@ class EntryListFragment : BaseFragment() {
       findNavController().navigate(action)
     }, { viewModel.dateClicked(it) })
 
-    viewModel.entryItems.observe(viewLifecycleOwner, Observer {
-      adapter.setData(it)
-    })
+    viewModel.entryItems.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
 
     bindings.run {
       recyclerView.layoutManager = LinearLayoutManager(root.context)

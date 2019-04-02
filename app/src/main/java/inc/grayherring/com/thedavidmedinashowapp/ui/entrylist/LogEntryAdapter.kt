@@ -3,6 +3,8 @@ package inc.grayherring.com.thedavidmedinashowapp.ui.entrylist
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import inc.grayherring.com.thedavidmedinashowapp.data.models.Entry
 import inc.grayherring.com.thedavidmedinashowapp.data.models.detailRes
@@ -18,16 +20,15 @@ class EntryAdapter(
   private val poopLogClicked: EntryLogClicked,
   private val dateItemClicked: DateItemClicked
 ) :
-  RecyclerView.Adapter<EntryListVH<ViewDataBinding>>() {
+  ListAdapter<EntryListItem, EntryListVH<ViewDataBinding>>(
+    object : DiffUtil.ItemCallback<EntryListItem>() {
+      override fun areItemsTheSame(oldItem: EntryListItem, newItem: EntryListItem) =
+        oldItem == newItem // maybe pass item id or make interface
 
-  private val data = mutableListOf<EntryListItem>()
-
-  //todo : dif util
-  fun setData(newData: List<EntryListItem>) {
-    data.clear()
-    data.addAll(newData)
-    notifyDataSetChanged()
-  }
+      override fun areContentsTheSame(oldItem: EntryListItem, newItem: EntryListItem) =
+        oldItem == newItem
+    }
+  ) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryListVH<ViewDataBinding> =
     when (viewType) {
@@ -52,17 +53,15 @@ class EntryAdapter(
       else -> error("invalid viewType")
     } as EntryListVH<ViewDataBinding>
 
-  override fun getItemCount() = data.size
-
   override fun onBindViewHolder(holder: EntryListVH<ViewDataBinding>, position: Int) {
-    val item = data[position]
+    val item = getItem(position)
     when (item) {
       is EntryListItem.Log -> (holder as EntryListVH.LogVH).bind(item)
       is EntryListItem.Date -> (holder as EntryListVH.DateVH).bind(item)
     }
   }
 
-  override fun getItemViewType(position: Int): Int = when (data[position]) {
+  override fun getItemViewType(position: Int): Int = when (getItem(position)) {
     is EntryListItem.Log -> 0
     is EntryListItem.Date -> 1
   }
