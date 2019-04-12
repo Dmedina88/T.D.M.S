@@ -8,7 +8,6 @@ import inc.grayherring.com.thedavidmedinashowapp.data.repo.EntryRepository
 import inc.grayherring.com.thedavidmedinashowapp.data.repo.NasaRepository
 import inc.grayherring.com.thedavidmedinashowapp.util.map
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
@@ -43,13 +42,13 @@ class EntryListVM @Inject constructor(
   }
 
   val handler = CoroutineExceptionHandler { _, exception ->
-    Timber.e("Caught $exception with suppressed ${exception.suppressed!!.contentToString()} ${Thread.currentThread()}")
+    Timber.e(exception)
   }
 
   fun dateClicked(date: String) {
     viewModelScope.launch(handler) {
-        nasaRepository.getNasaPlanetary(LocalDate.parse(date, dateFormatter)).await()
-
+      val response =  nasaRepository.getNasaPlanetary(LocalDate.parse(date, dateFormatter)).await()
+      Timber.i(response.toString())
     }
   }
 

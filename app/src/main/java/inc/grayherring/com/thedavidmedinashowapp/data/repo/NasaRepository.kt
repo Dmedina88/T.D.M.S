@@ -9,13 +9,12 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 interface NasaRepository {
- suspend fun getNasaPlanetary(date: LocalDate): NasaPlanetary
+  fun getNasaPlanetary(date: LocalDate): Deferred<NasaPlanetary>
 }
 
 @Singleton
 class NasaRepositoryImpl @Inject constructor(private val nasaApi: NasaAPI) :
   NasaRepository {
-
-  override suspend fun getNasaPlanetary(date: LocalDate) =
+  override fun getNasaPlanetary(date: LocalDate) =
     nasaApi.getNasaPlanetary(date.format(DateTimeFormatter.ISO_DATE))
 }
