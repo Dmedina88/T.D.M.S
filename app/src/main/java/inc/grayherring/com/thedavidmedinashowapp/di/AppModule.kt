@@ -2,7 +2,6 @@ package inc.grayherring.com.thedavidmedinashowapp.di
 
 import android.app.Application
 import androidx.room.Room
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import inc.grayherring.com.thedavidmedinashowapp.data.network.NasaAPI
@@ -35,7 +34,6 @@ class AppModule {
   fun providesRetroFit(okHttpClient: OkHttpClient) = Retrofit.Builder()
     .baseUrl("https://api.nasa.gov/")
     .client(okHttpClient)
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .addConverterFactory(MoshiConverterFactory.create())
     .build()
 
