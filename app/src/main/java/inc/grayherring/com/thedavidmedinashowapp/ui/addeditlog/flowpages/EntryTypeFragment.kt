@@ -5,27 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryTypePickerBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.GridSpacingItemDecoration
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
-import javax.inject.Inject
 
 class EntryTypeFragment : BaseFragment() {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelFactory
   lateinit var bindings: FragmentEntryTypePickerBinding
 
-  private val viewModel by lazy {
-    Timber.d("EntryTypeFragment lazy")
-    ViewModelProviders.of(this.requireParentFragment(), viewModelFactory)
-      .get(EntryFlowViewModel::class.java)
-  }
+  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = { requireParentFragment() })
 
   override fun onCreateView(
     inflater: LayoutInflater,

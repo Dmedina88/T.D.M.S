@@ -11,7 +11,6 @@ import android.view.animation.AnticipateOvershootInterpolator
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.transition.ChangeBounds
 import androidx.transition.Transition
@@ -24,25 +23,19 @@ import inc.grayherring.com.thedavidmedinashowapp.R.string
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.data.models.icon
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentDetailsBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.FULL_DETAIL
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.IMAGE_FULLSCREEN
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.NONE
 import inc.grayherring.com.thedavidmedinashowapp.util.map
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.textOrGone
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.format.DateTimeFormatter
-import javax.inject.Inject
 
 class LogDetailFragment : BaseFragment() {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelFactory
   lateinit var bindings: FragmentDetailsBinding
 
-  private val viewModel by lazy {
-    ViewModelProviders.of(this, viewModelFactory)
-      .get(LogDetailViewModel::class.java)
-  }
+  private val viewModel by viewModel<LogDetailViewModel>()
 
   override fun onCreateView(
     inflater: LayoutInflater,

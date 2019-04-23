@@ -10,7 +10,6 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.IMAGE_
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.NONE
 import inc.grayherring.com.thedavidmedinashowapp.util.SingleLiveEvent
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 data class LogDetailState(val entry: Entry, val animationState: AnimationState)
 
@@ -20,7 +19,7 @@ enum class AnimationState {
   FULL_DETAIL
 }
 
-class LogDetailViewModel @Inject constructor(private val entryRepository: EntryRepository) :
+class LogDetailViewModel(private val entryRepository: EntryRepository) :
   ViewModel() {
 
   private val _deletedLiveData = SingleLiveEvent<Boolean>()

@@ -1,18 +1,12 @@
 package inc.grayherring.com.thedavidmedinashowapp.di
 
-import dagger.Binds
-import dagger.Module
 import inc.grayherring.com.thedavidmedinashowapp.data.repo.EntryRepository
 import inc.grayherring.com.thedavidmedinashowapp.data.repo.EntryRepositoryImpl
 import inc.grayherring.com.thedavidmedinashowapp.data.repo.NasaRepository
 import inc.grayherring.com.thedavidmedinashowapp.data.repo.NasaRepositoryImpl
+import org.koin.dsl.module
 
-@Module
-abstract class DataModule {
-
-  @Binds
-  abstract fun providesEntryRepository(entryRepositoryImpl: EntryRepositoryImpl): EntryRepository
-
-  @Binds
-  abstract fun providesentryNasaRepository(nasaRepository: NasaRepositoryImpl): NasaRepository
+val dataModule = module {
+  single<EntryRepository> { EntryRepositoryImpl(get()) }
+  single<NasaRepository> { NasaRepositoryImpl(get()) }
 }

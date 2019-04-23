@@ -4,8 +4,6 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import inc.grayherring.com.thedavidmedinashowapp.data.models.Entry
 import inc.grayherring.com.thedavidmedinashowapp.data.persistence.EntryDao
-import javax.inject.Inject
-import javax.inject.Singleton
 
 interface EntryRepository {
   fun getAllEntries(): LiveData<List<Entry>>
@@ -23,8 +21,7 @@ interface EntryRepository {
   suspend fun update(entry: Entry)
 }
 
-@Singleton
-class EntryRepositoryImpl @Inject constructor(private val entryDao: EntryDao) :
+class EntryRepositoryImpl(private val entryDao: EntryDao) :
   EntryRepository {
   override suspend fun getEntryLiveData(id: Int) = entryDao.getEntryLiveData(id)
 

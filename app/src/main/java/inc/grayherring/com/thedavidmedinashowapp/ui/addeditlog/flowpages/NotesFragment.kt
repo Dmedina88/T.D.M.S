@@ -4,23 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentNotesBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class NotesFragment : BaseFragment() {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelFactory
   lateinit var bindings: FragmentNotesBinding
 
-  private val viewModel by lazy {
-    ViewModelProviders.of(this.requireParentFragment(), viewModelFactory)
-      .get(EntryFlowViewModel::class.java)
-  }
+  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = { requireParentFragment() })
 
   override fun onCreateView(
     inflater: LayoutInflater,

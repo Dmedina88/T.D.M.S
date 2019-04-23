@@ -12,7 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
-import javax.inject.Inject
 
 data class EntryTypeItem(val poopType: EntryType, val selected: Boolean)
 
@@ -20,7 +19,7 @@ sealed class EntryFlowError {
   object MissingEntryType : EntryFlowError()
 }
 
-class EntryFlowViewModel @Inject constructor(private val entryRepository: EntryRepository) :
+class EntryFlowViewModel(private val entryRepository: EntryRepository) :
   ViewModel() {
 
   //MaybeD0: considering movingall this to a state class and usinging map on LiveData to get the data from it

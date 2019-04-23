@@ -1,53 +1,44 @@
 package inc.grayherring.com.thedavidmedinashowapp.di
 
-import android.app.Application
 import androidx.room.Room
-import dagger.Module
-import dagger.Provides
 import inc.grayherring.com.thedavidmedinashowapp.data.network.NasaAPI
 import inc.grayherring.com.thedavidmedinashowapp.data.network.NasaKeyInterceptor
 import inc.grayherring.com.thedavidmedinashowapp.data.persistence.EntryDatabase
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Singleton
 
-@Module
-class AppModule {
+val appModule = module {
 
-  @Provides
-  @Singleton
-  fun providesEntryLogDatabase(application: Application) =
+  single<EntryDatabase> {
     Room.databaseBuilder(
-      application,
+      androidContext(),
       EntryDatabase::class.java,
       "log_db"
     ).build()
+  }
 
-  @Provides
-  @Singleton
-  fun providesEntryDoa(database: EntryDatabase) =
-    database.entryDao()
+  single {
+    get<EntryDatabase>().entryDao()
+  }
 
-  @Provides
-  @Singleton
-  fun providesRetroFit(okHttpClient: OkHttpClient) = Retrofit.Builder()
-    .baseUrl("https://api.nasa.gov/")
-    .client(okHttpClient)
-    .addConverterFactory(MoshiConverterFactory.create())
-    .build()
-
-  @Provides
-  @Singleton
-  fun providesOkHttpClient() =
+  single {
     OkHttpClient.Builder()
       .addInterceptor(NasaKeyInterceptor())
       .build()
+  }
 
-  @Provides
-  @Singleton
-  fun providesNasaApi(retrofit: Retrofit) =
-    retrofit.create(NasaAPI::class.java)
+  single {
+    Retrofit.Builder()
+      .baseUrl("https://api.nasa.gov/")
+      .client(get())
+      .addConverterFactory(MoshiConverterFactory.create())
+      .build()
+  }
 
-
+  single {
+    get<Retrofit>().create(NasaAPI::class.java)
+  }
 }
