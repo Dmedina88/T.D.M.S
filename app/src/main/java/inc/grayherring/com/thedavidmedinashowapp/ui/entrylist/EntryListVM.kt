@@ -46,7 +46,7 @@ class EntryListVM(
 
   fun dateClicked(date: String) {
     viewModelScope.launch(handler) {
-      val response = nasaRepository.getNasaPlanetary(LocalDate.parse(date, dateFormatter)).await()
+      val response = nasaRepository.getNasaPlanetary(LocalDate.parse(date, dateFormatter))
       Timber.i(response.toString())
     }
   }
