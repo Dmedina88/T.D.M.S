@@ -6,7 +6,7 @@ import inc.grayherring.com.thedavidmedinashowapp.di.appModule
 import inc.grayherring.com.thedavidmedinashowapp.di.dataModule
 import inc.grayherring.com.thedavidmedinashowapp.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.logger.AndroidLogger
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import timber.log.Timber
 
@@ -21,10 +21,11 @@ class TheDavidMedinaShowApp : Application() {
     startKoin {
       //todo make it use timber logger
       if (BuildConfig.DEBUG) {
-        logger(AndroidLogger())
+        androidLogger()
+      }
         androidContext(this@TheDavidMedinaShowApp)
         modules(appModule, dataModule, viewModelModule)
-      }
+
     }
   }
 
