@@ -15,7 +15,7 @@ class DatePickerFragment : BaseFragment() {
 
   lateinit var bindings: FragmentDatePickerBinding
 
-  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = { requireParentFragment() })
+  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = this::requireParentFragment )
 
   override fun onCreateView(
     inflater: LayoutInflater,

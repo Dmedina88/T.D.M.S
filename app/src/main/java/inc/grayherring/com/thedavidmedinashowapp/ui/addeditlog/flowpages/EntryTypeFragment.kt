@@ -17,7 +17,7 @@ class EntryTypeFragment : BaseFragment() {
 
   lateinit var bindings: FragmentEntryTypePickerBinding
 
-  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = { requireParentFragment() })
+  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = this::requireParentFragment)
 
   override fun onCreateView(
     inflater: LayoutInflater,

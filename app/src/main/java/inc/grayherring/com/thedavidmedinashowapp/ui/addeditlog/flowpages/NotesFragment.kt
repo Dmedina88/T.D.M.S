@@ -13,7 +13,7 @@ class NotesFragment : BaseFragment() {
 
   lateinit var bindings: FragmentNotesBinding
 
-  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = { requireParentFragment() })
+  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = this::requireParentFragment )
 
   override fun onCreateView(
     inflater: LayoutInflater,
