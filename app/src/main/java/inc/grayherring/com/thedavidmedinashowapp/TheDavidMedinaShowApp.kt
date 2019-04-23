@@ -1,17 +1,16 @@
 package inc.grayherring.com.thedavidmedinashowapp
 
-import android.app.Activity
 import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import inc.grayherring.com.thedavidmedinashowapp.di.AppInjector
+import inc.grayherring.com.thedavidmedinashowapp.di.appModule
+import inc.grayherring.com.thedavidmedinashowapp.di.dataModule
+import inc.grayherring.com.thedavidmedinashowapp.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.logger.AndroidLogger
+import org.koin.core.context.startKoin
 import timber.log.Timber
-import javax.inject.Inject
 
-class TheDavidMedinaShowApp : Application(), HasActivityInjector {
-  @Inject
-  lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+class TheDavidMedinaShowApp : Application() {
 
   override fun onCreate() {
     super.onCreate()
@@ -19,8 +18,14 @@ class TheDavidMedinaShowApp : Application(), HasActivityInjector {
     if (BuildConfig.DEBUG) {
       Timber.plant(Timber.DebugTree())
     }
-    AppInjector.init(this)
+    startKoin {
+      //todo make it use timber logger
+      if (BuildConfig.DEBUG) {
+        logger(AndroidLogger())
+        androidContext(this@TheDavidMedinaShowApp)
+        modules(appModule, dataModule, viewModelModule)
+      }
+    }
   }
 
-  override fun activityInjector() = dispatchingAndroidInjector
 }

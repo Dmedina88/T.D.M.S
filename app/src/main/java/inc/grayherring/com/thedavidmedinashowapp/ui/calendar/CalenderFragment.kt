@@ -4,19 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
-import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CalenderFragment : BaseFragment() {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelFactory
-  val viewModel by lazy {
-    ViewModelProviders.of(this, viewModelFactory).get(CalendarViewModel::class.java)
-  }
+  private val viewModel by viewModel<CalendarViewModel>()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

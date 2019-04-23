@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,15 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryListBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EntryListFragment : BaseFragment() {
 
-  @Inject lateinit var viewModelFactory: ViewModelFactory
-  private val viewModel by lazy {
-    ViewModelProviders.of(this, viewModelFactory).get(EntryListVM::class.java)
-  }
+  private val viewModel by viewModel<EntryListVM>()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +44,5 @@ class EntryListFragment : BaseFragment() {
     return bindings.root
 
   }
-
 
 }

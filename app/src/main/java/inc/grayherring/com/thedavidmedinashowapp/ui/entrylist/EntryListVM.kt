@@ -12,9 +12,8 @@ import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
-import javax.inject.Inject
 
-class EntryListVM @Inject constructor(
+class EntryListVM(
   entryRepository: EntryRepository,
   private val nasaRepository: NasaRepository
 ) : ViewModel() {
@@ -47,7 +46,7 @@ class EntryListVM @Inject constructor(
 
   fun dateClicked(date: String) {
     viewModelScope.launch(handler) {
-      val response =  nasaRepository.getNasaPlanetary(LocalDate.parse(date, dateFormatter)).await()
+      val response = nasaRepository.getNasaPlanetary(LocalDate.parse(date, dateFormatter)).await()
       Timber.i(response.toString())
     }
   }

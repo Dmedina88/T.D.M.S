@@ -8,28 +8,19 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryFlowBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.snackbar
-import timber.log.Timber
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EntryFlowFragment : BaseFragment() {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelFactory
+
   lateinit var bindings: FragmentEntryFlowBinding
 
-  private val viewModel by lazy {
-    Timber.d("EntryFlowFragment lazy")
-
-    ViewModelProviders.of(this, viewModelFactory)
-      .get(EntryFlowViewModel::class.java)
-  }
+  private val viewModel by viewModel<EntryFlowViewModel>()
 
   override fun onCreateView(
     inflater: LayoutInflater,

@@ -12,17 +12,19 @@ import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseActivity
-import inc.grayherring.com.thedavidmedinashowapp.data.repo.EntryRepository
 import inc.grayherring.com.thedavidmedinashowapp.databinding.ActivityMainBinding
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity(), OnNavigationItemSelectedListener {
 
-  @Inject
-  lateinit var entryRepository: EntryRepository
   private val navController by lazy { findNavController(R.id.my_nav_host_fragment) }
-  private val bindings
-      by lazy { DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main) }
+  private val bindings by lazy {
+    DataBindingUtil.setContentView<ActivityMainBinding>(
+      this,
+      R.layout.activity_main
+    )
+  }
+  private val mainViewModel: MainActivityViewModel by viewModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

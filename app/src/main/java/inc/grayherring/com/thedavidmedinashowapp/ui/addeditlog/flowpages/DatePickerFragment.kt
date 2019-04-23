@@ -5,25 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentDatePickerBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
-import inc.grayherring.com.thedavidmedinashowapp.util.ui.localDate
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.threeten.bp.LocalDate
-import javax.inject.Inject
 
 class DatePickerFragment : BaseFragment() {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelFactory
   lateinit var bindings: FragmentDatePickerBinding
 
-  private val viewModel by lazy {
-    ViewModelProviders.of(this.requireParentFragment(), viewModelFactory)
-      .get(EntryFlowViewModel::class.java)
-  }
+  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = { requireParentFragment() })
 
   override fun onCreateView(
     inflater: LayoutInflater,

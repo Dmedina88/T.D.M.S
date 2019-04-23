@@ -10,34 +10,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import inc.grayherring.com.thedavidmedinashowapp.BuildConfig
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentTakePhotoBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.ViewModelFactory
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
 import inc.grayherring.com.thedavidmedinashowapp.util.loadImageFromPath
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
-import javax.inject.Inject
 
 class PhotoFragment : BaseFragment() {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelFactory
   lateinit var bindings: FragmentTakePhotoBinding
 
   private val REQUEST_CAPTURE_IMAGE = 100
 
   var pendingImagePath = ""
 
-  private val viewModel by lazy {
-    ViewModelProviders.of(this.requireParentFragment(), viewModelFactory)
-      .get(EntryFlowViewModel::class.java)
-  }
+  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = { requireParentFragment() })
 
   override fun onCreateView(
     inflater: LayoutInflater,
