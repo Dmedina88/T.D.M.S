@@ -14,19 +14,19 @@ class TheDavidMedinaShowApp : Application() {
 
   override fun onCreate() {
     super.onCreate()
+
     AndroidThreeTen.init(this)
+
     if (BuildConfig.DEBUG) {
       Timber.plant(Timber.DebugTree())
     }
-    startKoin {
-      //todo make it use timber logger
-      if (BuildConfig.DEBUG) {
-        androidLogger()
-      }
-        androidContext(this@TheDavidMedinaShowApp)
-        modules(appModule, dataModule, viewModelModule)
 
+    startKoin {
+      androidLogger()
+      androidContext(this@TheDavidMedinaShowApp)
+      modules(appModule, dataModule, viewModelModule)
     }
+
   }
 
 }

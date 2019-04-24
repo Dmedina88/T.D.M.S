@@ -12,7 +12,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 val appModule = module {
 
-  single<EntryDatabase> {
+  single {
     Room.databaseBuilder(
       androidContext(),
       EntryDatabase::class.java,
@@ -29,6 +29,7 @@ val appModule = module {
       .addInterceptor(NasaKeyInterceptor())
       .build()
   }
+
 
   single {
     Retrofit.Builder()
