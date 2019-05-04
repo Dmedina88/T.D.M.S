@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
@@ -35,7 +36,7 @@ class EntryFlowFragment : BaseFragment() {
     bindings.tabLayout.setupWithViewPager(bindings.viewPager)
 
     setHasOptionsMenu(true)
-
+viewModel.viewModelScope
     viewModel.run {
       finish.observe(viewLifecycleOwner, Observer {
         if (it) {

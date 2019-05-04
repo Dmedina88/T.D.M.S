@@ -30,7 +30,6 @@ val appModule = module {
       .build()
   }
 
-
   single {
     Retrofit.Builder()
       .baseUrl("https://api.nasa.gov/")

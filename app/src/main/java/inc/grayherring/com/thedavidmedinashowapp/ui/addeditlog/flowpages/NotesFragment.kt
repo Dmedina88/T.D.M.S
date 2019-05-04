@@ -7,14 +7,27 @@ import android.view.ViewGroup
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentNotesBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
+import inc.grayherring.com.thedavidmedinashowapp.util.ui.textChangeFlow
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 class NotesFragment : BaseFragment() {
 
   lateinit var bindings: FragmentNotesBinding
 
   private val viewModel by sharedViewModel<EntryFlowViewModel>(from = this::requireParentFragment )
 
+  @ObsoleteCoroutinesApi
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -25,6 +38,12 @@ class NotesFragment : BaseFragment() {
 
     bindings.vm = viewModel
     bindings.lifecycleOwner = viewLifecycleOwner
+
+    fragmentScope.launch {
+      bindings.nameEditText.textChangeFlow(fragmentScope).consumeEach {
+        Timber.d(it)
+        viewModel.name.value = it }
+    }
 
     return bindings.root
   }

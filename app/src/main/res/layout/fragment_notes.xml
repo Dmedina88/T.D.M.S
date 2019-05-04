@@ -28,7 +28,7 @@
           android:id="@+id/name_edit_text"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="@={vm.name}"
+          android:text="@{vm.name}"
           />
 
     </com.google.android.material.textfield.TextInputLayout>

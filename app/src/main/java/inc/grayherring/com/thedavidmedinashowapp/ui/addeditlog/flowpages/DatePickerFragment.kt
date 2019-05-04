@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentDatePickerBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.threeten.bp.LocalDate
 
@@ -15,7 +16,7 @@ class DatePickerFragment : BaseFragment() {
 
   lateinit var bindings: FragmentDatePickerBinding
 
-  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = this::requireParentFragment )
+  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = this::requireParentFragment)
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -24,7 +25,6 @@ class DatePickerFragment : BaseFragment() {
   ): View? {
 
     bindings = FragmentDatePickerBinding.inflate(inflater, container, false)
-
     viewModel.date.observe(viewLifecycleOwner, Observer {
       bindings.datePicker.init(
         it.year, it.monthValue, it.dayOfMonth
@@ -34,6 +34,7 @@ class DatePickerFragment : BaseFragment() {
           viewModel.date.value = LocalDate.of(year, month, dayOfMonth)
       }
     })
+
 
     return bindings.root
   }
