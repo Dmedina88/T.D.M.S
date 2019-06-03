@@ -2,12 +2,15 @@ package inc.grayherring.com.thedavidmedinashowapp.ui.entrylist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
+import androidx.lifecycle.map
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import inc.grayherring.com.thedavidmedinashowapp.data.models.Entry
 import inc.grayherring.com.thedavidmedinashowapp.data.repo.EntryRepository
 import inc.grayherring.com.thedavidmedinashowapp.data.repo.NasaRepository
-import inc.grayherring.com.thedavidmedinashowapp.util.map
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -28,25 +31,26 @@ class EntryListVM(
 
 
   val entryItems: LiveData<List<EntryListItem>> =
-    entryRepository.getAllEntries().map(::addDateItem)
+    entryRepository.getAllEntries().switchMap(::addDateItem)
 
   private val dateFormatter = DateTimeFormatter.ISO_DATE
 
-  //todo: test and move off save thread
-  private fun addDateItem(list: List<Entry>): List<EntryListItem> {
+   private fun addDateItem(list: List<Entry>): LiveData<List<EntryListItem>> = liveData(Dispatchers.IO){
 
     val results = mutableListOf<EntryListItem>()
-    if (list.isEmpty()) return results
-    var lastDate = list.first().date
-    results.add(EntryListItem.Date(lastDate.format(dateFormatter)))
-    list.forEach {
-      if (lastDate.isBefore(it.date)) {
-        lastDate = it.date
-        results.add(EntryListItem.Date(lastDate.format(dateFormatter)))
+    if (list.isEmpty()) {emit(emptyList())}
+     else {
+      var lastDate = list.first().date
+      results.add(EntryListItem.Date(lastDate.format(dateFormatter)))
+      list.forEach {
+        if (lastDate.isBefore(it.date)) {
+          lastDate = it.date
+          results.add(EntryListItem.Date(lastDate.format(dateFormatter)))
+        }
+        results.add(EntryListItem.Log(it))
       }
-      results.add(EntryListItem.Log(it))
+       emit(results)
     }
-    return results
   }
 
   val handler = CoroutineExceptionHandler { _, exception ->
@@ -55,12 +59,8 @@ class EntryListVM(
 
    fun dateClicked(date: String) {
 
-
-    val  flow = flowOf(1,2,3,3)
     viewModelScope.launch(handler) {
-      flow.map { it +1 }.collect {
-        Timber.d(it.toString())
-      }
+
       val response = nasaRepository.getNasaPlanetary(LocalDate.parse(date, dateFormatter))
       Timber.i(response.toString())
     }

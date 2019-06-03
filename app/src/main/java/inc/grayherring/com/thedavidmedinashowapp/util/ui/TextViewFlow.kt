@@ -22,7 +22,7 @@ import timber.log.Timber
 @FlowPreview
 suspend fun TextView.textChangeFlow(scope: CoroutineScope) : ReceiveChannel<String>  {
 val channel : Channel<String>  = Channel()
-  this@textChangeFlow.doOnTextChanged { text, start, count, after ->
+  this@textChangeFlow.doOnTextChanged { text, _, _, _ ->
     scope.launch {
       Timber.d(text.toString())
       channel.send(text.toString())

@@ -4,6 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.liveData
+import androidx.lifecycle.map
+import androidx.lifecycle.whenCreated
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentNotesBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
@@ -39,8 +43,10 @@ class NotesFragment : BaseFragment() {
     bindings.vm = viewModel
     bindings.lifecycleOwner = viewLifecycleOwner
 
-    fragmentScope.launch {
-      bindings.nameEditText.textChangeFlow(fragmentScope).consumeEach {
+
+    lifecycleScope.launch {
+
+      bindings.nameEditText.textChangeFlow(lifecycleScope).consumeEach {
         Timber.d(it)
         viewModel.name.value = it }
     }

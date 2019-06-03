@@ -7,7 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import inc.grayherring.com.thedavidmedinashowapp.R
@@ -17,7 +17,6 @@ import inc.grayherring.com.thedavidmedinashowapp.util.ui.snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EntryFlowFragment : BaseFragment() {
-
 
   lateinit var bindings: FragmentEntryFlowBinding
 
@@ -36,19 +35,19 @@ class EntryFlowFragment : BaseFragment() {
     bindings.tabLayout.setupWithViewPager(bindings.viewPager)
 
     setHasOptionsMenu(true)
-viewModel.viewModelScope
+    viewModel.viewModelScope
     viewModel.run {
-      finish.observe(viewLifecycleOwner, Observer {
+      finish.observe(viewLifecycleOwner) {
         if (it) {
           findNavController().popBackStack()
         }
-      })
-      errors.observe(viewLifecycleOwner, Observer {
-        it?.let {
+      }
+      errors.observe(viewLifecycleOwner) {
+        it.let {
           bindings.root.snackbar(R.string.mandatory_poop_type)
           bindings.viewPager.currentItem = 0
         }
-      })
+      }
     }
     return bindings.root
   }

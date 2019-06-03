@@ -24,7 +24,7 @@ class TheDavidMedinaShowApp : Application() {
     startKoin {
       androidLogger()
       androidContext(this@TheDavidMedinaShowApp)
-      modules(appModule, dataModule, viewModelModule)
+      modules(listOf(appModule, dataModule, viewModelModule))
     }
 
   }

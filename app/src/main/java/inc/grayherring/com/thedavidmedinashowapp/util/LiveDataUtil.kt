@@ -9,10 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import java.util.concurrent.atomic.AtomicBoolean
 
-fun <X, Y> LiveData<X>.map(mapper: (X) -> Y) = Transformations.map(this, mapper)
-
-fun <X> LiveData<X>.distinctUntilChanged() = Transformations.distinctUntilChanged(this)
-
 class SingleLiveEvent<T> : MutableLiveData<T>() {
 
   private val pending = AtomicBoolean(false)
