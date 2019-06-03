@@ -11,7 +11,6 @@ import android.view.animation.AnticipateOvershootInterpolator
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.Observer
-import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
 import androidx.transition.ChangeBounds

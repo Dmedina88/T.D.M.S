@@ -7,7 +7,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
-import timber.log.Timber
 import java.io.Closeable
 import kotlin.coroutines.CoroutineContext
 
