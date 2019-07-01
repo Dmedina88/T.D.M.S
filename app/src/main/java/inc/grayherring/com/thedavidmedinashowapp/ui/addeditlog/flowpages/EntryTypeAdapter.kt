@@ -38,6 +38,7 @@ class EntryTypeAdapter(private val typeClicked: TypeClicked) : RecyclerView.Adap
 
 class EntryTypeVH(val binding: EntryTypeItemBinding, val typeClicked: TypeClicked) : RecyclerView.ViewHolder(binding.root) {
    fun bind(item: EntryTypeItem) {
+
     binding.icon.setImageResource(item.poopType.icon)
     binding.detail.text = binding.root.context.getText(item.poopType.detailRes)
     if (item.selected) {

@@ -50,7 +50,6 @@ class MainActivity : BaseActivity(), OnNavigationItemSelectedListener {
       startActivity(Intent(this, OssLicensesMenuActivity::class.java))
     }
     bindings.drawerLayout.closeDrawer(GravityCompat.START)
-
     return true
   }
 
