@@ -6,10 +6,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import inc.grayherring.com.thedavidmedinashowapp.data.models.Entry
-import inc.grayherring.com.thedavidmedinashowapp.data.models.detailRes
-import inc.grayherring.com.thedavidmedinashowapp.data.models.icon
-import inc.grayherring.com.thedavidmedinashowapp.data.models.nameRes
+import inc.grayherring.com.core.models.Entry
+import inc.grayherring.com.core.models.detailRes
+import inc.grayherring.com.core.models.icon
+import inc.grayherring.com.core.models.nameRes
 import inc.grayherring.com.thedavidmedinashowapp.databinding.DateItemBinding
 import inc.grayherring.com.thedavidmedinashowapp.databinding.EntryListItemBinding
 
@@ -68,7 +68,7 @@ class EntryAdapter(
 }
 
 sealed class EntryListItem {
-  data class Log(val entry: inc.grayherring.com.thedavidmedinashowapp.data.models.Entry) :
+  data class Log(val entry: inc.grayherring.com.core.models.Entry) :
     EntryListItem()
 
   data class Date(val date: String) : EntryListItem()

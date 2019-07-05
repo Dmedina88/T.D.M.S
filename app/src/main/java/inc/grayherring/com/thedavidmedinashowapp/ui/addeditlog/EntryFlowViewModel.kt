@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import inc.grayherring.com.thedavidmedinashowapp.data.models.Entry
-import inc.grayherring.com.thedavidmedinashowapp.data.models.EntryType
-import inc.grayherring.com.thedavidmedinashowapp.data.repo.EntryRepository
+import inc.grayherring.com.core.models.Entry
+import inc.grayherring.com.core.models.EntryType
 import inc.grayherring.com.thedavidmedinashowapp.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +18,7 @@ sealed class EntryFlowError {
   object MissingEntryType : EntryFlowError()
 }
 
-class EntryFlowViewModel(private val entryRepository: EntryRepository) :
+class EntryFlowViewModel(private val entryRepository: inc.grayherring.com.repository.EntryRepository) :
   ViewModel() {
 
   //MaybeD0: considering movingall this to a state class and usinging map on LiveData to get the data from it

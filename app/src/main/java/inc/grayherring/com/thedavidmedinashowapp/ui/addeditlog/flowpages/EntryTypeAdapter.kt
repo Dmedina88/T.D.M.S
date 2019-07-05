@@ -3,9 +3,9 @@ package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import inc.grayherring.com.thedavidmedinashowapp.data.models.EntryType
-import inc.grayherring.com.thedavidmedinashowapp.data.models.detailRes
-import inc.grayherring.com.thedavidmedinashowapp.data.models.icon
+import inc.grayherring.com.core.models.EntryType
+import inc.grayherring.com.core.models.detailRes
+import inc.grayherring.com.core.models.icon
 import inc.grayherring.com.thedavidmedinashowapp.databinding.EntryTypeItemBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryTypeItem
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.colorPrimary
