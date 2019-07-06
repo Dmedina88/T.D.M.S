@@ -3,8 +3,7 @@ package inc.grayherring.com.thedavidmedinashowapp.ui.detail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import inc.grayherring.com.thedavidmedinashowapp.data.models.Entry
-import inc.grayherring.com.thedavidmedinashowapp.data.repo.EntryRepository
+import inc.grayherring.com.core.models.Entry
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.FULL_DETAIL
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.IMAGE_FULLSCREEN
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.NONE
@@ -19,7 +18,7 @@ enum class AnimationState {
   FULL_DETAIL
 }
 
-class LogDetailViewModel(private val entryRepository: EntryRepository) :
+class LogDetailViewModel(private val entryRepository: inc.grayherring.com.repository.EntryRepository) :
   ViewModel() {
 
   private val _deletedLiveData = SingleLiveEvent<Boolean>()

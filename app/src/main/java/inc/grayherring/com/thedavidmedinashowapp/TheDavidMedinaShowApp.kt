@@ -2,8 +2,9 @@ package inc.grayherring.com.thedavidmedinashowapp
 
 import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen
-import inc.grayherring.com.thedavidmedinashowapp.di.appModule
-import inc.grayherring.com.thedavidmedinashowapp.di.dataModule
+import inc.grayherring.com.repository.di.dataModule
+import inc.grayherring.com.repository.di.networkModule
+import inc.grayherring.com.repository.di.persistenceModule
 import inc.grayherring.com.thedavidmedinashowapp.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -24,7 +25,7 @@ class TheDavidMedinaShowApp : Application() {
     startKoin {
       androidLogger()
       androidContext(this@TheDavidMedinaShowApp)
-      modules(listOf(appModule, dataModule, viewModelModule))
+      modules(listOf(persistenceModule, networkModule, dataModule, viewModelModule))
     }
 
   }
