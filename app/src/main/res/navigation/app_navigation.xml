@@ -40,4 +40,20 @@
         android:defaultValue="-1"
         app:argType="integer"/>
   </fragment>
+  <fragment
+      android:id="@+id/secretFragment"
+      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.secret.SecretFragment"
+      android:label="SecretFragment">
+    <deepLink
+        android:id="@+id/deepLink"
+        app:uri="www.thedavidmedinashow.com/secret/{id}"
+        android:autoVerify="true"/>
+    <action
+        android:id="@+id/action_secretFragment_to_entryListFragment"
+        app:destination="@id/entryListFragment"/>
+    <argument
+        android:name="id"
+        app:argType="integer"
+        android:defaultValue="0"/>
+  </fragment>
 </navigation>
