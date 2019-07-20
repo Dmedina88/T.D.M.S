@@ -24,9 +24,6 @@ interface WorkoutDao {
   suspend fun insertWorkout(workout: Workout)
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  suspend fun insertWorkoutExercises(workout: WorkoutExercises)
-
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
   suspend fun insertExerciseSet(workoutSet: ExerciseSet)
 
   @Delete
