@@ -12,7 +12,6 @@ type - IN APP EVENT (CHECKENING LICINCES, DONATIING) ,
 
 sealed class Achievements {
   object ReadLicenses : Achievements()
-
   object PoopType1_1 : Achievements()
   object PoopType1_100 : Achievements()
   object PoopType1_1000 : Achievements()

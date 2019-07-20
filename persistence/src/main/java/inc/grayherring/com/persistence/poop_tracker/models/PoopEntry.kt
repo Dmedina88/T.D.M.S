@@ -6,7 +6,7 @@ import inc.grayherring.com.core.models.EntryType
 import org.threeten.bp.LocalDate
 
 @Entity(tableName = "poop_log")
- data class DBEntry(
+ data class PoopEntry(
   val date: LocalDate,
   val poopType: EntryType,
   val name: String,

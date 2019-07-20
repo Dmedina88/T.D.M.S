@@ -10,6 +10,7 @@ android {
     targetSdkVersion 28
     versionCode 1
     versionName "1.0"
+    multiDexEnabled true
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -20,6 +21,18 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
+
+    compileOptions {
+      sourceCompatibility JavaVersion.VERSION_1_8
+      targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+  packagingOptions {
+    pickFirst 'META-INF/kotlinx-io.kotlin_module'
+    pickFirst 'META-INF/atomicfu.kotlin_module'
+    pickFirst 'META-INF/kotlinx-coroutines-io.kotlin_module'
+  }
 }
 
 dependencies {
@@ -29,13 +42,16 @@ dependencies {
 
   implementation "androidx.room:room-runtime:$room_version"
   implementation "androidx.room:room-ktx:$room_version"
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
   implementation "org.koin:koin-android:$koin"
-
   kapt "androidx.room:room-compiler:$room_version"
 
-
-  implementation 'androidx.appcompat:appcompat:1.0.2'
   testImplementation 'junit:junit:4.12'
+
+  androidTestImplementation "android.arch.core:core-testing:$lifecycle_version"
+  androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+  testImplementation 'androidx.arch.core:core-common:2.0.1'
+  testImplementation 'androidx.arch.core:core-testing:2.0.1'
+  androidTestImplementation "io.mockk:mockk-android:1.9.3.kotlin12"
   androidTestImplementation 'androidx.test:runner:1.2.0'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

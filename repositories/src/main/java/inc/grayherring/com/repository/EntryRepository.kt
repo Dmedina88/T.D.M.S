@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import inc.grayherring.com.core.models.Entry
-import inc.grayherring.com.persistence.EntryDatastore
+import inc.grayherring.com.persistence.poop_tracker.EntryDatastore
 import inc.grayherring.com.repository.util.toDBEntry
 import inc.grayherring.com.repository.util.toEntry
 

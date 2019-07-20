@@ -20,7 +20,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.4.1'
+    classpath 'com.android.tools.build:gradle:3.4.2'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
     classpath 'com.google.android.gms:oss-licenses-plugin:0.9.5'
@@ -39,6 +39,14 @@ allprojects {
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     maven { url 'https://jitpack.io' }
   }
+
+  //mockk issue workaround
+  configurations.all {
+    resolutionStrategy {
+      force("org.objenesis:objenesis:2.6")
+    }
+  }
+
 }
 
 task clean(type: Delete) {

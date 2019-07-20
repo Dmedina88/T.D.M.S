@@ -1,9 +1,9 @@
 package inc.grayherring.com.repository.util
 
 import inc.grayherring.com.core.models.Entry
-import inc.grayherring.com.persistence.models.DBEntry
+import inc.grayherring.com.persistence.models.PoopEntry
 
-fun DBEntry.toEntry() = Entry(
+fun PoopEntry.toEntry() = Entry(
   date = date,
   poopType = poopType,
   name = name,
@@ -12,7 +12,7 @@ fun DBEntry.toEntry() = Entry(
   id = id
 )
 
-fun Entry.toDBEntry() = DBEntry(
+fun Entry.toDBEntry() = PoopEntry(
   date = date,
   poopType = poopType,
   name = name,
