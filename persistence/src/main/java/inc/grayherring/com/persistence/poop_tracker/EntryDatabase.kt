@@ -16,15 +16,15 @@ abstract class EntryDatabase : RoomDatabase() {
 
   companion object {
     @Volatile
-    private var INSTANCE: WorkoutDatabase? = null
+    private var INSTANCE: EntryDatabase? = null
 
-    fun getDatabase(context: Context): WorkoutDatabase {
+    fun getDatabase(context: Context): EntryDatabase {
       return INSTANCE
         ?: synchronized(this) {
         // Create database here
         val instance = Room.databaseBuilder(
           context.applicationContext,
-          WorkoutDatabase::class.java,
+          EntryDatabase::class.java,
           "Entry_log_db"
         ).build()
         INSTANCE = instance

@@ -15,25 +15,28 @@ import inc.grayherring.com.persistence.workout_tracker.models.WorkoutExercises
 private const val GET_WORKOUT_QUERY = "SELECT * FROM workout WHERE id = :id LIMIT 1"
 
 @Dao
-interface WorkoutDao {
+interface WorkoutDao : WorkoutDatastore{
   @Transaction
   @Query(GET_WORKOUT_QUERY)
-  fun monitorWorkout(id: Long): LiveData<WorkoutExercises>
+  override fun monitorWorkout(id: Long): LiveData<WorkoutExercises>
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  suspend fun insertWorkout(workout: Workout)
+  override suspend fun insertWorkout(workout: Workout)
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  suspend fun insertExerciseSet(workoutSet: ExerciseSet)
+  override suspend fun insertExerciseSet(workoutSet: ExerciseSet)
+
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  override suspend fun insertExerciseSets(workoutSets: List<ExerciseSet> )
 
   @Delete
-  suspend fun deleteExerciseSet(workoutSet: ExerciseSet)
+  override suspend fun deleteExerciseSet(workoutSet: ExerciseSet)
 
   @Delete
-  suspend fun deleteWorkout(workout: Workout)
+  override suspend fun deleteWorkout(workout: Workout)
 
   @Query("SELECT * FROM workout WHERE date BETWEEN :dayst AND :dayet")
-  fun getFromTable(dayst: Long, dayet: Long): LiveData<List<Workout>>
+  override fun getFromTable(dayst: Long, dayet: Long): LiveData<List<Workout>>
 
 
 
