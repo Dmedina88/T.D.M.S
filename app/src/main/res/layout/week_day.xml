@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+  <TextView
+      android:id="@+id/day"
+      android:layout_width="match_parent"
+      android:layout_height="24dp"
+      android:background="@color/primary_light"
+      android:ellipsize="end"
+      android:gravity="center"
+      android:maxLines="1"
+      android:scrollHorizontally="true"
+      android:textSize="12sp"
+      tools:text="Monday"
+      />
+</layout>

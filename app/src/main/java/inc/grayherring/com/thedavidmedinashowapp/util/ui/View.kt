@@ -19,7 +19,6 @@ val View.colorWhite
     inc.grayherring.com.thedavidmedinashowapp.R.color.white
   )
 
-
 fun getPressedColorRippleDrawable(normalColor: Int, pressedColor: Int): RippleDrawable {
   return RippleDrawable(
     getPressedColorSelector(normalColor, pressedColor),

@@ -19,10 +19,10 @@ import androidx.transition.TransitionListenerAdapter
 import androidx.transition.TransitionManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.bumptech.glide.Glide
+import inc.grayherring.com.core.models.icon
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.R.string
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
-import inc.grayherring.com.core.models.icon
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentDetailsBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.FULL_DETAIL
 import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.IMAGE_FULLSCREEN

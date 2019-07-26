@@ -46,8 +46,9 @@ class MainActivity : BaseActivity(), OnNavigationItemSelectedListener {
     navigateUp(navController, bindings.drawerLayout)
 
   override fun onNavigationItemSelected(item: MenuItem): Boolean {
-    if (item.itemId == R.id.nav_license) {
-      startActivity(Intent(this, OssLicensesMenuActivity::class.java))
+    when {
+      item.itemId == R.id.nav_license -> startActivity(Intent(this, OssLicensesMenuActivity::class.java))
+      item.itemId == R.id.calenderFragment -> navController.navigate(R.id.action_entryListFragment_to_entryCalenderFragment2)
     }
     bindings.drawerLayout.closeDrawer(GravityCompat.START)
     return true

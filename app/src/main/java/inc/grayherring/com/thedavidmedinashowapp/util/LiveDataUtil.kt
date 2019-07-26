@@ -19,6 +19,7 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
       }
     })
   }
+
   @MainThread
   override fun setValue(@Nullable t: T?) {
     pending.set(true)
@@ -34,7 +35,6 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
   }
 
 }
-
 
 /*
 open class Event<out T>(private val content: T) {

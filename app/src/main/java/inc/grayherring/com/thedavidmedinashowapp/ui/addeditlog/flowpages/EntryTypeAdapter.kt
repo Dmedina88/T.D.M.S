@@ -26,7 +26,10 @@ class EntryTypeAdapter(private val typeClicked: TypeClicked) : RecyclerView.Adap
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryTypeVH =
-  EntryTypeVH(EntryTypeItemBinding.inflate(LayoutInflater.from(parent.context),parent,false), typeClicked)
+    EntryTypeVH(
+      EntryTypeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+      typeClicked
+    )
 
   override fun getItemCount() = data.size
 
@@ -36,8 +39,9 @@ class EntryTypeAdapter(private val typeClicked: TypeClicked) : RecyclerView.Adap
 
 }
 
-class EntryTypeVH(val binding: EntryTypeItemBinding, val typeClicked: TypeClicked) : RecyclerView.ViewHolder(binding.root) {
-   fun bind(item: EntryTypeItem) {
+class EntryTypeVH(val binding: EntryTypeItemBinding, val typeClicked: TypeClicked) :
+  RecyclerView.ViewHolder(binding.root) {
+  fun bind(item: EntryTypeItem) {
 
     binding.icon.setImageResource(item.poopType.icon)
     binding.detail.text = binding.root.context.getText(item.poopType.detailRes)

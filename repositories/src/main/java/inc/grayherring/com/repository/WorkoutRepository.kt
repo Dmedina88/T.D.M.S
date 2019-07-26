@@ -2,7 +2,6 @@ package inc.grayherring.com.repository;
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import inc.grayherring.com.core.models.ExerciseSet
 import inc.grayherring.com.core.models.Workout

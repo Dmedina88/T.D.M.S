@@ -23,7 +23,7 @@ class NotesFragment : BaseFragment() {
 
   lateinit var bindings: FragmentNotesBinding
 
-  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = this::requireParentFragment )
+  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = this::requireParentFragment)
 
   @ObsoleteCoroutinesApi
   override fun onCreateView(
@@ -42,7 +42,8 @@ class NotesFragment : BaseFragment() {
 
       bindings.nameEditText.textChangeFlow(lifecycleScope).consumeEach {
         Timber.d(it)
-        viewModel.name.value = it }
+        viewModel.name.value = it
+      }
     }
 
     return bindings.root

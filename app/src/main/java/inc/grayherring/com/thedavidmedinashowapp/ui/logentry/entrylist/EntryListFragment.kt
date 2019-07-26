@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.entrylist
+package inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrylist
 
 import android.os.Bundle
 import android.view.LayoutInflater

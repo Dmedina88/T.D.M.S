@@ -1,23 +1,23 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.calendar
+package inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrycalender
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.Observer
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentCalenderBinding
+import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderAdapter
+import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.Event
+import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.calenderPopulated
+import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.configureForCalender
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
 
-class CalenderFragment : BaseFragment() {
+class EntryCalenderFragment : BaseFragment() {
 
-  private val viewModel by viewModel<CalendarViewModel>()
+  private val viewModel by viewModel<EntryCalenderVM>()
   private lateinit var bindings: FragmentCalenderBinding
 
   override fun onCreateView(
@@ -31,15 +31,12 @@ class CalenderFragment : BaseFragment() {
     }
 
     bindings.calenderRecycler.configureForCalender(this.requireContext(), calenderAdapter)
-    calenderAdapter.setData(
-      calenderPopulated(
-        LocalDate.now(),
-        LocalDate.now().plusMonths(14),
-        listOf(Event(LocalDate.now(), ":)"))
-      )
-    )
-    return bindings.root
-  }
+    viewModel.calenderIteamLiveData.observe(this.viewLifecycleOwner, Observer {
+      calenderAdapter.setData(it)
+  })
+
+  return bindings.root
+}
 
 }
 

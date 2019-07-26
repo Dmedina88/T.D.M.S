@@ -14,20 +14,16 @@ import timber.log.Timber
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-suspend fun TextView.textChangeFlow(scope: CoroutineScope) : ReceiveChannel<String>  {
-val channel : Channel<String>  = Channel()
+suspend fun TextView.textChangeFlow(scope: CoroutineScope): ReceiveChannel<String> {
+  val channel: Channel<String> = Channel()
   this@textChangeFlow.doOnTextChanged { text, _, _, _ ->
     scope.launch {
       Timber.d(text.toString())
       channel.send(text.toString())
     }
   }
-  return  channel
+  return channel
 }
-
-
-
-
 
 @FlowPreview fun View.clicks(scope: CoroutineScope) = flow {
   this@clicks.setOnClickListener {

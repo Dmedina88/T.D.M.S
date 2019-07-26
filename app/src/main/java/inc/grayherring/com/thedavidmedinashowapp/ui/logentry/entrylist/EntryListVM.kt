@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.entrylist
+package inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrylist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -18,35 +18,36 @@ class EntryListVM(
   private val nasaRepository: inc.grayherring.com.repository.NasaRepository
 ) : ViewModel() {
 
-
   val entryItems: LiveData<List<EntryListItem>> =
     entryRepository.getAllEntries().switchMap(::addDateItem)
 
   private val dateFormatter = DateTimeFormatter.ISO_DATE
 
-   private fun addDateItem(list: List<Entry>): LiveData<List<EntryListItem>> = liveData(Dispatchers.IO){
+  private fun addDateItem(list: List<Entry>): LiveData<List<EntryListItem>> =
+    liveData(Dispatchers.IO) {
 
-    val results = mutableListOf<EntryListItem>()
-    if (list.isEmpty()) {emit(emptyList<EntryListItem>())}
-     else {
-      var lastDate = list.first().date
-      results.add(EntryListItem.Date(lastDate.format(dateFormatter)))
-      list.forEach {
-        if (lastDate.isBefore(it.date)) {
-          lastDate = it.date
-          results.add(EntryListItem.Date(lastDate.format(dateFormatter)))
+      val results = mutableListOf<EntryListItem>()
+      if (list.isEmpty()) {
+        emit(emptyList<EntryListItem>())
+      } else {
+        var lastDate = list.first().date
+        results.add(EntryListItem.Date(lastDate.format(dateFormatter)))
+        list.forEach {
+          if (lastDate.isBefore(it.date)) {
+            lastDate = it.date
+            results.add(EntryListItem.Date(lastDate.format(dateFormatter)))
+          }
+          results.add(EntryListItem.Log(it))
         }
-        results.add(EntryListItem.Log(it))
+        emit(results)
       }
-       emit(results)
     }
-  }
 
   val handler = CoroutineExceptionHandler { _, exception ->
     Timber.e(exception)
   }
 
-   fun dateClicked(date: String) {
+  fun dateClicked(date: String) {
 
     viewModelScope.launch(handler) {
 

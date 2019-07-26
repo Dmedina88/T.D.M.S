@@ -20,7 +20,7 @@ class SaveEntryPager(fragmentManager: FragmentManager, val context: Context) :
     FlowItems(DatePickerFragment(), R.string.date_title),
     FlowItems(NotesFragment(), R.string.note_title),
     FlowItems(PhotoFragment(), R.string.photo_title)
-    )
+  )
 
   override fun getItem(position: Int): Fragment =
     data[position].fragment
@@ -28,6 +28,6 @@ class SaveEntryPager(fragmentManager: FragmentManager, val context: Context) :
   override fun getCount() = data.size
 
   override fun getPageTitle(position: Int): CharSequence? =
-   context.getString( data[position].title)
+    context.getString(data[position].title)
 
 }

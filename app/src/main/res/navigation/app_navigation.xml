@@ -6,7 +6,7 @@
 
   <fragment
       android:id="@+id/entryListFragment"
-      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.entrylist.EntryListFragment"
+      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrylist.EntryListFragment"
       android:label="Home">
     <action
         android:id="@+id/action_list_to_flow"
@@ -18,6 +18,9 @@
     <action
         android:id="@+id/action_poopListFragment_to_logDetailFragment"
         app:destination="@id/logDetailFragment"/>
+    <action
+        android:id="@+id/action_entryListFragment_to_entryCalenderFragment2"
+        app:destination="@id/entryCalenderFragment"/>
   </fragment>
   <fragment
       android:id="@+id/poopFlowFragment"
@@ -46,14 +49,22 @@
       android:label="SecretFragment">
     <deepLink
         android:id="@+id/deepLink"
-        app:uri="www.thedavidmedinashow.com/secret/{id}"
-        android:autoVerify="true"/>
+        android:autoVerify="true"
+        app:uri="www.thedavidmedinashow.com/secret/{id}"/>
     <action
         android:id="@+id/action_secretFragment_to_entryListFragment"
         app:destination="@id/entryListFragment"/>
     <argument
         android:name="id"
-        app:argType="integer"
-        android:defaultValue="0"/>
+        android:defaultValue="0"
+        app:argType="integer"/>
+  </fragment>
+  <fragment
+      android:id="@+id/entryCalenderFragment"
+      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrycalender.EntryCalenderFragment"
+      android:label="EntryCalenderFragment">
+    <action
+        android:id="@+id/action_entryCalenderFragment_to_logDetailFragment"
+        app:destination="@id/logDetailFragment"/>
   </fragment>
 </navigation>

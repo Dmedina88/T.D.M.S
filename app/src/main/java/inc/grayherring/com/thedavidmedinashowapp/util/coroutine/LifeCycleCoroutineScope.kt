@@ -18,5 +18,4 @@ class LifeCycleCoroutineScope() : CoroutineScope, LifecycleObserver, Closeable {
     coroutineContext.cancel()
   }
 
-
 }
