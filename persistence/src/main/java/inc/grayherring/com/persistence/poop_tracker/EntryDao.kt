@@ -28,8 +28,8 @@ interface EntryDao {
   @Delete
   suspend fun deleteEntryLog(entry: PoopEntry)
 
-  @Query("SELECT * FROM poop_log WHERE date BETWEEN :dayst AND :dayet")
-  fun getFromTable(dayst: Long, dayet: Long): LiveData<List<PoopEntry>>
+  @Query("SELECT * FROM poop_log WHERE date BETWEEN :epochDayStart AND :epochDayEnd")
+  fun getFromTable(epochDayStart: Long, epochDayEnd: Long): LiveData<List<PoopEntry>>
 
   @Query(GET_POOP_QUERY)
   suspend fun getEntry(id: Int): PoopEntry

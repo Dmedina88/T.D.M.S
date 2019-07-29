@@ -67,4 +67,16 @@
         android:id="@+id/action_entryCalenderFragment_to_logDetailFragment"
         app:destination="@id/logDetailFragment"/>
   </fragment>
+
+  <dialog
+      android:id="@+id/my_dialog"
+      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrylist.EntryListDialogFragment"
+     >
+    <action
+        android:id="@+id/action_my_dialog_to_poopFlowFragment"
+        app:destination="@id/poopFlowFragment"/>
+    <action
+        android:id="@+id/action_my_dialog_to_logDetailFragment"
+        app:destination="@id/logDetailFragment"/>
+  </dialog>
 </navigation>

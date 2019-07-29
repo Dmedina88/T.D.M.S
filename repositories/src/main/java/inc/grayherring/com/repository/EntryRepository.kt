@@ -20,14 +20,14 @@ interface EntryRepository {
 
   suspend fun deleteAll()
   suspend fun deleteEntry(entry: Entry)
-  suspend fun getEntries(dayst: Long, dayet: Long): LiveData<List<Entry>>
-  suspend fun getEntryLiveData(id: Int): LiveData<Entry>
+  fun getEntries(epochDayStart: Long, epochDayEnd: Long): LiveData<List<Entry>>
+  fun getEntryLiveData(id: Int): LiveData<Entry>
   suspend fun update(entry: Entry)
 }
 
 internal class EntryRepositoryImpl(private val EntryDataStore: EntryDatastore) :
   EntryRepository {
-  override suspend fun getEntryLiveData(id: Int) =
+  override  fun getEntryLiveData(id: Int) =
     EntryDataStore.getEntryLiveData(id).switchMap { liveData { emit(it.toEntry()) } }
 
   override fun getAllEntries(): LiveData<List<Entry>> =
@@ -43,8 +43,8 @@ internal class EntryRepositoryImpl(private val EntryDataStore: EntryDatastore) :
 
   override suspend fun deleteEntry(entry: Entry) = EntryDataStore.deleteEntry(entry.toDBEntry())
 
-  override suspend fun getEntries(dayst: Long, dayet: Long): LiveData<List<Entry>> =
-    EntryDataStore.getEntries(dayst, dayet).switchMap { liveData { emit(it.map { it.toEntry() }) } }
+  override  fun getEntries(epochDayStart: Long, epochDayEnd: Long): LiveData<List<Entry>> =
+    EntryDataStore.getEntries(epochDayStart, epochDayEnd).switchMap { liveData { emit(it.map { it.toEntry() }) } }
 
   override suspend fun getEntry(id: Int): Entry = EntryDataStore.getEntry(id).toEntry()
 }

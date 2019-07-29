@@ -4,7 +4,7 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import inc.grayherring.com.persistence.models.PoopEntry
 
-interface EntryDatastore  {
+interface EntryDatastore {
   fun getAllEntries(): LiveData<List<PoopEntry>>
 
   @WorkerThread
@@ -15,14 +15,14 @@ interface EntryDatastore  {
 
   suspend fun deleteAll()
   suspend fun deleteEntry(entry: PoopEntry)
-  suspend fun getEntries(dayst: Long, dayet: Long): LiveData<List<PoopEntry>>
-  suspend fun getEntryLiveData(id: Int): LiveData<PoopEntry>
+  fun getEntries(epochDayStart: Long, epochDayEnd: Long): LiveData<List<PoopEntry>>
+  fun getEntryLiveData(id: Int): LiveData<PoopEntry>
   suspend fun update(entry: PoopEntry)
 }
 
 internal class EntryDatastoreImpl(private val entryDao: EntryDao) :
   EntryDatastore {
-  override suspend fun getEntryLiveData(id: Int) =
+  override fun getEntryLiveData(id: Int) =
     entryDao.getEntryLiveData(id)
 
   override fun getAllEntries(): LiveData<List<PoopEntry>> =
@@ -38,8 +38,8 @@ internal class EntryDatastoreImpl(private val entryDao: EntryDao) :
 
   override suspend fun deleteEntry(entry: PoopEntry) = entryDao.deleteEntryLog(entry)
 
-  override suspend fun getEntries(dayst: Long, dayet: Long): LiveData<List<PoopEntry>> =
-    entryDao.getFromTable(dayst, dayet)
+  override fun getEntries(epochDayStart: Long, epochDayEnd: Long): LiveData<List<PoopEntry>> =
+    entryDao.getFromTable(epochDayStart, epochDayEnd)
 
   override suspend fun getEntry(id: Int): PoopEntry = entryDao.getEntry(id)
 }

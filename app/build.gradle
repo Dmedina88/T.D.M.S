@@ -23,10 +23,6 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
 
   dataBinding {
     enabled = true
@@ -40,6 +36,15 @@ android {
 
   androidExtensions {
     features = ["parcelize"]
+  }
+
+  compileOptions {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+  }
+
+  kotlinOptions {
+    jvmTarget = "1.8"
   }
 }
 
@@ -56,8 +61,8 @@ dependencies {
   //androidx
   implementation "androidx.core:core-ktx:$androidx_core"
   implementation "androidx.paging:paging-runtime-ktx:$paging_version"
-  implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
-  implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+  implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+  implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
   implementation "android.arch.work:work-runtime-ktx:$work_version"
   implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
   implementation "androidx.fragment:fragment-ktx:1.2.0-alpha01"

@@ -3,6 +3,8 @@
   <androidx.coordinatorlayout.widget.CoordinatorLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:minHeight="400dp"
+      android:minWidth="400dp"
       android:background="@color/white"
       android:orientation="vertical"
       >

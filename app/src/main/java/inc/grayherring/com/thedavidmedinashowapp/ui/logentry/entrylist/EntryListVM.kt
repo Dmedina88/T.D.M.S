@@ -6,22 +6,29 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import inc.grayherring.com.core.models.Entry
+import inc.grayherring.com.repository.NasaRepository
+import inc.grayherring.com.thedavidmedinashowapp.util.DefaultDateFormatter
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
-import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
 
 class EntryListVM(
-  entryRepository: inc.grayherring.com.repository.EntryRepository,
-  private val nasaRepository: inc.grayherring.com.repository.NasaRepository
+ val entryRepository: inc.grayherring.com.repository.EntryRepository,
+  private val nasaRepository: NasaRepository
 ) : ViewModel() {
-
   val entryItems: LiveData<List<EntryListItem>> =
     entryRepository.getAllEntries().switchMap(::addDateItem)
 
-  private val dateFormatter = DateTimeFormatter.ISO_DATE
+
+
+  fun getEntryItems(epochDay: Long): LiveData<List<EntryListItem>>  = liveData(Dispatchers.IO) {
+    emitSource(entryRepository
+      .getEntries(epochDay,epochDay + 1 )
+      .switchMap(::addDateItem))
+  }
+
 
   private fun addDateItem(list: List<Entry>): LiveData<List<EntryListItem>> =
     liveData(Dispatchers.IO) {
@@ -31,11 +38,11 @@ class EntryListVM(
         emit(emptyList<EntryListItem>())
       } else {
         var lastDate = list.first().date
-        results.add(EntryListItem.Date(lastDate.format(dateFormatter)))
+        results.add(EntryListItem.Date(lastDate.format(DefaultDateFormatter)))
         list.forEach {
           if (lastDate.isBefore(it.date)) {
             lastDate = it.date
-            results.add(EntryListItem.Date(lastDate.format(dateFormatter)))
+            results.add(EntryListItem.Date(lastDate.format(DefaultDateFormatter)))
           }
           results.add(EntryListItem.Log(it))
         }
@@ -51,10 +58,9 @@ class EntryListVM(
 
     viewModelScope.launch(handler) {
 
-      val response = nasaRepository.getNasaPlanetary(LocalDate.parse(date, dateFormatter))
+      val response = nasaRepository.getNasaPlanetary(LocalDate.parse(date, DefaultDateFormatter))
       Timber.i(response.toString())
     }
   }
 
-//  fun onDateClicked
 }
