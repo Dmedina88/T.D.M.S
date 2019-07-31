@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.flowpages
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,16 +8,16 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryTypePickerBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.PoopFlowViewModel
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.GridSpacingItemDecoration
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
-class EntryTypeFragment : BaseFragment() {
+class PoopTypeFragment : BaseFragment() {
 
   lateinit var bindings: FragmentEntryTypePickerBinding
 
-  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = this::requireParentFragment)
+  private val viewModel by sharedViewModel<PoopFlowViewModel>(from = this::requireParentFragment)
 
   override fun onCreateView(
     inflater: LayoutInflater,

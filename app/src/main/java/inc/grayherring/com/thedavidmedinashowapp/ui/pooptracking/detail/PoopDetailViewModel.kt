@@ -1,12 +1,12 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.detail
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import inc.grayherring.com.core.models.Entry
-import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.FULL_DETAIL
-import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.IMAGE_FULLSCREEN
-import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.NONE
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.AnimationState.FULL_DETAIL
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.AnimationState.IMAGE_FULLSCREEN
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.AnimationState.NONE
 import inc.grayherring.com.thedavidmedinashowapp.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 

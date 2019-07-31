@@ -7,14 +7,14 @@
 
     <variable
         name="vm"
-        type="inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel"
+        type="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.PoopFlowViewModel"
         />
 
   </data>
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      tools:context=".ui.addeditlog.flowpages.DatePickerFragment"
+      tools:context=".ui.pooptracking.addeditlog.flowpages.DatePickerFragment"
       >
 
     <!--app:imagePath="@{vm.imagePath}"-->

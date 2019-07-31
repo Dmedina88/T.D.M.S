@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,7 +18,7 @@ sealed class EntryFlowError {
   object MissingEntryType : EntryFlowError()
 }
 
-class EntryFlowViewModel(private val entryRepository: inc.grayherring.com.repository.EntryRepository) :
+class PoopFlowViewModel(private val entryRepository: inc.grayherring.com.repository.EntryRepository) :
   ViewModel() {
 
   //MaybeD0: considering movingall this to a state class and usinging map on LiveData to get the data from it
@@ -72,7 +72,7 @@ class EntryFlowViewModel(private val entryRepository: inc.grayherring.com.reposi
   }
 
   private fun setData(entry: Entry) {
-    this@EntryFlowViewModel.id = entry.id
+    this@PoopFlowViewModel.id = entry.id
     date.value = entry.date
     name.value = entry.name
     notes.value = entry.notes

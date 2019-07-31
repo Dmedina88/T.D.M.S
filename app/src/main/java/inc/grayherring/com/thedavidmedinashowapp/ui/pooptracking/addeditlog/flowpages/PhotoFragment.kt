@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.flowpages
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -13,7 +13,7 @@ import androidx.lifecycle.observe
 import inc.grayherring.com.thedavidmedinashowapp.BuildConfig
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentTakePhotoBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.PoopFlowViewModel
 import inc.grayherring.com.thedavidmedinashowapp.util.loadImageFromPath
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.threeten.bp.LocalDateTime
@@ -30,7 +30,7 @@ class PhotoFragment : BaseFragment() {
 
   var pendingImagePath = ""
 
-  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = this::requireParentFragment)
+  private val viewModel by sharedViewModel<PoopFlowViewModel>(from = this::requireParentFragment)
 
   override fun onCreateView(
     inflater: LayoutInflater,

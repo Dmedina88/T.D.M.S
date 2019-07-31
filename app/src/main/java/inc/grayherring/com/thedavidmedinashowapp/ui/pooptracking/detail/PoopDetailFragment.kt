@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.detail
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.animation.AnticipateOvershootInterpolator
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.lifecycle.Observer
 import androidx.lifecycle.map
 import androidx.navigation.fragment.findNavController
 import androidx.transition.ChangeBounds
@@ -24,15 +23,15 @@ import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.R.string
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentDetailsBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.FULL_DETAIL
-import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.IMAGE_FULLSCREEN
-import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.NONE
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.AnimationState.FULL_DETAIL
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.AnimationState.IMAGE_FULLSCREEN
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.AnimationState.NONE
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.textOrGone
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.format.DateTimeFormatter
 import androidx.lifecycle.observe
 
-class LogDetailFragment : BaseFragment() {
+class PoopDetailFragment : BaseFragment() {
 
   lateinit var bindings: FragmentDetailsBinding
 
@@ -44,7 +43,7 @@ class LogDetailFragment : BaseFragment() {
     savedInstanceState: Bundle?
   ): View? {
     bindings = FragmentDetailsBinding.inflate(inflater, container, false)
-    viewModel.init(LogDetailFragmentArgs.fromBundle(arguments!!).id)
+    viewModel.init(PoopDetailFragmentArgs.fromBundle(arguments!!).id)
     setHasOptionsMenu(true)
     bind()
     return bindings.root
@@ -122,7 +121,7 @@ class LogDetailFragment : BaseFragment() {
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     viewModel.logDetailState.map { it.entry.id }.observe(viewLifecycleOwner) {
       if (item.itemId == R.id.action_edit) {
-        val action = LogDetailFragmentDirections.actionLogDetailFragmentToPoopFlowFragment(it)
+        val action = PoopDetailFragmentDirections.actionLogDetailFragmentToPoopFlowFragment(it)
         findNavController().navigate(action)
       }
       if (item.itemId == R.id.action_delete) {

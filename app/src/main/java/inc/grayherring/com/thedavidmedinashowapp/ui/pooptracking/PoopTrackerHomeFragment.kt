@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrycalender
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,9 +14,8 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.configureForCalende
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
 
-class EntryCalenderFragment : BaseFragment() {
+class PoopTrackerHomeFragment : BaseFragment() {
 
-  private val viewModel by viewModel<EntryCalenderVM>()
   private lateinit var bindings: FragmentCalenderBinding
 
   override fun onCreateView(
@@ -25,21 +24,7 @@ class EntryCalenderFragment : BaseFragment() {
   ): View? {
     bindings = FragmentCalenderBinding.inflate(inflater, container, false)
 
-    val calenderAdapter = CalenderAdapter {
-      Toast.makeText(context, it.toString(), Toast.LENGTH_LONG).show()
-      //todo maybe handle this but fulling in the start of every segment with the last days of last month
-      if (it.month != 0) {
-        val epochDay = LocalDate.of(it.year, it.month, it.day).toEpochDay()
-        val directions =
-          EntryCalenderFragmentDirections.actionEntryCalenderFragmentToMyDialog(epochDay)
-        findNavController().navigate(directions)
-      }
-    }
 
-    bindings.calenderRecycler.configureForCalender(this.requireContext(), calenderAdapter)
-    viewModel.calenderIteamLiveData.observe(this.viewLifecycleOwner) {
-      calenderAdapter.setData(it)
-    }
 
     return bindings.root
   }

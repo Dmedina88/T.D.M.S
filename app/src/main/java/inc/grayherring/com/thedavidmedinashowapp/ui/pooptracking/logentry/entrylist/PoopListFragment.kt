@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrylist
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrylist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,9 +14,9 @@ import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EntryListFragment : BaseFragment() {
+class PoopListFragment : BaseFragment() {
 
-  private val viewModel by viewModel<EntryListVM>()
+  private val viewModel by viewModel<PoopListVM>()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +26,7 @@ class EntryListFragment : BaseFragment() {
     val bindings = FragmentEntryListBinding.inflate(inflater, container, false)
 
     val adapter = EntryAdapter({
-      val action = EntryListFragmentDirections.actionPoopListFragmentToLogDetailFragment(it.id)
+      val action = PoopListFragmentDirections.actionPoopListFragmentToLogDetailFragment(it.id)
       findNavController().navigate(action)
     }, { viewModel.dateClicked(it) })
 

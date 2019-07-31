@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrycalender
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrycalender
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +15,7 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
 
-class EntryCalenderVM(
+class PoopCalenderVM(
   entryRepository: EntryRepository
 ) : ViewModel() {
 

@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrylist
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrylist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import timber.log.Timber
 
-class EntryListVM(
+class PoopListVM(
  val entryRepository: inc.grayherring.com.repository.EntryRepository,
   private val nasaRepository: NasaRepository
 ) : ViewModel() {

@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.flowpages
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import inc.grayherring.com.core.models.EntryType
 import inc.grayherring.com.core.models.detailRes
 import inc.grayherring.com.core.models.icon
 import inc.grayherring.com.thedavidmedinashowapp.databinding.EntryTypeItemBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryTypeItem
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.EntryTypeItem
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.colorPrimary
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.colorWhite
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.setRippleBackgroundColor

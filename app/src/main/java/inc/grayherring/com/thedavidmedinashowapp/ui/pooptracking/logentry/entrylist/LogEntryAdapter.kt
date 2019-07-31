@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrylist
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrylist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

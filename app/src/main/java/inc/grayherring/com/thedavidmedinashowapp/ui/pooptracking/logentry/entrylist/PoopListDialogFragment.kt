@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrylist
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrylist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,18 +12,14 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
-import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.R.style
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.threeten.bp.LocalDate
-import org.threeten.bp.ZoneOffset
-import java.time.LocalDateTime
 
-class EntryListDialogFragment : DialogFragment() {
+class PoopListDialogFragment : DialogFragment() {
 
-  private val viewModel by viewModel<EntryListVM>()
-  private val  args : EntryListDialogFragmentArgs by navArgs()
+  private val viewModel by viewModel<PoopListVM>()
+  private val  args : PoopListDialogFragmentArgs by navArgs()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +29,7 @@ class EntryListDialogFragment : DialogFragment() {
     val bindings = FragmentEntryListBinding.inflate(inflater, container, false)
 
     val adapter = EntryAdapter({
-      val action = EntryListDialogFragmentDirections.actionMyDialogToLogDetailFragment(it.id)
+      val action = PoopListDialogFragmentDirections.actionMyDialogToLogDetailFragment(it.id)
       findNavController().navigate(action)
     }, { viewModel.dateClicked(it) })
 
@@ -44,7 +40,7 @@ class EntryListDialogFragment : DialogFragment() {
       recyclerView.addItemDecoration(DividerItemDecoration(ContextThemeWrapper(requireContext(), style.AppTheme), VERTICAL))
       recyclerView.adapter = adapter
       fab.setOnClickListener {
-        findNavController().navigate(EntryListFragmentDirections.actionListToFlow(epochDay = args.epochDay))
+        findNavController().navigate(PoopListFragmentDirections.actionListToFlow(epochDay = args.epochDay))
       }
     }
 

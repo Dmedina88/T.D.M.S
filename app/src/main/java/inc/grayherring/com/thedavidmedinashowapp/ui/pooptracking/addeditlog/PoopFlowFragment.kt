@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.observe
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
@@ -16,11 +15,11 @@ import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryFlowBi
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EntryFlowFragment : BaseFragment() {
+class PoopFlowFragment : BaseFragment() {
 
   lateinit var bindings: FragmentEntryFlowBinding
 
-  private val viewModel by viewModel<EntryFlowViewModel>()
+  private val viewModel by viewModel<PoopFlowViewModel>()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -28,7 +27,7 @@ class EntryFlowFragment : BaseFragment() {
     savedInstanceState: Bundle?
   ): View? {
     bindings = FragmentEntryFlowBinding.inflate(inflater, container, false)
-    val args = EntryFlowFragmentArgs.fromBundle(arguments!!)
+    val args = PoopFlowFragmentArgs.fromBundle(arguments!!)
     viewModel.init(args.id, args.epochDay)
     val adapter = SaveEntryPager(childFragmentManager, requireContext())
     bindings.viewPager.adapter = adapter

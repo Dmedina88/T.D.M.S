@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.flowpages
+package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.flowpages
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.observe
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentDatePickerBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.PoopFlowViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.threeten.bp.LocalDate
 
@@ -15,7 +15,7 @@ class DatePickerFragment : BaseFragment() {
 
   lateinit var bindings: FragmentDatePickerBinding
 
-  private val viewModel by sharedViewModel<EntryFlowViewModel>(from = this::requireParentFragment)
+  private val viewModel by sharedViewModel<PoopFlowViewModel>(from = this::requireParentFragment)
 
   override fun onCreateView(
     inflater: LayoutInflater,

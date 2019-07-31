@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/app_navigation"
+    android:id="@+id/poop_tracker_nav"
     app:startDestination="@id/poopTracker">
 
   <fragment
@@ -28,7 +29,7 @@
   </fragment>
   <fragment
       android:id="@+id/poopFlowFragment"
-      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.PoopFlowFragment"
+      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.EntryFlowFragment"
       android:label="Log Flow">
     <argument
         android:name="id"
@@ -36,8 +37,8 @@
         app:argType="integer"/>
     <argument
         android:name="epochDay"
-        android:defaultValue="-1L"
-        app:argType="long"/>
+        app:argType="long"
+        android:defaultValue="-1L"/>
   </fragment>
   <fragment
       android:id="@+id/logDetailFragment"
@@ -49,24 +50,6 @@
     <argument
         android:name="id"
         android:defaultValue="-1"
-        app:argType="integer"/>
-  </fragment>
-  <fragment
-      android:id="@+id/secretFragment"
-      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.secret.SecretFragment"
-      android:label="SecretFragment"
-      tools:layout="@layout/fragment_secret"
-      >
-    <deepLink
-        android:id="@+id/deepLink"
-        android:autoVerify="true"
-        app:uri="www.thedavidmedinashow.com/secret/{id}"/>
-    <action
-        android:id="@+id/action_secretFragment_to_entryListFragment"
-        app:destination="@id/poopTracker"/>
-    <argument
-        android:name="id"
-        android:defaultValue="0"
         app:argType="integer"/>
   </fragment>
   <fragment
