@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -32,6 +33,8 @@ class MainActivity : BaseActivity(), OnNavigationItemSelectedListener {
     setupWithNavController(bindings.toolbar, navController, bindings.drawerLayout)
     setupWithNavController(bindings.navView, navController)
     bindings.navView.setNavigationItemSelectedListener(this)
+    bindings.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
   }
 
   override fun onBackPressed() {

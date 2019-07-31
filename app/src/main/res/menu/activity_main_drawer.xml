@@ -5,10 +5,13 @@
 
   <group android:checkableBehavior="single">
     <item
+        android:id="@+id/poopTracker"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="@string/poop_tracker"/>
+    <item
         android:id="@+id/calenderFragment"
         android:icon="@drawable/ic_menu_camera"
         android:title="@string/workout_tracker"/>
-
   <item
         android:id="@+id/nav_license"
         android:icon="@drawable/ic_description_black_24dp"

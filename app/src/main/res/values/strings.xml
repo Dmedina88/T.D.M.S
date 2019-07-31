@@ -26,6 +26,8 @@
   <string name="delete_message">Are you sure you want to Delete Log? This action can not be undone.</string>
   <string name="licences">Licences</string>
   <string name="workout_tracker">Workout Tracker</string>
+  <string name="poop_tracker">Poop Tracker</string>
+
 
 
 </resources>
