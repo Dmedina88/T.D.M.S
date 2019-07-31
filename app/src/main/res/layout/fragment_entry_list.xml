@@ -3,18 +3,18 @@
   <androidx.coordinatorlayout.widget.CoordinatorLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:background="@color/white"
       android:minHeight="@dimen/list_dialog_height"
       android:minWidth="@dimen/list_dialog_width"
-      android:background="@color/white"
       android:orientation="vertical"
       >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:minHeight="@dimen/list_dialog_height"
-        android:minWidth="@dimen/list_dialog_width"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:minHeight="@dimen/list_dialog_height"
+        android:minWidth="@dimen/list_dialog_width"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

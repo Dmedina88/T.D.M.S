@@ -9,10 +9,10 @@
       android:orientation="vertical"
       >
     <TextView
-        android:text="More TDMS coming Soon"
         android:id="@+id/secret"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:text="More TDMS coming Soon"
         />
 
   </androidx.constraintlayout.widget.ConstraintLayout>

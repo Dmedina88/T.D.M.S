@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -15,7 +14,6 @@ import com.google.android.material.navigation.NavigationView.OnNavigationItemSel
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseActivity
 import inc.grayherring.com.thedavidmedinashowapp.databinding.ActivityMainBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity(), OnNavigationItemSelectedListener {
 
@@ -50,7 +48,9 @@ class MainActivity : BaseActivity(), OnNavigationItemSelectedListener {
 
   override fun onNavigationItemSelected(item: MenuItem): Boolean {
     when {
-      item.itemId == R.id.nav_license -> startActivity(Intent(this, OssLicensesMenuActivity::class.java))
+      item.itemId == R.id.nav_license -> {
+        startActivity(Intent(this, OssLicensesMenuActivity::class.java))
+      }
       else -> item.onNavDestinationSelected(navController)
     }
     bindings.drawerLayout.closeDrawer(GravityCompat.START)

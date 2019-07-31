@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryListBinding
-import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentPoopTrackerMainBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.PoopTrackerHomeFragmentDirections
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -12,9 +12,10 @@
         android:id="@+id/workoutCalenderFragment"
         android:icon="@drawable/ic_menu_camera"
         android:title="@string/workout_tracker"/>
-  <item
+    <item
         android:id="@+id/nav_license"
         android:icon="@drawable/ic_description_black_24dp"
+        android:checkable="false"
         android:title="@string/licences"/>
   </group>
 

@@ -11,6 +11,7 @@ import android.view.animation.AnticipateOvershootInterpolator
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.map
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.transition.ChangeBounds
 import androidx.transition.Transition
@@ -29,7 +30,6 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.Animatio
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.textOrGone
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.format.DateTimeFormatter
-import androidx.lifecycle.observe
 
 class PoopDetailFragment : BaseFragment() {
 

@@ -2,7 +2,6 @@
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/poop_tracker_nav"
     app:startDestination="@id/poopTrackerHomeFragment">
 
@@ -16,8 +15,8 @@
         app:argType="integer"/>
     <argument
         android:name="epochDay"
-        app:argType="long"
-        android:defaultValue="-1L"/>
+        android:defaultValue="-1L"
+        app:argType="long"/>
   </fragment>
   <fragment
       android:id="@+id/logDetailFragment"
@@ -44,8 +43,8 @@
         app:destination="@id/logDetailFragment"/>
     <argument
         android:name="epochDay"
-        app:argType="long"
-        android:defaultValue="0L"/>
+        android:defaultValue="0L"
+        app:argType="long"/>
   </dialog>
   <fragment
 

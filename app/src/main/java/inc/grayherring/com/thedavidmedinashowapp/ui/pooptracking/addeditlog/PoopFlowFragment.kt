@@ -17,7 +17,6 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.flow
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.flowpages.NotesFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.flowpages.PhotoFragment
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.flowpages.PoopTypeFragment
-import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrylist.PoopListFragment
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.SimplePagerAdapter
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.SimplePagerItem
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.snackbar
