@@ -1,4 +1,4 @@
-package inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrycalender
+package inc.grayherring.com.thedavidmedinashowapp.ui.workout
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,16 +11,13 @@ import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentCalenderBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderAdapter
 import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.configureForCalender
-import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.PoopTrackerHomeFragmentDirections
-import inc.grayherring.com.thedavidmedinashowapp.ui.workout.WorkoutCalenderVM
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
 
-class PoopCalenderFragment : BaseFragment() {
+class WorkoutCalenderFragment : BaseFragment() {
 
   private val viewModel by viewModel<WorkoutCalenderVM>()
   private lateinit var bindings: FragmentCalenderBinding
-  private val navController by lazy { requireParentFragment().findNavController() }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +30,7 @@ class PoopCalenderFragment : BaseFragment() {
       //todo maybe handle this but fulling in the start of every segment with the last days of last month
       if (it.month != 0) {
         val epochDay = LocalDate.of(it.year, it.month, it.day).toEpochDay()
-        val directions =
-          PoopTrackerHomeFragmentDirections.actionPoopCalenderFragmentToListDialog(epochDay)
-        navController.navigate(directions)
+
       }
     }
 

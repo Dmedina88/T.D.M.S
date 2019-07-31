@@ -10,14 +10,22 @@ import android.view.ViewGroup
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import inc.grayherring.com.thedavidmedinashowapp.R
+import inc.grayherring.com.thedavidmedinashowapp.R.string
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
-import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryFlowBinding
+import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentPagerWithTabsBinding
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.flowpages.DatePickerFragment
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.flowpages.NotesFragment
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.flowpages.PhotoFragment
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.flowpages.PoopTypeFragment
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrylist.PoopListFragment
+import inc.grayherring.com.thedavidmedinashowapp.util.ui.SimplePagerAdapter
+import inc.grayherring.com.thedavidmedinashowapp.util.ui.SimplePagerItem
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PoopFlowFragment : BaseFragment() {
 
-  lateinit var bindings: FragmentEntryFlowBinding
+  lateinit var bindings: FragmentPagerWithTabsBinding
 
   private val viewModel by viewModel<PoopFlowViewModel>()
 
@@ -26,10 +34,17 @@ class PoopFlowFragment : BaseFragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    bindings = FragmentEntryFlowBinding.inflate(inflater, container, false)
+    bindings = FragmentPagerWithTabsBinding.inflate(inflater, container, false)
     val args = PoopFlowFragmentArgs.fromBundle(arguments!!)
     viewModel.init(args.id, args.epochDay)
-    val adapter = SaveEntryPager(childFragmentManager, requireContext())
+    val adapter = SimplePagerAdapter(
+      childFragmentManager, requireContext(), mutableListOf(
+        SimplePagerItem(PoopTypeFragment(), string.type_title),
+        SimplePagerItem(DatePickerFragment(), string.date_title),
+        SimplePagerItem(NotesFragment(), string.note_title),
+        SimplePagerItem(PhotoFragment(), string.photo_title)
+      )
+    )
     bindings.viewPager.adapter = adapter
     //sort of want to do this with data binding if i can
     bindings.tabLayout.setupWithViewPager(bindings.viewPager)

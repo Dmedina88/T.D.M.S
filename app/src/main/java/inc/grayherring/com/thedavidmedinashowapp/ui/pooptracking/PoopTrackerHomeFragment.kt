@@ -4,29 +4,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
+import inc.grayherring.com.thedavidmedinashowapp.R
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
-import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentCalenderBinding
-import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderAdapter
-import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.configureForCalender
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.threeten.bp.LocalDate
+import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentPagerWithTabsBinding
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrycalender.PoopCalenderFragment
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrylist.PoopListFragment
+import inc.grayherring.com.thedavidmedinashowapp.util.ui.SimplePagerAdapter
+import inc.grayherring.com.thedavidmedinashowapp.util.ui.SimplePagerItem
 
 class PoopTrackerHomeFragment : BaseFragment() {
 
-  private lateinit var bindings: FragmentCalenderBinding
+  private lateinit var bindings: FragmentPagerWithTabsBinding
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    bindings = FragmentCalenderBinding.inflate(inflater, container, false)
+    bindings = FragmentPagerWithTabsBinding.inflate(inflater, container, false)
 
-
+    val adapter = SimplePagerAdapter(
+      childFragmentManager, requireContext(), mutableListOf(
+        SimplePagerItem(PoopListFragment(), R.string.poop_tracker),
+        SimplePagerItem(PoopCalenderFragment(), R.string.poop_tracker)
+      )
+    )
+    //sort of want to do this with data binding if i can
+    bindings.viewPager.adapter = adapter
+    bindings.tabLayout.setupWithViewPager(bindings.viewPager)
 
     return bindings.root
+
   }
 
 }

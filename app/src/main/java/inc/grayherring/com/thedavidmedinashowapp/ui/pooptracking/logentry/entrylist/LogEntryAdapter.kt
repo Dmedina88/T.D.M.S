@@ -68,7 +68,7 @@ class EntryAdapter(
 }
 
 sealed class EntryListItem {
-  data class Log(val entry: inc.grayherring.com.core.models.Entry) :
+  data class Log(val entry: Entry) :
     EntryListItem()
 
   data class Date(val date: String) : EntryListItem()

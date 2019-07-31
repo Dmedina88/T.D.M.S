@@ -5,11 +5,11 @@
 
   <group android:checkableBehavior="single">
     <item
-        android:id="@+id/poopTracker"
-        android:icon="@drawable/ic_menu_camera"
+        android:id="@+id/poop_tracker_nav"
+        android:icon="@drawable/ic_menu_send"
         android:title="@string/poop_tracker"/>
     <item
-        android:id="@+id/calenderFragment"
+        android:id="@+id/workoutCalenderFragment"
         android:icon="@drawable/ic_menu_camera"
         android:title="@string/workout_tracker"/>
   <item
@@ -17,6 +17,5 @@
         android:icon="@drawable/ic_description_black_24dp"
         android:title="@string/licences"/>
   </group>
-
 
 </menu>

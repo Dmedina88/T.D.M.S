@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import inc.grayherring.com.thedavidmedinashowapp.R.style
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryListBinding
+import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.PoopTrackerHomeFragmentDirections
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PoopListDialogFragment : DialogFragment() {
@@ -40,7 +41,7 @@ class PoopListDialogFragment : DialogFragment() {
       recyclerView.addItemDecoration(DividerItemDecoration(ContextThemeWrapper(requireContext(), style.AppTheme), VERTICAL))
       recyclerView.adapter = adapter
       fab.setOnClickListener {
-        findNavController().navigate(PoopListFragmentDirections.actionListToFlow(epochDay = args.epochDay))
+        findNavController().navigate(PoopTrackerHomeFragmentDirections.actionListToFlow(epochDay = args.epochDay))
       }
     }
 

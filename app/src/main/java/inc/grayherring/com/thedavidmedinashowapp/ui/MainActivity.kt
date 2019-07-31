@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.navigation.ui.onNavDestinationSelected
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import inc.grayherring.com.thedavidmedinashowapp.R
@@ -25,7 +26,6 @@ class MainActivity : BaseActivity(), OnNavigationItemSelectedListener {
       R.layout.activity_main
     )
   }
-  private val mainViewModel: MainActivityViewModel by viewModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class MainActivity : BaseActivity(), OnNavigationItemSelectedListener {
     setupWithNavController(bindings.toolbar, navController, bindings.drawerLayout)
     setupWithNavController(bindings.navView, navController)
     bindings.navView.setNavigationItemSelectedListener(this)
-    bindings.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+   // bindings.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
   }
 
@@ -51,7 +51,7 @@ class MainActivity : BaseActivity(), OnNavigationItemSelectedListener {
   override fun onNavigationItemSelected(item: MenuItem): Boolean {
     when {
       item.itemId == R.id.nav_license -> startActivity(Intent(this, OssLicensesMenuActivity::class.java))
-      item.itemId == R.id.calenderFragment -> navController.navigate(R.id.action_entryListFragment_to_entryCalenderFragment2)
+      else -> item.onNavDestinationSelected(navController)
     }
     bindings.drawerLayout.closeDrawer(GravityCompat.START)
     return true

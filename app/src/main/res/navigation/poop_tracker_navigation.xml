@@ -4,32 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/poop_tracker_nav"
-    app:startDestination="@id/poopTracker">
+    app:startDestination="@id/poopTrackerHomeFragment">
 
-  <fragment
-      android:id="@+id/poopTracker"
-      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrylist.PoopListFragment"
-      android:label="Home"
-      tools:layout="@layout/entry_list_item"
-      >
-
-    <action
-        android:id="@+id/action_list_to_flow"
-        app:destination="@id/poopFlowFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_right"
-        app:popExitAnim="@anim/slide_out_left"/>
-    <action
-        android:id="@+id/action_poopListFragment_to_logDetailFragment"
-        app:destination="@id/logDetailFragment"/>
-    <action
-        android:id="@+id/action_entryListFragment_to_entryCalenderFragment2"
-        app:destination="@id/entryCalenderFragment"/>
-  </fragment>
   <fragment
       android:id="@+id/poopFlowFragment"
-      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.EntryFlowFragment"
+      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.PoopFlowFragment"
       android:label="Log Flow">
     <argument
         android:name="id"
@@ -52,14 +31,6 @@
         android:defaultValue="-1"
         app:argType="integer"/>
   </fragment>
-  <fragment
-      android:id="@+id/entryCalenderFragment"
-      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrycalender.PoopCalenderFragment"
-      android:label="EntryCalenderFragment">
-    <action
-        android:id="@+id/action_entryCalenderFragment_to_my_dialog"
-        app:destination="@+id/entryListDialog"/>
-  </fragment>
 
   <dialog
       android:id="@+id/entryListDialog"
@@ -76,4 +47,24 @@
         app:argType="long"
         android:defaultValue="0L"/>
   </dialog>
+  <fragment
+
+      android:id="@+id/poopTrackerHomeFragment"
+      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.PoopTrackerHomeFragment"
+      android:label="PoopTrackerHomeFragment">
+    <action
+        android:id="@+id/action_list_to_flow"
+        app:destination="@id/poopFlowFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"/>
+    <action
+        android:id="@+id/action_poopListFragment_to_logDetailFragment"
+        app:destination="@id/logDetailFragment"/>
+
+    <action
+        android:id="@+id/action_poopCalenderFragment_to_list_dialog"
+        app:destination="@+id/entryListDialog"/>
+  </fragment>
 </navigation>

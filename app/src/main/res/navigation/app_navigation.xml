@@ -3,54 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/poopTracker">
+    app:startDestination="@id/mainFragment">
 
-  <fragment
-      android:id="@+id/poopTracker"
-      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrylist.PoopListFragment"
-      android:label="Home"
-      tools:layout="@layout/entry_list_item"
-      >
+  <include app:graph="@navigation/poop_tracker_navigation"/>
 
-    <action
-        android:id="@+id/action_list_to_flow"
-        app:destination="@id/poopFlowFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_right"
-        app:popExitAnim="@anim/slide_out_left"/>
-    <action
-        android:id="@+id/action_poopListFragment_to_logDetailFragment"
-        app:destination="@id/logDetailFragment"/>
-    <action
-        android:id="@+id/action_entryListFragment_to_entryCalenderFragment2"
-        app:destination="@id/entryCalenderFragment"/>
-  </fragment>
-  <fragment
-      android:id="@+id/poopFlowFragment"
-      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.PoopFlowFragment"
-      android:label="Log Flow">
-    <argument
-        android:name="id"
-        android:defaultValue="-1"
-        app:argType="integer"/>
-    <argument
-        android:name="epochDay"
-        android:defaultValue="-1L"
-        app:argType="long"/>
-  </fragment>
-  <fragment
-      android:id="@+id/logDetailFragment"
-      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.PoopDetailFragment"
-      android:label="Detail">
-    <action
-        android:id="@+id/action_logDetailFragment_to_poopFlowFragment"
-        app:destination="@id/poopFlowFragment"/>
-    <argument
-        android:name="id"
-        android:defaultValue="-1"
-        app:argType="integer"/>
-  </fragment>
   <fragment
       android:id="@+id/secretFragment"
       android:name="inc.grayherring.com.thedavidmedinashowapp.ui.secret.SecretFragment"
@@ -61,36 +17,32 @@
         android:id="@+id/deepLink"
         android:autoVerify="true"
         app:uri="www.thedavidmedinashow.com/secret/{id}"/>
-    <action
-        android:id="@+id/action_secretFragment_to_entryListFragment"
-        app:destination="@id/poopTracker"/>
     <argument
         android:name="id"
         android:defaultValue="0"
         app:argType="integer"/>
-  </fragment>
-  <fragment
-      android:id="@+id/entryCalenderFragment"
-      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrycalender.PoopCalenderFragment"
-      android:label="EntryCalenderFragment">
     <action
-        android:id="@+id/action_entryCalenderFragment_to_my_dialog"
-        app:destination="@+id/entryListDialog"/>
+        android:id="@+id/action_secretFragment_to_mainFragment"
+        app:destination="@id/mainFragment"/>
   </fragment>
 
-  <dialog
-      android:id="@+id/entryListDialog"
-      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.logentry.entrylist.PoopListDialogFragment"
-      >
+  <fragment
+      android:id="@+id/workoutCalenderFragment"
+      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.workout.WorkoutCalenderFragment"
+      android:label="WorkoutCalenderFragment"/>
+  <fragment
+      android:id="@+id/mainFragment"
+      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.MainFragment"
+      android:label="MainFragment">
     <action
-        android:id="@+id/action_my_dialog_to_poopFlowFragment"
-        app:destination="@id/poopFlowFragment"/>
+        android:id="@+id/action_mainFragment_to_workoutCalenderFragment"
+        app:destination="@id/workoutCalenderFragment"/>
     <action
-        android:id="@+id/action_my_dialog_to_logDetailFragment"
-        app:destination="@id/logDetailFragment"/>
-    <argument
-        android:name="epochDay"
-        app:argType="long"
-        android:defaultValue="0L"/>
-  </dialog>
+        android:id="@+id/action_mainFragment_to_poop_tracker_nav"
+        app:destination="@id/poop_tracker_nav"/>
+  </fragment>
+  <activity
+      android:id="@+id/mainActivity"
+      android:name="inc.grayherring.com.thedavidmedinashowapp.ui.MainActivity"
+      android:label="MainActivity"/>
 </navigation>
