@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import inc.grayherring.com.thedavidmedinashowapp.BuildConfig
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentTakePhotoBinding
@@ -43,11 +43,11 @@ class PhotoFragment : BaseFragment() {
     bindings.takePhotoBtn.setOnClickListener {
       openCamera()
     }
-    viewModel.imagePath.observe(viewLifecycleOwner, Observer {
+    viewModel.imagePath.observe(viewLifecycleOwner) {
       if (!it.isNullOrBlank()) {
         bindings.poopImage.loadImageFromPath(it)
       }
-    })
+    }
 
     return bindings.root
   }

@@ -30,6 +30,7 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.detail.AnimationState.NONE
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.textOrGone
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.format.DateTimeFormatter
+import androidx.lifecycle.observe
 
 class LogDetailFragment : BaseFragment() {
 
@@ -50,11 +51,11 @@ class LogDetailFragment : BaseFragment() {
   }
 
   fun bind() {
-    viewModel.deletedLiveData.observe(viewLifecycleOwner, Observer {
+    viewModel.deletedLiveData.observe(viewLifecycleOwner) {
       findNavController().popBackStack()
-    })
+    }
     bindings.run {
-      viewModel.logDetailState.observe(viewLifecycleOwner, Observer {
+      viewModel.logDetailState.observe(viewLifecycleOwner) {
         it?.let { state ->
 
           when {
@@ -82,7 +83,7 @@ class LogDetailFragment : BaseFragment() {
           notes.textOrGone(state.entry.notes)
           date.textOrGone(state.entry.date.format(DateTimeFormatter.ISO_DATE))
         }
-      })
+      }
 
       logImage.setOnClickListener {
         viewModel.toggleImage()
@@ -119,7 +120,7 @@ class LogDetailFragment : BaseFragment() {
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    viewModel.logDetailState.map { it.entry.id }.observe(viewLifecycleOwner, Observer {
+    viewModel.logDetailState.map { it.entry.id }.observe(viewLifecycleOwner) {
       if (item.itemId == R.id.action_edit) {
         val action = LogDetailFragmentDirections.actionLogDetailFragmentToPoopFlowFragment(it)
         findNavController().navigate(action)
@@ -127,7 +128,7 @@ class LogDetailFragment : BaseFragment() {
       if (item.itemId == R.id.action_delete) {
         showDeleteDialog()
       }
-    })
+    }
     return super.onOptionsItemSelected(item)
   }
 

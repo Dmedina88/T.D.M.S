@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import inc.grayherring.com.thedavidmedinashowapp.arch.BaseFragment
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentDatePickerBinding
 import inc.grayherring.com.thedavidmedinashowapp.ui.addeditlog.EntryFlowViewModel
@@ -24,7 +24,7 @@ class DatePickerFragment : BaseFragment() {
   ): View? {
 
     bindings = FragmentDatePickerBinding.inflate(inflater, container, false)
-    viewModel.date.observe(viewLifecycleOwner, Observer {
+    viewModel.date.observe(viewLifecycleOwner){
       bindings.datePicker.init(
         it.year, it.monthValue -1, it.dayOfMonth
       ) { _, year, month, dayOfMonth ->
@@ -32,8 +32,7 @@ class DatePickerFragment : BaseFragment() {
         if (it != localDate)
           viewModel.date.value = LocalDate.of(localDate.year,localDate.month, localDate.dayOfMonth)
       }
-    })
-
+    }
 
     return bindings.root
   }
