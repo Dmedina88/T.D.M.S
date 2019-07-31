@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import inc.grayherring.com.thedavidmedinashowapp.R
+import inc.grayherring.com.thedavidmedinashowapp.R.style
 import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentEntryListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
@@ -20,6 +23,7 @@ import java.time.LocalDateTime
 class EntryListDialogFragment : DialogFragment() {
 
   private val viewModel by viewModel<EntryListVM>()
+  private val  args : EntryListDialogFragmentArgs by navArgs()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -33,14 +37,14 @@ class EntryListDialogFragment : DialogFragment() {
       findNavController().navigate(action)
     }, { viewModel.dateClicked(it) })
 
-    viewModel.getEntryItems(LocalDate.now().toEpochDay()).observe(viewLifecycleOwner) { adapter.submitList(it) }
+    viewModel.getEntryItems(args.epochDay).observe(viewLifecycleOwner) { adapter.submitList(it) }
 
     bindings.run {
       recyclerView.layoutManager = LinearLayoutManager(root.context)
-      recyclerView.addItemDecoration(DividerItemDecoration(root.context, VERTICAL))
+      recyclerView.addItemDecoration(DividerItemDecoration(ContextThemeWrapper(requireContext(), style.AppTheme), VERTICAL))
       recyclerView.adapter = adapter
       fab.setOnClickListener {
-        findNavController().navigate(R.id.action_my_dialog_to_poopFlowFragment)
+        findNavController().navigate(EntryListFragmentDirections.actionListToFlow(epochDay = args.epochDay))
       }
     }
 

@@ -57,13 +57,16 @@ class EntryFlowViewModel(private val entryRepository: inc.grayherring.com.reposi
     }
   }
 
-  fun init(id: Int) {
+  fun init(id: Int, epochDay: Long) {
     if (id > 0) {
       viewModelScope.launch {
         setData(entryRepository.getEntry(id))
       }
     } else {
       reset()
+      if (epochDay >-1){
+        date.value = LocalDate.ofEpochDay(epochDay)
+      }
     }
 
   }

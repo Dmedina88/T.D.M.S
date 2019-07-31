@@ -25,7 +25,7 @@ class EntryListVM(
 
   fun getEntryItems(epochDay: Long): LiveData<List<EntryListItem>>  = liveData(Dispatchers.IO) {
     emitSource(entryRepository
-      .getEntries(epochDay,epochDay + 1 )
+      .getEntries(epochDay,epochDay)
       .switchMap(::addDateItem))
   }
 

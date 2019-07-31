@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
     app:startDestination="@id/entryListFragment">
 
   <fragment
       android:id="@+id/entryListFragment"
       android:name="inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrylist.EntryListFragment"
-      android:label="Home">
+      android:label="Home"
+      tools:layout="@layout/entry_list_item"
+      >
+
     <action
         android:id="@+id/action_list_to_flow"
         app:destination="@id/poopFlowFragment"
@@ -30,6 +34,10 @@
         android:name="id"
         android:defaultValue="-1"
         app:argType="integer"/>
+    <argument
+        android:name="epochDay"
+        app:argType="long"
+        android:defaultValue="-1L"/>
   </fragment>
   <fragment
       android:id="@+id/logDetailFragment"
@@ -46,7 +54,9 @@
   <fragment
       android:id="@+id/secretFragment"
       android:name="inc.grayherring.com.thedavidmedinashowapp.ui.secret.SecretFragment"
-      android:label="SecretFragment">
+      android:label="SecretFragment"
+      tools:layout="@layout/fragment_secret"
+      >
     <deepLink
         android:id="@+id/deepLink"
         android:autoVerify="true"
@@ -64,19 +74,23 @@
       android:name="inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrycalender.EntryCalenderFragment"
       android:label="EntryCalenderFragment">
     <action
-        android:id="@+id/action_entryCalenderFragment_to_logDetailFragment"
-        app:destination="@id/logDetailFragment"/>
+        android:id="@+id/action_entryCalenderFragment_to_my_dialog"
+        app:destination="@+id/entryListDialog"/>
   </fragment>
 
   <dialog
-      android:id="@+id/my_dialog"
+      android:id="@+id/entryListDialog"
       android:name="inc.grayherring.com.thedavidmedinashowapp.ui.logentry.entrylist.EntryListDialogFragment"
-     >
+      >
     <action
         android:id="@+id/action_my_dialog_to_poopFlowFragment"
         app:destination="@id/poopFlowFragment"/>
     <action
         android:id="@+id/action_my_dialog_to_logDetailFragment"
         app:destination="@id/logDetailFragment"/>
+    <argument
+        android:name="epochDay"
+        app:argType="long"
+        android:defaultValue="0L"/>
   </dialog>
 </navigation>

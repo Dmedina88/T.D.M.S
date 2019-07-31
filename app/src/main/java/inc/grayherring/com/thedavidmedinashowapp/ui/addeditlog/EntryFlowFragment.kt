@@ -28,14 +28,14 @@ class EntryFlowFragment : BaseFragment() {
     savedInstanceState: Bundle?
   ): View? {
     bindings = FragmentEntryFlowBinding.inflate(inflater, container, false)
-    viewModel.init(EntryFlowFragmentArgs.fromBundle(arguments!!).id)
+    val args = EntryFlowFragmentArgs.fromBundle(arguments!!)
+    viewModel.init(args.id, args.epochDay)
     val adapter = SaveEntryPager(childFragmentManager, requireContext())
     bindings.viewPager.adapter = adapter
     //sort of want to do this with data binding if i can
     bindings.tabLayout.setupWithViewPager(bindings.viewPager)
 
     setHasOptionsMenu(true)
-    viewModel.viewModelScope
     viewModel.run {
       finish.observe(viewLifecycleOwner) {
         if (it) {
