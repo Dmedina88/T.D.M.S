@@ -3,6 +3,7 @@ package inc.grayherring.com.thedavidmedinashowapp.util
 import androidx.annotation.MainThread
 import androidx.annotation.Nullable
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import java.util.concurrent.atomic.AtomicBoolean
@@ -34,6 +35,16 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
     value = null
   }
 
+}
+
+//todo change this to be able to move the observer to a fn
+fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
+  observe(lifecycleOwner, object : Observer<T> {
+    override fun onChanged(t: T?) {
+      observer.onChanged(t)
+      removeObserver(this)
+    }
+  })
 }
 
 /*

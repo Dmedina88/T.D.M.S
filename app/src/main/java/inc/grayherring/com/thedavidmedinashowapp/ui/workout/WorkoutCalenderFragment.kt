@@ -34,7 +34,7 @@ class WorkoutCalenderFragment : BaseFragment() {
     }
 
     bindings.calenderRecycler.configureForCalender(this.requireContext(), calenderAdapter)
-    viewModel.calenderIteamLiveData.observe(this.viewLifecycleOwner) {
+    viewModel.calenderItemLiveData.observe(this.viewLifecycleOwner) {
       calenderAdapter.setData(it)
     }
 

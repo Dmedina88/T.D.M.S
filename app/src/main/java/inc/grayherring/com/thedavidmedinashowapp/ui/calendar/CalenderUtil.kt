@@ -5,15 +5,19 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import androidx.recyclerview.widget.RecyclerView
+import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderIteam.Month
+import inc.grayherring.com.thedavidmedinashowapp.util.ui.endlessScrollListener
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
-import timber.log.Timber
 
-fun RecyclerView.configureForCalender(context: Context, calenderAdapter: CalenderAdapter) =
+fun RecyclerView.configureForCalender(
+  context: Context,
+  calenderAdapter: CalenderAdapter
+) =
   this.apply {
-    val gridlayoutMutableList = GridLayoutManager(context, 7)
+    val gridLayoutManager = GridLayoutManager(context, 7)
     adapter = calenderAdapter
-    layoutManager = gridlayoutMutableList
+    layoutManager = gridLayoutManager
     addItemDecoration(
       DividerItemDecoration(
         context,
@@ -27,7 +31,7 @@ fun RecyclerView.configureForCalender(context: Context, calenderAdapter: Calende
       )
     )
 
-    gridlayoutMutableList.spanSizeLookup = object : SpanSizeLookup() {
+    gridLayoutManager.spanSizeLookup = object : SpanSizeLookup() {
       override fun getSpanSize(position: Int): Int {
         return when (calenderAdapter.data[position]) {
           is CalenderIteam.Month -> 7
@@ -41,7 +45,7 @@ fun RecyclerView.configureForCalender(context: Context, calenderAdapter: Calende
 
 data class Event(val date: LocalDate, val message: String)
 
-fun calenderPopulated(
+fun calenderPopulater(
   startDate: LocalDate,
   endDate: LocalDate,
   messages: List<Event>
@@ -52,11 +56,15 @@ fun calenderPopulated(
 
   for (monthsFromStart in 0..numberOfMonths) {
     val startOfMonth = startDate.plusMonths(monthsFromStart).withDayOfMonth(1)
-    val month = CalenderIteam.Month("${startOfMonth.month} ${startOfMonth.year}")
+    val month = Month(
+      "${startOfMonth.month} ${startOfMonth.year}",
+      CalenderInfo(startOfMonth.year, startOfMonth.month.value, 0)
+    )
 
     val eventsForByDaysInMonth = messages.filter { it.date.monthValue == startOfMonth.monthValue }
       .groupBy { it.date.dayOfMonth }
 
+    //todo change to string resource
     calenderItems.add(month)
     calenderItems.addAll(
       listOf(
@@ -73,7 +81,6 @@ fun calenderPopulated(
     // add blank days
     if (startOfMonth.dayOfWeek.value < 7) {
       for (day in 0 until startOfMonth.dayOfWeek.value) {
-        Timber.d("${startOfMonth.month.name} $day ${startOfMonth.dayOfWeek.value}")
         calenderItems.add(CalenderIteam.Day("", "", CalenderInfo(0, 0, 0)))
       }
     }
@@ -93,3 +100,15 @@ fun calenderPopulated(
   }
   return calenderItems
 }
+
+val List<CalenderIteam>.indexOfCurrentMonth: Int
+  get() = {
+    val today = LocalDate.now().let { CalenderInfo(it.year, it.month.value, 0) }
+    this.indexOfFirst { calenderItem ->
+      if (calenderItem is Month) {
+        calenderItem.calenderInfo == today
+      } else {
+        false
+      }
+    }
+  }()

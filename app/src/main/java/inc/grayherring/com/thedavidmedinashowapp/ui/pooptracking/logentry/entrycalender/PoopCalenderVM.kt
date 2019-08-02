@@ -8,20 +8,18 @@ import androidx.lifecycle.viewModelScope
 import inc.grayherring.com.repository.EntryRepository
 import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderIteam
 import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.Event
-import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.calenderPopulated
+import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.calenderPopulater
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
-import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
 
 class PoopCalenderVM(
   entryRepository: EntryRepository
 ) : ViewModel() {
 
-  private val dateFormatter = DateTimeFormatter.ISO_DATE
 
-  val calenderIteamLiveData: LiveData<List<CalenderIteam>> = entryRepository.getAllEntries()
+  val calenderItemLiveData: LiveData<List<CalenderIteam>> = entryRepository.getAllEntries()
     .switchMap {
       liveData(viewModelScope.coroutineContext) {
         Timber.d(Thread.currentThread().name)
@@ -30,7 +28,7 @@ class PoopCalenderVM(
           .values.toList()
 
         emit(
-          calenderPopulated(
+          calenderPopulater(
             LocalDate.now().minusMonths(6),
             LocalDate.now().plusMonths(6),
             events

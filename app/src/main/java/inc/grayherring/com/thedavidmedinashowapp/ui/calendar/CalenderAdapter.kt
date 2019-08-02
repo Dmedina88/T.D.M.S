@@ -12,12 +12,12 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderIteam.DayOf
 import inc.grayherring.com.thedavidmedinashowapp.ui.calendar.CalenderIteam.Month
 
 sealed class CalenderIteam {
-  data class Month(val name: String) : CalenderIteam()
+  data class Month(val name: String, val calenderInfo : CalenderInfo) : CalenderIteam()
   data class DayOfWeek(val name: String) : CalenderIteam()
-  data class Day(val dayNumber: String, val message : String ="",val calenderInfo : CalenderInfo) : CalenderIteam()
+  data class Day(val dayNumber: String, val message : String ="", val calenderInfo : CalenderInfo) : CalenderIteam()
 }
 
-data class CalenderInfo( val year: Int,val month: Int,  val day:Int)
+data class CalenderInfo(val year: Int,val month: Int,  val day:Int)
 typealias DateClickedListener  = ((CalenderInfo) -> Unit)
 
 class CalenderAdapter(val onDayClicked: DateClickedListener) :
