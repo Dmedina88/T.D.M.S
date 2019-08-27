@@ -16,8 +16,6 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
-@ExperimentalCoroutinesApi
-@FlowPreview
 class NotesFragment : BaseFragment() {
 
   lateinit var bindings: FragmentNotesBinding
