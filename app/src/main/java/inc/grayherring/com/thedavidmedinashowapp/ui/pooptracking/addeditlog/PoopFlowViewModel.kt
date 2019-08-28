@@ -31,7 +31,7 @@ class PoopFlowViewModel(private val entryRepository: inc.grayherring.com.reposit
   //id lose 2 way data binding but do i even want it  :shrug:
   private val _poopTypeList = MutableLiveData<List<EntryTypeItem>>()
   //  private val _errors = SingleLiveEvent<EntryFlowError>()
-  //todo change this to be one flow that spits out events
+  //todo change this to be one flow that spits out events to sealed class
   private val _finish = BroadcastChannel<Boolean>(BUFFERED)
   private val _errors = BroadcastChannel<EntryFlowError>(BUFFERED)
   private var selectedEntryType: EntryType? = null
