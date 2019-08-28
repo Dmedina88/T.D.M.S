@@ -10,7 +10,6 @@ import inc.grayherring.com.thedavidmedinashowapp.databinding.FragmentNotesBindin
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.addeditlog.PoopFlowViewModel
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.textChangeFlow
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -22,6 +21,7 @@ class NotesFragment : BaseFragment() {
 
   private val viewModel by sharedViewModel<PoopFlowViewModel>(from = this::requireParentFragment)
 
+  @ExperimentalCoroutinesApi
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,

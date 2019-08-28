@@ -7,7 +7,7 @@ import inc.grayherring.com.core.models.Entry
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.AnimationState.FULL_DETAIL
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.AnimationState.IMAGE_FULLSCREEN
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.AnimationState.NONE
-import inc.grayherring.com.thedavidmedinashowapp.util.SingleLiveEvent
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 
 data class LogDetailState(val entry: Entry, val animationState: AnimationState)
@@ -21,7 +21,7 @@ enum class AnimationState {
 class LogDetailViewModel(private val entryRepository: inc.grayherring.com.repository.EntryRepository) :
   ViewModel() {
 
-  private val _deletedLiveData = SingleLiveEvent<Boolean>()
+  private val _deletedLiveData = Channel<Boolean>()
   private val _logDetailState = MutableLiveData<LogDetailState>()
 
   val logDetailState get() = _logDetailState
@@ -47,7 +47,7 @@ class LogDetailViewModel(private val entryRepository: inc.grayherring.com.reposi
     viewModelScope.launch {
       _logDetailState.value?.let {
         entryRepository.deleteEntry(it.entry)
-        deletedLiveData.value = true
+        deletedLiveData.send(true)
       }
     }
   }

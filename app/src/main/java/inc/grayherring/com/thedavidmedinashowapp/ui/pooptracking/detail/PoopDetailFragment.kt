@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.animation.AnticipateOvershootInterpolator
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.map
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -28,9 +29,13 @@ import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.Animatio
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.AnimationState.IMAGE_FULLSCREEN
 import inc.grayherring.com.thedavidmedinashowapp.ui.pooptracking.detail.AnimationState.NONE
 import inc.grayherring.com.thedavidmedinashowapp.util.ui.textOrGone
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.format.DateTimeFormatter
 
+@ExperimentalCoroutinesApi
 class PoopDetailFragment : BaseFragment() {
 
   lateinit var bindings: FragmentDetailsBinding
@@ -50,8 +55,10 @@ class PoopDetailFragment : BaseFragment() {
   }
 
   fun bind() {
-    viewModel.deletedLiveData.observe(viewLifecycleOwner) {
-      findNavController().popBackStack()
+    this.lifecycleScope.launch {
+      viewModel.deletedLiveData.consumeEach {
+        findNavController().popBackStack()
+      }
     }
     bindings.run {
       viewModel.logDetailState.observe(viewLifecycleOwner) {

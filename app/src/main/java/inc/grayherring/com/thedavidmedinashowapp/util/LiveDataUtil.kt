@@ -1,41 +1,8 @@
 package inc.grayherring.com.thedavidmedinashowapp.util
 
-import androidx.annotation.MainThread
-import androidx.annotation.Nullable
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import java.util.concurrent.atomic.AtomicBoolean
-
-class SingleLiveEvent<T> : MutableLiveData<T>() {
-
-  private val pending = AtomicBoolean(false)
-
-  @MainThread
-  override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
-    super.observe(owner, Observer<T> { t ->
-      if (pending.compareAndSet(true, false)) {
-        observer.onChanged(t)
-      }
-    })
-  }
-
-  @MainThread
-  override fun setValue(@Nullable t: T?) {
-    pending.set(true)
-    super.setValue(t)
-  }
-
-  /**
-   * Used for cases where T is Void, to make calls cleaner.
-   */
-  @MainThread
-  fun call() {
-    value = null
-  }
-
-}
 
 //todo change this to be able to move the observer to a fn
 fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
@@ -46,6 +13,35 @@ fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observ
     }
   })
 }
+
+//class SingleLiveEvent<T> : MutableLiveData<T>() {
+//
+//  private val pending = AtomicBoolean(false)
+//
+//  @MainThread
+//  override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
+//    super.observe(owner, Observer<T> { t ->
+//      if (pending.compareAndSet(true, false)) {
+//        observer.onChanged(t)
+//      }
+//    })
+//  }
+//
+//  @MainThread
+//  override fun setValue(@Nullable t: T?) {
+//    pending.set(true)
+//    super.setValue(t)
+//  }
+//
+//  /**
+//   * Used for cases where T is Void, to make calls cleaner.
+//   */
+//  @MainThread
+//  fun call() {
+//    value = null
+//  }
+//
+//}
 
 /*
 open class Event<out T>(private val content: T) {
